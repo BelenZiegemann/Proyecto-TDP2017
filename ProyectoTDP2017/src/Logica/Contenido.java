@@ -1,0 +1,22 @@
+package Logica;
+
+import java.util.LinkedList;
+
+/**
+ * Clase Abstracta Contenido 
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
+public abstract class Contenido
+{
+	protected int puntosVida = 100;
+	protected LinkedList<Celda> misCeldas;
+	
+	
+	
+	
+	
+	
+	
+	
+}

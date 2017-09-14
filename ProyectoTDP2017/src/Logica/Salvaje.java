@@ -1,0 +1,17 @@
+package Logica;
+
+/**
+ * Clase Salvaje
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
+public class Salvaje extends Enemigo 
+{
+
+	public Salvaje()
+	{
+		
+		
+	}
+	
+}
