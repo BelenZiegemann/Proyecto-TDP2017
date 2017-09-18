@@ -1,17 +1,12 @@
 package Logica;
 
 /**
- * Clase Salvaje
+ * Clase Abstracta Premio 
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
-public class Salvaje extends Enemigo 
+public abstract class Premio 
 {
 
-	public Salvaje()
-	{
-		
-		
-	}
 	
 }
