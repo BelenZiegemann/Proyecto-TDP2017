@@ -7,10 +7,30 @@ package Logica;
  */
 public abstract class Enemigo extends Personaje
 {
-	protected int velocidad;
-	protected int puntaje;
-	protected int rangoMonedas;
+	protected int velocidad = 2;
+	protected int puntaje = 50;
+	protected int rangoMonedas = 150;
+	protected Mapa mapa;
+	protected Premio miPremio;
 	
-	//protected Premio miPremio;
-	//protected Mapa mapa;
+	public Posicion getPosicion()
+	{
+		return ubicacion;
+	}
+	
+	/**
+	 * Modifica la ubicación del enemigo y actualiza su posición en el mapa
+	 */
+	public void mover()
+	{
+		//Intento mover hacia la derecha
+		if(ubicacion.getEjeX() + 1 < mapa.obtenerMatrizCeldas().length)
+		{
+			Posicion p = new Posicion(ubicacion.getEjeX() + 1, ubicacion.getEjeY());
+			mapa.obtenerCelda(ubicacion).setContenido(null);
+			mapa.obtenerCelda(p).setContenido(this);//por ahora se asume que no hay obstáculos
+			ubicacion = p;
+		}
+	}
+	
 }

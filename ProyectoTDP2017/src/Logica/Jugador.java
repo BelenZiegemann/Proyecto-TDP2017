@@ -7,13 +7,6 @@ package Logica;
  */
 public abstract class Jugador extends Personaje
 {
-	protected int precio;
-	//protected Maoa mapa;
-	
-	
-	
-	
-	
-	
-	
+	protected int precio = 125;
+	protected Mapa mapa;
 }

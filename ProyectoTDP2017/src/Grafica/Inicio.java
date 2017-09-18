@@ -12,6 +12,12 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 @SuppressWarnings("serial")
+
+/**
+ * Clase Inicio
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
 public class Inicio extends JFrame
 {
 
@@ -26,12 +32,15 @@ public class Inicio extends JFrame
 	{
 
 		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+			public void run() 
+			{
+				try 
+				{
 					frame = new Inicio();
 					frame.setVisible(true);
 					
-				} catch (Exception e) {
+				} catch (Exception e) 
+				{
 					e.printStackTrace();
 				}
 			}
@@ -74,7 +83,7 @@ public class Inicio extends JFrame
 					{
 						try 
 						{
-							//GUI frame = new GUI();
+							GUI frame = new GUI();
 							frame.setVisible(true);
 						} 
 						catch (Exception e)

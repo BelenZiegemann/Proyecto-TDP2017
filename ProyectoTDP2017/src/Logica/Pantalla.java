@@ -1,5 +1,6 @@
 package Logica;
-//import java.util.LinkedList;
+
+import java.util.LinkedList;
 
 /**
  * Clase Pantalla 
@@ -12,30 +13,20 @@ public class Pantalla
 	protected int puntos;
 	protected int nivel;
 	protected Mapa mapa;
-	//protected LinkedList<Premio> listaPremiosObtenidos;
+	protected LinkedList<Premio> listaPremiosObtenidos;
 	
 	/**
 	 * Constructor
 	 */
-	public Pantalla()
+	public Pantalla(Mapa m)
 	{
 		monedas = 1000;
 		puntos = 0;
 		nivel = 1;
-		//mapa = new Mapa(6,10);
-		//listaPremiosObtenidos = new LinkedList<Premio>();
+		mapa = m;
+		listaPremiosObtenidos = new LinkedList<Premio>();
 	}
 	
-	/**
-	 * El premio agregado podrá ser utilizado mas tarde por el Jugador
-	 * @param prem premio obtenido cuando muere un Enemigo
-	 */
-	/*
-	public void agregarPremio(Premio prem)
-	{
-		listaPremiosObtenidos.addLast(prem);
-	}
-	*/
 	
 	public void incrementarPresupuesto(int coins)
 	{
@@ -66,29 +57,5 @@ public class Pantalla
 	{
 		return nivel;
 	}
-	
-	
-	/*
-	public Premio usarPremio()
-	{
-		if(!listaPremiosObtenidos.isEmpty())	
-			return listaPremiosObtenidos.removeLast();
-		else
-			return null;
-	}
-	
-	
-	public void comprarJugador(Jugador j)
-	{
-		
-	}
-	
-	
-	public void venderJugador(Jugador j)
-	{
-	
-	}
-	
-	*/
 	
 }

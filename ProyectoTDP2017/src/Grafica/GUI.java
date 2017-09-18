@@ -1,16 +1,23 @@
 package Grafica;
 
-import java.awt.BorderLayout;
+
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+
 
 @SuppressWarnings("serial")
-public class GUI extends JFrame {
-
-	private JPanel contentPane;
+/**
+ * Clase GUI
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
+public class GUI extends JFrame 
+{
+	private JPanel contentPane;	
+	private gMapa mapa;	
 
 	/**
 	 * Launch the application.
@@ -31,13 +38,22 @@ public class GUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUI() {
+	public GUI() 
+	{	
+		setTitle("GAME OF THRONES");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		getContentPane().setBackground(Color.DARK_GRAY);
+		setBounds(150, 150, 640, 434);
+		getContentPane().setLayout(null);
+		
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		contentPane.setBounds(0,50,640,384);
+		contentPane.setLayout(null);
+		//setContentPane(contentPane);
+		getContentPane().add(contentPane);
+		
+		mapa = new gMapa(contentPane);
+		
 	}
-
 }

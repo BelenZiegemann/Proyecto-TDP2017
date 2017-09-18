@@ -10,13 +10,10 @@ public class Celda
 	
 	protected Contenido miContenido;
 	protected Posicion posicion;
-	protected Mapa mapa;
 	
-	public Celda(Posicion p, Mapa m)
+	public Celda(Posicion p)
 	{
-		posicion = p;
-		mapa  = m;
-		
+		posicion = p;	
 	}
 	
 	public void setContenido(Contenido c) 
@@ -33,20 +30,4 @@ public class Celda
 	{
 		return posicion;
 	}
-	
-	/*
-	public Premio destruir()
-	{
-		
-	}
-	
-	
-	public boolean avanzar(Enemigo e) 
-	{
-		return contenido.avanzar(e);
-	}
-	
-	*/
-	
-	
 }
