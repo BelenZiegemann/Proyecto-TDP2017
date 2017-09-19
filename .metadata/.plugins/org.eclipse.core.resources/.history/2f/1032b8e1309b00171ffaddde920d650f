@@ -1,0 +1,32 @@
+package Grafica;
+
+public class gCaminanteBlanco 
+{
+
+	CaminanteBlanco caminanteB;
+	
+	private movCaminanteBlanco movimientoThread;
+	private boolean seMueve;
+	
+	public gAltair(int velocidad, int x, int y, Enemigo caminante) 
+	{
+		super(velocidad, x, y);
+
+		mAlt = (Altair) alt;
+		this.jugador = jugador;
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,34 @@
+package Grafica;
+
+import Logica.CaminanteBlanco;
+import Logica.Enemigo;
+
+public class gCaminanteBlanco 
+{
+
+	CaminanteBlanco caminanteB;
+	
+	private movCaminanteBlanco movimientoThread;
+	private boolean seMueve;
+	
+	public gCaminanteBlanco(int x, int y, Enemigo caminante) 
+	{
+		caminanteB = (Enemigo) caminante;
+
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+	
+	
+	public JLabel getGrafico()
+	{
+		
+	}
+	
+}

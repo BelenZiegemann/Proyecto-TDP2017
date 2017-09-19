@@ -32,7 +32,7 @@ public class gMapa
 		m = new Mapa(altoMapa,anchoMapa);
 		
 		//creo imagen
-		pisoNieve = new ImageIcon(this.getClass().getResource("/Imagenes/piso2.jpg"));
+		pisoNieve = new ImageIcon(this.getClass().getResource("/Imagenes/PisoNieve.jpg"));
 		JLabel grafPiso =  new JLabel(pisoNieve);
 		grafPiso.setBounds(0,0, anchoMapa * anchoLabel, altoMapa * altoLabel);
 		gui.add(grafPiso);

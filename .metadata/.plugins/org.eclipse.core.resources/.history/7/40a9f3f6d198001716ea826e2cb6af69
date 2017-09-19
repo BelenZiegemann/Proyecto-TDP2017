@@ -1,0 +1,6 @@
+package Logica;
+
+public abstract class Enemigo extends Contenido
+{
+
+}

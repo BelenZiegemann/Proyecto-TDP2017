@@ -1,0 +1,6 @@
+package Grafica;
+
+public class CaminanteBlancoThread extends Thread
+{
+
+}

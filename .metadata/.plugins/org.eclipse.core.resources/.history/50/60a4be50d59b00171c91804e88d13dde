@@ -1,0 +1,56 @@
+package Grafica;
+
+
+import java.awt.Color;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+
+@SuppressWarnings("serial")
+public class GUI extends JFrame 
+{
+	private JPanel contentPane;	
+	private gMapa mapa;	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI frame = new GUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GUI() 
+	{	
+		
+		setTitle("GAME OF THRONES");
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setBackground(Color.RED);
+		setBounds(150, 150, 800, 450);
+		getContentPane().setLayout(null);
+		
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.BLACK);
+		contentPane.setBounds(0,100,600,350);
+		contentPane.setLayout(null);
+		//setContentPane(contentPane);
+		getContentPane().add(contentPane);
+		
+		mapa = new gMapa(contentPane);
+		
+	}
+}

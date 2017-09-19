@@ -1,0 +1,13 @@
+package Logica;
+
+/**
+ * Clase Abstracta Contenido 
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
+public abstract class Contenido
+{
+	protected int puntosVida = 125;
+	protected Celda misCeldas[];	
+	
+}

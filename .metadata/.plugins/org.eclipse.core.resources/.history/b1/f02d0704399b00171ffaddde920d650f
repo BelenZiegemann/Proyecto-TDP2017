@@ -1,0 +1,21 @@
+package Grafica;
+
+public class movCaminanteBlanco extends Thread 
+{
+	
+	
+	
+	public movCaminanteBlanco()
+	{
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+}

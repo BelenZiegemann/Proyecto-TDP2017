@@ -1,0 +1,20 @@
+package Logica;
+
+/**
+ * Clase Abstarcta Contenido 
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
+public abstract class Contenido
+{
+	protected int puntosVida;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

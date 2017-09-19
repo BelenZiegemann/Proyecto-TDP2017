@@ -1,0 +1,97 @@
+package Grafica;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.SwingConstants;
+
+@SuppressWarnings("serial")
+public class Inicio extends JFrame
+{
+
+	private static Inicio frame;
+	private final JLabel Image = new JLabel("");
+	private JButton btnJugar = new JButton("");
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) 
+	{
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame = new Inicio();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Inicio() 
+	{
+		
+		setTitle("GAME OF THRONES");
+		getContentPane().setBackground(Color.BLACK);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 500,300);
+		//setBounds(100, 100, 1000,510);
+		getContentPane().setLayout(null);
+		
+		//imágen de fondo
+		Image.setIcon(new ImageIcon(Inicio.class.getResource("/Imagenes/Fondo.gif")));
+		Image.setBounds(0, 0, 500, 300);
+		//Image.setBounds(50, 0, 900, 474);
+		getContentPane().add(Image);
+		
+		//botón Jugar
+		btnJugar.setVerticalAlignment(SwingConstants.BOTTOM);
+		btnJugar.setIcon(new ImageIcon(Inicio.class.getResource("/Imagenes/Boton.png")));
+		//btnJugar.setSelectedIcon(new ImageIcon(Inicio.class.getResource("/Imagenes/Boton.png")));
+		btnJugar.setBackground(Color.BLACK);
+		//btnJugar.setForeground(new Color(245, 255, 250));
+		btnJugar.setBounds(55,221,400,55);
+		//btnJugar.setBounds(320, 343, 277, 107);
+		getContentPane().add(btnJugar);
+		
+		btnJugar.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				frame.setVisible(false);
+				
+				EventQueue.invokeLater(new Runnable() 
+				{
+					public void run() 
+					{
+						try 
+						{
+							//GUI frame = new GUI();
+							frame.setVisible(true);
+						} 
+						catch (Exception e)
+						{
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+	
+	}
+}

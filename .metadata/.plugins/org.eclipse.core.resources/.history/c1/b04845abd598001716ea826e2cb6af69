@@ -1,0 +1,43 @@
+package Logica;
+
+import java.util.LinkedList;
+
+/**
+ * Clase Mapa
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
+public class Mapa 
+{
+	protected int alto;
+	protected int ancho;
+	protected Celda[][] matrizCeldas;
+	protected Pantalla miPantalla;
+	protected LinkedList<Jugador> misJugadores;
+	protected LinkedList<Enemigo> misEnemigos;
+	//protected LinkedList<Objeto> misObjetos;
+	
+	public Mapa()
+	{
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,52 @@
+package Grafica;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import Logica.Enemigo;
+import Logica.Mapa;
+
+public class gMapa 
+{
+	private Mapa m;
+	private Thread Enemigos[];
+	private ImageIcon nieve;
+	//private GUI gui;
+	private JPanel gui;
+	
+	public gMapa(JPanel gui)
+	{		
+		this.gui = gui;
+		
+		m = new Mapa(6,10);
+		
+		//agrego el piso
+		
+		m.ob
+		
+		
+		
+		//Creo un Enemigo y agrego a la GUI su gráfico
+		
+		Enemigos= new Thread[2];
+		
+		// agrego los CaminantesBlancos en posiciones que coinciden con las que creo los
+		// CaminatesBlancos en el mapa
+		
+		Enemigo enem[] = m.getEnemigos();
+
+		gCaminanteBlanco caminante1 = new gCaminanteBlanco(enem[0].getPosicion().getEjeX() * 32, enem[0].getPosicion().getEjeY() * 32, enem[0]);
+		Enemigos[0] = new CaminanteBlancoThread(caminante1);
+		gui.add(caminante1.getGrafico());
+		
+		
+		gCaminanteBlanco caminante2 = new gCaminanteBlanco(enem[1].getPosicion().getEjeX() * 32, enem[1].getPosicion().getEjeY() * 32, enem[1]);
+		Enemigos[1] = new CaminanteBlancoThread(caminante2);
+		gui.add(caminante2.getGrafico());
+		
+		Enemigos[0].start();
+		Enemigos[1].start();
+		
+	}
+	
+	
+}

@@ -1,0 +1,24 @@
+package Logica;
+
+/**
+ * Clase Celda
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
+public class Celda 
+{
+	protected Contenido miContenido;
+	
+	
+	public Celda()
+	{
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+}

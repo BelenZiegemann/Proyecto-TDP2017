@@ -1,0 +1,45 @@
+package Grafica;
+
+import java.awt.Point;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+import Logica.CaminanteBlanco;
+import Logica.Enemigo;
+
+public class gCaminanteBlanco 
+{
+
+	CaminanteBlanco caminanteB;
+
+	protected Icon imagen;
+	
+	protected Point mPosicion;
+	protected JLabel mGrafico;
+	protected final int ancho = 32;
+	protected final int alto = 32;
+	
+	public gCaminanteBlanco(int x, int y, Enemigo caminante) 
+	{
+		mPosicion = new Point(x, y);
+		caminanteB = (CaminanteBlanco) caminante;
+		
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlancoCorrer.gif"));
+		mGrafico = new JLabel(imagen);
+		mGrafico.setBounds(mPosicion.x,mPosicion.y,ancho,alto);
+	}
+	
+	public void mover() 
+	{
+		mGrafico.setBounds(mPosicion.x + 32,mPosicion.y,ancho,alto);
+	
+	}
+	
+	public JLabel getGrafico()
+	{
+		return mGrafico;
+	}
+	
+}

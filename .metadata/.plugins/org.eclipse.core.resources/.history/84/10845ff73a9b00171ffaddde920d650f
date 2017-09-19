@@ -1,0 +1,45 @@
+package Logica;
+
+/**
+ * Clase Celda
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
+public class Celda 
+{
+	
+	protected Contenido miContenido;
+	protected Posicion posicion;
+	protected Mapa mapa;
+	
+	public Celda(Posicion p, Mapa m)
+	{
+		posicion = p;
+		mapa  = m;
+		
+	}
+	
+	public void setContenido(Contenido c) 
+	{
+		miContenido = c;
+	}
+	
+	public Contenido getContenido() 
+	{
+		return miContenido;
+	}
+	
+	public Posicion getPosCelda() 
+	{
+		return posicion;
+	}
+	
+	public boolean avanzar(Enemigo e) 
+	{
+		return contenido.avanzar(e);
+	}
+	
+	*/
+	
+	
+}

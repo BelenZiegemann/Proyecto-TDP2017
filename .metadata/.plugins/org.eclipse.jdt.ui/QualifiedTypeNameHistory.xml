@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="Logica.Mapa"/>
+<fullyQualifiedTypeName name="Logica.CaminanteBlanco"/>
+<fullyQualifiedTypeName name="Logica.Enemigo"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="Logica.Celda"/>
+<fullyQualifiedTypeName name="javax.swing.Icon"/>
+<fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+<fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<fullyQualifiedTypeName name="Logica.Posicion"/>
+</qualifiedTypeNameHistroy>
