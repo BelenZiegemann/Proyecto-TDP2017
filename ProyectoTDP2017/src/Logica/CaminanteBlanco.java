@@ -8,6 +8,9 @@ package Logica;
 public class CaminanteBlanco extends Enemigo 
 {
 
+	/*
+	 * Constructor
+	 */
 	public CaminanteBlanco(Posicion p,Mapa m)
 	{
 		ubicacion = p;
