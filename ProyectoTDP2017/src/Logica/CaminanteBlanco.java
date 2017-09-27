@@ -28,9 +28,8 @@ public class CaminanteBlanco extends Enemigo
 		//agrego la gráfica al caminante
 		posGrafica = new Point(ubicacion.getEjeX(),ubicacion.getEjeY());
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlanco.gif"));
-		mGrafico = new JLabel(imagen);
-		mGrafico.setBounds(ubicacion.getEjeX() * 32, ubicacion.getEjeY() * 32,ancho,alto);	
-		
+		mGrafico = new JLabel(imagen);	
+		mGrafico.setBounds(0,0,ancho,alto);	
 	}
 	
 	

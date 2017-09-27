@@ -3,6 +3,11 @@ package Grafica;
 import Logica.Mapa;
 import Logica.Personaje;
 
+/**
+ * Clase ThreadPersonaje
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
 public class ThreadPersonaje extends Thread
 {
 	private Mapa mapa;

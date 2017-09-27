@@ -31,7 +31,7 @@ public abstract class Enemigo extends Personaje
 			//muevo el JLabel que representa al enemigo
 			
 			posGrafica.x = posGrafica.x + 8;
-			mGrafico.setBounds(posGrafica.x , ubicacion.getEjeY() * 32, ancho, alto);
+			mGrafico.setBounds(posGrafica.x, ubicacion.getEjeY() * 64, ancho, alto);
 		}
 	}
 	

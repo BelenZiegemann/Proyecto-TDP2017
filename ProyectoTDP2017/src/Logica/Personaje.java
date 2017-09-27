@@ -21,7 +21,7 @@ public abstract class Personaje extends Contenido
 	protected Icon imagen;
 	protected JLabel mGrafico;
 	protected final int ancho = 32;
-	protected final int alto = 32;
+	protected final int alto = 64;
 	
 	public abstract void seratacado(Proyectil p);
 	

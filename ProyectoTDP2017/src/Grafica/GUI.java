@@ -3,10 +3,12 @@ package Grafica;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -58,23 +60,21 @@ public class GUI extends JFrame
 		
 		mapa = new gMapa(contentPane);
 		
-		
 		JButton btnAgregarEnemigo = new JButton("Agregar Enemigo");
-		btnAgregarEnemigo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0)
-			{
-				
-				
-			
-				
-			}
-		});
-		
-		btnAgregarEnemigo.setBounds(64, 11, 141, 23);
-		
+		btnAgregarEnemigo.setBackground(Color.RED);
+		btnAgregarEnemigo.setForeground(Color.WHITE);
+		btnAgregarEnemigo.setFocusPainted(false);
+		btnAgregarEnemigo.setBounds(32, 11, 141, 23);
 		getContentPane().add(btnAgregarEnemigo);
 		
-		
+		btnAgregarEnemigo.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				mapa.agregarEnemigo();
+			}
+		});
+	
 		
 	}
 	

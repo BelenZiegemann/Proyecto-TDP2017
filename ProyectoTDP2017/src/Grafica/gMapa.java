@@ -1,16 +1,13 @@
 package Grafica;
 
-
-import java.util.LinkedList;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Logica.Enemigo;
+
 import Logica.Mapa;
-import Logica.Personaje;
+
 
 /**
  * Clase gMapa
@@ -19,14 +16,15 @@ import Logica.Personaje;
  */
 public class gMapa 
 {
-	private Mapa m;
-	private ThreadPersonaje	enemigos;
-	private Icon pisoNieve;
-	private JPanel gui;
-	protected final int anchoLabel = 8;
-	protected final int altoLabel= 8;
-	protected final int anchoMapa = 80;
-	protected final int altoMapa= 48;
+	protected Mapa m;
+	protected ThreadPersonaje enemigos;
+	protected Icon pisoNieve;
+	protected JPanel gui;
+	protected JLabel grafPiso;
+	protected final int anchoLabel = 64;
+	protected final int altoLabel= 64;
+	protected final int anchoMapa = 10;
+	protected final int altoMapa = 6;
 	
 	
 	public gMapa(JPanel gui)
@@ -34,22 +32,22 @@ public class gMapa
 		this.gui = gui;
 		m = new Mapa(altoMapa,anchoMapa);
 		
-		//creo imagen
+		//Creo imagen
 		pisoNieve = new ImageIcon(this.getClass().getResource("/Imagenes/PisoNieve.jpg"));
-		JLabel grafPiso =  new JLabel(pisoNieve);
+		grafPiso =  new JLabel(pisoNieve);
 		grafPiso.setBounds(0,0, anchoMapa * anchoLabel, altoMapa * altoLabel);
 		gui.add(grafPiso);
 		
-		//agrego cada personaje(enemigo) al piso del mapa
-		for(Personaje p : m.getListaPersonajes())
-		{
-			grafPiso.add(p.getGrafico());
-		}
-		
 		//Creo un ThreadEnemigo 
 		enemigos = new ThreadPersonaje(m);
-		enemigos.start();
-		
+		enemigos.start();	
+	}
+	
+	public void agregarEnemigo()
+	{
+		JLabel grafEnemigo = m.agregarEnemigo();
+		if(grafEnemigo != null)
+			grafPiso.add(grafEnemigo);
 	}
 	
 }
