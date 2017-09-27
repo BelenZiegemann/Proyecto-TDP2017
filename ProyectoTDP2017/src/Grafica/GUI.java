@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 @SuppressWarnings("serial")
@@ -55,5 +58,24 @@ public class GUI extends JFrame
 		
 		mapa = new gMapa(contentPane);
 		
+		
+		JButton btnAgregarEnemigo = new JButton("Agregar Enemigo");
+		btnAgregarEnemigo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				
+				
+			
+				
+			}
+		});
+		
+		btnAgregarEnemigo.setBounds(64, 11, 141, 23);
+		
+		getContentPane().add(btnAgregarEnemigo);
+		
+		
+		
 	}
+	
 }

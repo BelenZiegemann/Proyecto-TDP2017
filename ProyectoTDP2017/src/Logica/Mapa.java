@@ -13,8 +13,7 @@ public class Mapa
 	protected int ancho;
 	protected Celda[][] matrizCeldas;
 	protected Pantalla miPantalla;
-	protected LinkedList<Jugador> misJugadores;
-	protected Enemigo[] misEnemigos;
+	protected LinkedList<Personaje> misPersonajes;
 	//protected LinkedList<Objeto> misObjetos;
 	
 	public Mapa(int alto, int ancho)
@@ -38,9 +37,10 @@ public class Mapa
 		obtenerCelda(caminante2.getPosicion()).setContenido(caminante2);
 		
 		// lleno el arreglo de enemigos
-		misEnemigos = new Enemigo[2];
-		misEnemigos[0] = caminante1;
-		misEnemigos[1] = caminante2;
+		misPersonajes = new LinkedList<Personaje>(); 
+		
+		misPersonajes.addLast(caminante1);
+		misPersonajes.addLast(caminante2);
 	}
 	
 	public Celda[][] obtenerMatrizCeldas() 
@@ -48,9 +48,9 @@ public class Mapa
 		return matrizCeldas;
 	}
 	
-	public Enemigo[] getEnemigos() 
+	public LinkedList<Personaje> getListaPersonajes() 
 	{
-		return misEnemigos;
+		return misPersonajes;
 	}
 	
 	public Celda obtenerCelda(Posicion p)
@@ -58,4 +58,13 @@ public class Mapa
 		return matrizCeldas[p.getEjeX()][p.getEjeY()];
 		
 	}
+	
+	public void agregarEnemigo()
+	{
+		Enemigo caminante3 = new CaminanteBlanco(new Posicion(0, 5), this);
+		obtenerCelda(caminante3.getPosicion()).setContenido(caminante3);
+		misPersonajes.addLast(caminante3);
+	}
+	
+	
 }

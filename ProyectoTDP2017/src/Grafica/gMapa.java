@@ -1,6 +1,8 @@
 package Grafica;
 
 
+import java.util.LinkedList;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -8,6 +10,7 @@ import javax.swing.JPanel;
 
 import Logica.Enemigo;
 import Logica.Mapa;
+import Logica.Personaje;
 
 /**
  * Clase gMapa
@@ -17,13 +20,13 @@ import Logica.Mapa;
 public class gMapa 
 {
 	private Mapa m;
-	private Thread Enemigos[];
+	private ThreadPersonaje	enemigos;
 	private Icon pisoNieve;
 	private JPanel gui;
-	protected final int anchoLabel = 32;
-	protected final int altoLabel= 32;
-	protected final int anchoMapa = 20;
-	protected final int altoMapa= 12;
+	protected final int anchoLabel = 8;
+	protected final int altoLabel= 8;
+	protected final int anchoMapa = 80;
+	protected final int altoMapa= 48;
 	
 	
 	public gMapa(JPanel gui)
@@ -37,27 +40,16 @@ public class gMapa
 		grafPiso.setBounds(0,0, anchoMapa * anchoLabel, altoMapa * altoLabel);
 		gui.add(grafPiso);
 		
-		//Creo un Enemigo y agrego a la GUI su gráfico
+		//agrego cada personaje(enemigo) al piso del mapa
+		for(Personaje p : m.getListaPersonajes())
+		{
+			grafPiso.add(p.getGrafico());
+		}
 		
-		Enemigos= new Thread[2];
+		//Creo un ThreadEnemigo 
+		enemigos = new ThreadPersonaje(m);
+		enemigos.start();
 		
-		// agrego los CaminantesBlancos en posiciones que coinciden con las que creo los
-		// CaminatesBlancos en el mapa
-		
-		Enemigo enem[] = m.getEnemigos();
-
-		gCaminanteBlanco caminante1 = new gCaminanteBlanco(enem[0].getPosicion().getEjeX() * 32, enem[0].getPosicion().getEjeY() * 32, enem[0]);
-		Enemigos[0] = new CaminanteBlancoThread(caminante1);
-		grafPiso.add(caminante1.getGrafico());
-		
-		
-		gCaminanteBlanco caminante2 = new gCaminanteBlanco(enem[1].getPosicion().getEjeX() * 32, enem[1].getPosicion().getEjeY() * 32, enem[1]);
-		Enemigos[1] = new CaminanteBlancoThread(caminante2);
-		grafPiso.add(caminante2.getGrafico());
-		
-		Enemigos[0].start();
-		Enemigos[1].start();
 	}
-	
 	
 }
