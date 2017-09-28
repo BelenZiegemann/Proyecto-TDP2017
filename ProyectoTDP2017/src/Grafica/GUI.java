@@ -53,7 +53,7 @@ public class GUI extends JFrame
 		setBounds(150, 150, 640, 434);
 		getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("somos tontos");
+		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBackground(Color.MAGENTA);
 		lblNewLabel.setForeground(Color.LIGHT_GRAY);
 		lblNewLabel.setBounds(366, 11, 127, 28);
@@ -74,14 +74,15 @@ public class GUI extends JFrame
 		btnAgregarEnemigo.setBounds(32, 11, 141, 23);
 		getContentPane().add(btnAgregarEnemigo);
 		
-		JButton btnNewButton = new JButton("Eliminar Enemigo");
+		JButton btnNewButton = new JButton("Personaje");
+		btnNewButton.setBackground(Color.RED);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				mapa.eliminarEnemigo();
 			}
 		});
-		btnNewButton.setBounds(203, 11, 121, 23);
+		btnNewButton.setBounds(203, 11, 231, 23);
 		getContentPane().add(btnNewButton);
 		
 		btnAgregarEnemigo.addActionListener(new ActionListener()
