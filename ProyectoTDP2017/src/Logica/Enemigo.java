@@ -19,6 +19,10 @@ public abstract class Enemigo extends Personaje
 	 */
 	public void mover()
 	{
+		//PRIMERO DEBO IR CONTROLANDO CUANTO RECORRIÓ DEL PANEL (MIENTRAS EL ENEMIGO VA AVANZANDO DE A 8)
+		//LUEGO SUMO 1 A LA MATRIZ DE CELDAS
+		
+		
 		//Intento mover hacia la derecha
 		if(ubicacion.getEjeX() + 1 < mapa.obtenerMatrizCeldas().length)
 		{

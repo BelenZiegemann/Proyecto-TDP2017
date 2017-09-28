@@ -14,6 +14,7 @@ public class Pantalla
 	protected int nivel;
 	protected Mapa mapa;
 	protected LinkedList<Premio> listaPremiosObtenidos;
+	//protected JLabel mostrarMonedas;
 	
 	/**
 	 * Constructor

@@ -50,4 +50,10 @@ public class gMapa
 			grafPiso.add(grafEnemigo);
 	}
 	
+	public void eliminarEnemigo()
+	{
+		m.eliminarEnemigo();
+	}
+	
+	
 }

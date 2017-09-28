@@ -67,5 +67,12 @@ public class Mapa
 			return null;
 	}
 	
-	
+	public void eliminarEnemigo()
+	{
+		//cuando el jugador lo ataca al enemigo asumimos que lo mata de una sola vez
+		
+		
+		
+		
+	}
 }
