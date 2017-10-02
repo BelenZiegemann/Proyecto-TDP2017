@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 import javax.swing.JLabel;
 
+import Logica.Enemigos.CaminanteBlanco;
+
 /**
  * Clase Mapa
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
@@ -13,16 +15,23 @@ public class Mapa
 {
 	protected int alto;
 	protected int ancho;
+	protected int altoReal;
+	protected int anchoReal;
 	protected Celda[][] matrizCeldas;
 	protected Pantalla miPantalla;
 	protected LinkedList<Personaje> misPersonajes;
+	
+	//protected LinkedList<Proyectil> misProyectiles;
+	
 	//protected LinkedList<Objeto> misObjetos;
 	protected int posYenemigo;
 	
-	public Mapa(int alto, int ancho)
+	public Mapa(int alto, int ancho, int altoReal, int anchoReal)
 	{
 		this.alto = alto;
 		this.ancho = ancho;
+		this.altoReal = altoReal;	//Es el alto del panel que contiene al mapa gráfico
+		this.anchoReal = anchoReal;	//Es el ancho del panel que contiene al mapa gráfico
 		matrizCeldas = new Celda[ancho][alto];
 		
 		//Inicializo cada celda de la matriz
@@ -33,11 +42,7 @@ public class Mapa
 			
 		posYenemigo = 0;
 		misPersonajes = new LinkedList<Personaje>(); 
-	}
-	
-	public Celda[][] obtenerMatrizCeldas() 
-	{
-		return matrizCeldas;
+		miPantalla = new Pantalla(this);
 	}
 	
 	public LinkedList<Personaje> getListaPersonajes() 
@@ -45,10 +50,35 @@ public class Mapa
 		return misPersonajes;
 	}
 	
+	public Pantalla obtenerPantalla()
+	{
+		return miPantalla;
+	}
+	
 	public Celda obtenerCelda(Posicion p)
 	{
 		return matrizCeldas[p.getEjeX()][p.getEjeY()];
 		
+	}
+	
+	public int obtenerAncho()
+	{
+		return ancho;
+	}
+	
+	public int obtenerAlto()
+	{
+		return alto;
+	}
+	
+	public int obtenerAltoReal()
+	{
+		return altoReal;
+	}
+		
+	public int obtenerAnchoReal()
+	{
+		return anchoReal;
 	}
 	
 	public JLabel agregarEnemigo()
@@ -67,11 +97,18 @@ public class Mapa
 			return null;
 	}
 	
-	public void eliminarEnemigo()
+	public JLabel agregarJugador(Jugador j)
 	{
-		//cuando el jugador lo ataca al enemigo asumimos que lo mata de una sola vez
-		
-		
+		//debo verificar si dispongo de la cantidad de monedas suficientes para comprar al jugador
+		if(miPantalla.getPresupuesto() >= j.getPrecio())
+		{
+			miPantalla.setPresupuesto(miPantalla.getPresupuesto() - j.getPrecio());
+			obtenerCelda(j.getPosicion()).setContenido(j);
+			misPersonajes.addLast(j);
+			return j.getGrafico();
+		}
+		else
+			return null;
 		
 		
 	}

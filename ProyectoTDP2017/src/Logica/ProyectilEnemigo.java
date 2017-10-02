@@ -2,14 +2,14 @@ package Logica;
 
 public class ProyectilEnemigo extends Proyectil
 {
-	public ProyectilEnemigo()
+	public ProyectilEnemigo(int fImpacto)
 	{
-		
+		fuerzaImpacto = fImpacto;
 	}
 	
 	public void atacarJugador(Jugador j)
 	{
-		j.setVida(j.getVida() - j.getFuerzaImpacto());
+		j.setVida(j.getVida() - fuerzaImpacto);
 	}
 	
 	public void atacarEnemigo(Enemigo e)

@@ -1,7 +1,5 @@
 package Logica;
 
-import java.awt.Point;
-
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
@@ -16,12 +14,11 @@ public abstract class Personaje extends Contenido
 	protected int fuerzaImpacto = 10;
 	protected int alcance = 1;
 	protected Posicion ubicacion;	
-	
-	protected Point posGrafica;
+	protected boolean estaVivo = true;
+	protected int desplX;
+	protected int desplY;
 	protected Icon imagen;
 	protected JLabel mGrafico;
-	protected final int ancho = 32;
-	protected final int alto = 64;
 	
 	public abstract void seratacado(Proyectil p);
 	
@@ -30,9 +27,9 @@ public abstract class Personaje extends Contenido
 		return puntosVida;
 	}
 
-	public void setVida(int v)
+	public int getAlcance()
 	{
-		puntosVida = v;
+		return alcance;
 	}
 	
 	public int getFuerzaImpacto()
@@ -49,6 +46,17 @@ public abstract class Personaje extends Contenido
 	{
 		return mGrafico;
 	}
+	
+	public boolean estaVivo()
+	{
+		return estaVivo;
+	}
+	
+	public void setVida(int v)
+	{
+		puntosVida = v;
+	}
+	
 	
 	public abstract void mover();
 

@@ -1,5 +1,8 @@
 package Grafica;
 
+import java.util.LinkedList;
+
+
 import Logica.Mapa;
 import Logica.Personaje;
 
@@ -11,6 +14,7 @@ import Logica.Personaje;
 public class ThreadPersonaje extends Thread
 {
 	private Mapa mapa;
+	LinkedList<Personaje> PersonajesParaEliminar;
 	
 	// Flag que indica cuando debe detenerse la ejecución del hilo.
 	private boolean Detener;
@@ -19,10 +23,12 @@ public class ThreadPersonaje extends Thread
 	{
 		mapa = m;
 		Detener = false;
-	}
-
+		PersonajesParaEliminar = new LinkedList<Personaje>();
+	}	
+	
 	public void run() 
 	{
+		
 		// Ejecuto indefinidamente hasta que el flag sea verdadero.
 		while (!Detener) 
 		{
@@ -31,10 +37,23 @@ public class ThreadPersonaje extends Thread
 				Thread.sleep(400);
 				// Realizo el movimiento
 				for(Personaje p: mapa.getListaPersonajes())
-				{//SI EL PERSONAJE ESTÁ VIVO ENTONCES MOVER, SINO AGREGO A LA LISTA AUXILIAR PARA LUEGO ELIMINAR
-					p.mover();
+				{	
+					//SI EL PERSONAJE ESTÁ VIVO ENTONCES MOVER, SINO LO AGREGO A LA LISTA AUXILIAR PARA LUEGO ELIMINARLO
+					if(p.estaVivo() == true)
+						p.mover();
+					else
+					{
+						
+						PersonajesParaEliminar.addLast(p);
+					}
 				}
-				//ACÁ RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS ENEMIGOS
+				
+				//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS PERSONAJES
+				for(Personaje pElim : PersonajesParaEliminar)
+				{
+					pElim.getGrafico().setEnabled(false);
+					mapa.getListaPersonajes().remove(pElim);
+				}
 					
 			} catch (InterruptedException e)
 			{}

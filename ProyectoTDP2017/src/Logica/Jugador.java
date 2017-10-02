@@ -15,8 +15,11 @@ public abstract class Jugador extends Personaje
 		p.atacarJugador(this);
 	}
 	
-	public void mover()
+	public int getPrecio()
 	{
-		
+		return precio;
 	}
+	
+	public abstract void mover();
+	
 }

@@ -1,9 +1,11 @@
-package Logica;
-
-import java.awt.Point;
+package Logica.Enemigos;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import Logica.Enemigo;
+import Logica.Mapa;
+import Logica.Posicion;
 
 /**
  * Clase CaminanteBlanco
@@ -25,11 +27,14 @@ public class CaminanteBlanco extends Enemigo
 		puntaje = 400;
 		rangoMonedas = 400;
 		
+		cantDesplazada = 0;	// Se usará para controlar cuánto se mueve el JLabel dentro del ancho real de la celda
+		anchoRealCelda = mapa.obtenerAnchoReal() / mapa.obtenerAncho();	
 		//agrego la gráfica al caminante
-		posGrafica = new Point(ubicacion.getEjeX(),ubicacion.getEjeY());
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlanco.gif"));
 		mGrafico = new JLabel(imagen);	
-		mGrafico.setBounds(0,0,ancho,alto);	
+		desplX = 0;
+		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * ubicacion.getEjeY();
+		mGrafico.setBounds(desplX,desplY,imagen.getIconWidth(),imagen.getIconHeight());	
 	}
 	
 	

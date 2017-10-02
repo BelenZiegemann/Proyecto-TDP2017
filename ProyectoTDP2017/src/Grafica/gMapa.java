@@ -5,9 +5,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
+import Logica.Jugador;
 import Logica.Mapa;
-
 
 /**
  * Clase gMapa
@@ -21,8 +20,6 @@ public class gMapa
 	protected Icon pisoNieve;
 	protected JPanel gui;
 	protected JLabel grafPiso;
-	protected final int anchoLabel = 64;
-	protected final int altoLabel= 64;
 	protected final int anchoMapa = 10;
 	protected final int altoMapa = 6;
 	
@@ -30,12 +27,12 @@ public class gMapa
 	public gMapa(JPanel gui)
 	{		
 		this.gui = gui;
-		m = new Mapa(altoMapa,anchoMapa);
+		m = new Mapa(altoMapa, anchoMapa, gui.getHeight(), gui.getWidth());
 		
 		//Creo imagen
 		pisoNieve = new ImageIcon(this.getClass().getResource("/Imagenes/PisoNieve.jpg"));
 		grafPiso =  new JLabel(pisoNieve);
-		grafPiso.setBounds(0,0, anchoMapa * anchoLabel, altoMapa * altoLabel);
+		grafPiso.setBounds(0,0, gui.getWidth(), gui.getHeight());
 		gui.add(grafPiso);
 		
 		//Creo un ThreadEnemigo 
@@ -47,13 +44,25 @@ public class gMapa
 	{
 		JLabel grafEnemigo = m.agregarEnemigo();
 		if(grafEnemigo != null)
+		{	
 			grafPiso.add(grafEnemigo);
+			grafPiso.repaint();
+		}
+		
 	}
 	
-	public void eliminarEnemigo()
+	public void agregarJugador(Jugador j)
 	{
-		m.eliminarEnemigo();
+		JLabel grafJugador = m.agregarJugador(j);
+		if(grafJugador != null)
+		{
+			grafPiso.add(grafJugador);
+			grafPiso.repaint();
+		}
 	}
 	
-	
+	public Mapa obtenerMapaLogico()
+	{
+		return m;
+	}
 }
