@@ -36,7 +36,7 @@ public class gMapa
 		gui.add(grafPiso);
 		
 		//Creo un ThreadEnemigo 
-		enemigos = new ThreadPersonaje(m);
+		enemigos = new ThreadPersonaje(this);
 		enemigos.start();	
 	}
 	
@@ -65,4 +65,10 @@ public class gMapa
 	{
 		return m;
 	}
+	
+	public JLabel obtenerPisoMapa()
+	{
+		return grafPiso;
+	}
+	
 }

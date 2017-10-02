@@ -2,8 +2,6 @@ package Grafica;
 
 import java.util.LinkedList;
 
-
-import Logica.Mapa;
 import Logica.Personaje;
 
 /**
@@ -13,15 +11,15 @@ import Logica.Personaje;
  */
 public class ThreadPersonaje extends Thread
 {
-	private Mapa mapa;
-	LinkedList<Personaje> PersonajesParaEliminar;
-	
+	private LinkedList<Personaje> PersonajesParaEliminar;
+	private gMapa gmapa;
+	 
 	// Flag que indica cuando debe detenerse la ejecución del hilo.
 	private boolean Detener;
 
-	public ThreadPersonaje(Mapa m) 
+	public ThreadPersonaje(gMapa gm) 
 	{
-		mapa = m;
+		gmapa = gm;
 		Detener = false;
 		PersonajesParaEliminar = new LinkedList<Personaje>();
 	}	
@@ -36,7 +34,7 @@ public class ThreadPersonaje extends Thread
 			{
 				Thread.sleep(400);
 				// Realizo el movimiento
-				for(Personaje p: mapa.getListaPersonajes())
+				for(Personaje p: gmapa.obtenerMapaLogico().getListaPersonajes())
 				{	
 					//SI EL PERSONAJE ESTÁ VIVO ENTONCES MOVER, SINO LO AGREGO A LA LISTA AUXILIAR PARA LUEGO ELIMINARLO
 					if(p.estaVivo() == true)
@@ -51,8 +49,10 @@ public class ThreadPersonaje extends Thread
 				//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS PERSONAJES
 				for(Personaje pElim : PersonajesParaEliminar)
 				{
-					pElim.getGrafico().setEnabled(false);
-					mapa.getListaPersonajes().remove(pElim);
+					//pElim.getGrafico().setEnabled(false);
+					gmapa.obtenerPisoMapa().remove(pElim.getGrafico());
+					gmapa.obtenerPisoMapa().repaint();
+					gmapa.obtenerMapaLogico().getListaPersonajes().remove(pElim);
 				}
 					
 			} catch (InterruptedException e)
