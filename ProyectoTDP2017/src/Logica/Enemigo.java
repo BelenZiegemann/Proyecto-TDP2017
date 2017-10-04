@@ -16,13 +16,16 @@ public abstract class Enemigo extends Personaje
 	protected int cantDesplazada;
 	protected int anchoRealCelda;
 	
+	public void setProyectil(ProyectilEnemigo proyEnem)
+	{
+		proyectil = proyEnem;
+	}
 	
 	/**
 	 * Modifica la ubicación del enemigo y actualiza su posición en el mapa
 	 */
 	public void mover()
 	{	
-		
 		//Primero veo si me están atacando
 		int posEnXJugador;
 		int posEnYJugador;
@@ -37,10 +40,9 @@ public abstract class Enemigo extends Personaje
 				posEnXJugador =  pers.getPosicion().getEjeX();
 				distancia = posEnXJugador - ubicacion.getEjeX();
 				if((distancia != 0) && (distancia <= pers.getAlcance()))
-				{	//entonces el enemigo debe ser atacado por el jugador
-					Proyectil proy = new ProyectilJugador(pers.getFuerzaImpacto() * 20); //la incrementé para
-																				//que se muera con un solo impacto
-					seratacado(proy);
+				{	
+					//entonces el enemigo debe ser atacado por el proyectil del jugador
+					seratacado(pers.getProyectil());
 					if(puntosVida <= 0)
 					{	//entonces el enemigo debe morir 
 								
@@ -48,14 +50,13 @@ public abstract class Enemigo extends Personaje
 						mapa.obtenerPantalla().incrementarPuntaje(puntaje);
 						mapa.obtenerCelda(ubicacion).setContenido(null);
 						estaVivo = false;
-					}
-							
-							
+					}			
 						
 				}		
 			}
 		}	
 		
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		if(estaVivo)
 		{

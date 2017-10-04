@@ -20,6 +20,11 @@ public abstract class Jugador extends Personaje
 		return precio;
 	}
 	
+	public void setProyectil(ProyectilJugador proyJug)
+	{
+		proyectil = proyJug;
+	}
+	
 	public abstract void mover();
 	
 }

@@ -19,6 +19,7 @@ public abstract class Personaje extends Contenido
 	protected int desplY;
 	protected Icon imagen;
 	protected JLabel mGrafico;
+	protected Proyectil proyectil;
 	
 	public abstract void seratacado(Proyectil p);
 	
@@ -47,6 +48,11 @@ public abstract class Personaje extends Contenido
 		return mGrafico;
 	}
 	
+	public Proyectil getProyectil()
+	{
+		return proyectil;
+	}
+	
 	public boolean estaVivo()
 	{
 		return estaVivo;
@@ -56,7 +62,6 @@ public abstract class Personaje extends Contenido
 	{
 		puntosVida = v;
 	}
-	
 	
 	public abstract void mover();
 
