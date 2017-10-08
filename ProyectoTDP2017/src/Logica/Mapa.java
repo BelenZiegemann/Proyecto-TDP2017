@@ -80,12 +80,12 @@ public class Mapa
 		return anchoReal;
 	}
 	
-	public JLabel agregarEnemigo()
+	public JLabel agregarEnemigo(int x, int y)
 	{
 	
 		if(posYenemigo <= alto - 1)
 		{	
-			Enemigo caminante = new CaminanteBlanco(new Posicion(0, posYenemigo), this);
+			Enemigo caminante = new CaminanteBlanco(new Posicion(x, y), this);
 			obtenerCelda(caminante.getPosicion()).setContenido(caminante);
 			misPersonajes.addLast(caminante);
 			posYenemigo = posYenemigo + 2;

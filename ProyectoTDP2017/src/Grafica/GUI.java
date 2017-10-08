@@ -3,6 +3,7 @@ package Grafica;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.MouseInfo;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -85,7 +86,10 @@ public class GUI extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				mapa.agregarEnemigo();
+
+				int X=(int) MouseInfo.getPointerInfo().getLocation().getX();
+				int Y=(int) MouseInfo.getPointerInfo().getLocation().getY();
+				mapa.agregarEnemigo(X, Y);
 			}
 		});
 		

@@ -1,5 +1,7 @@
 package Grafica;
 
+import java.awt.MouseInfo;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -40,9 +42,11 @@ public class gMapa
 		enemigos.start();	
 	}
 	
-	public void agregarEnemigo()
+	public void agregarEnemigo(int x, int y)
 	{
-		JLabel grafEnemigo = m.agregarEnemigo();
+		int X=(int) MouseInfo.getPointerInfo().getLocation().getX();
+		int Y=(int) MouseInfo.getPointerInfo().getLocation().getY();
+		JLabel grafEnemigo = m.agregarEnemigo(X, Y);
 		if(grafEnemigo != null)
 		{	
 			grafPiso.add(grafEnemigo);
