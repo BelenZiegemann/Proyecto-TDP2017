@@ -153,7 +153,7 @@ public class GUI extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				mapa.agregarJugador();
+				mapa.DeboAgregarJugador(true);
 			}
 		});
 		

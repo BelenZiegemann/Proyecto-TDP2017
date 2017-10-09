@@ -25,7 +25,7 @@ public class gMapa implements MouseListener
 	protected JPanel gui;
 	protected JLabel grafPiso;
 	
-	protected Posicion ultimaPosClickeada;
+	protected boolean deboAgregar;
 	
 	protected final int anchoMapa = 10;
 	protected final int altoMapa = 6;
@@ -42,6 +42,8 @@ public class gMapa implements MouseListener
 		grafPiso.setBounds(0,0, gui.getWidth(), gui.getHeight());
 		gui.add(grafPiso);
 		
+		
+		deboAgregar = false;
 		grafPiso.addMouseListener(this);
 		
 	
@@ -62,20 +64,22 @@ public class gMapa implements MouseListener
 		}
 	}
 	
-	public void agregarJugador()
+	public void agregarJugador(Posicion posClickeada)
 	{
-		
-		if(ultimaPosClickeada != null)
-		{
-			JonSnow j = new JonSnow(ultimaPosClickeada,m);
+			JonSnow j = new JonSnow(posClickeada,m);
 			JLabel grafJugador = m.agregarJugador(j);
 			if(grafJugador != null)
 			{
 				grafPiso.add(grafJugador);
 				grafPiso.repaint();
 			}
-		}
 	}
+	
+	public void DeboAgregarJugador(boolean deboAgregar)
+	{
+		this.deboAgregar = deboAgregar;
+	}
+	
 	
 	public Mapa obtenerMapaLogico()
 	{
@@ -102,9 +106,9 @@ public class gMapa implements MouseListener
 		{
 			PosY--;
 		}
-		
-		ultimaPosClickeada = new Posicion(PosX,PosY); //posición en la cual se agregará al jugador
-		
+		if(deboAgregar)
+			agregarJugador(new Posicion(PosX,PosY));  //posición en la cual se agregará al jugador
+		deboAgregar = false;	
 	}
 
 

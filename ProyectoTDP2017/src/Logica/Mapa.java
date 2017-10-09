@@ -82,25 +82,29 @@ public class Mapa
 	
 	public JLabel agregarEnemigo()
 	{
-	
-		if(posYenemigo <= alto - 1)
+		Posicion posEnem = new Posicion(0,posYenemigo);
+		if((posYenemigo <= alto - 1) && (obtenerCelda(posEnem).getContenido() == null))
 		{	
-			Enemigo caminante = new CaminanteBlanco(new Posicion(0, posYenemigo), this);
+			Enemigo caminante = new CaminanteBlanco(posEnem, this);
 			obtenerCelda(caminante.getPosicion()).setContenido(caminante);
 			misPersonajes.addLast(caminante);
 			posYenemigo = posYenemigo + 2;
 			return caminante.getGrafico();
-			
 		}
 		else
+		{
+			posYenemigo = posYenemigo + 2;
 			return null;
+		}
 	}
 	
 	public JLabel agregarJugador(Jugador j)
 	{
-		//debo verificar si dispongo de la cantidad de monedas suficientes para comprar al jugador
-		if(miPantalla.getPresupuesto() >= j.getPrecio())
+		//Debo verificar si dispongo de la cantidad de monedas suficientes para comprar al jugador.
+		//También debo verificar que la celda donde agregaré al jugador no esté ocupada
+		if((miPantalla.getPresupuesto() >= j.getPrecio()) && (obtenerCelda(j.getPosicion()).getContenido() == null))
 		{
+			
 			miPantalla.setPresupuesto(miPantalla.getPresupuesto() - j.getPrecio());
 			obtenerCelda(j.getPosicion()).setContenido(j);
 			misPersonajes.addLast(j);
