@@ -1,27 +1,32 @@
 package Grafica;
 
-import java.awt.MouseInfo;
+import java.awt.event.MouseListener;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Logica.Jugador;
+
 import Logica.Mapa;
+import Logica.Posicion;
+import Logica.Jugadores.JonSnow;
 
 /**
  * Clase gMapa
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
-public class gMapa 
+public class gMapa implements MouseListener
 {
 	protected Mapa m;
 	protected ThreadPersonaje enemigos;
 	protected Icon pisoNieve;
 	protected JPanel gui;
 	protected JLabel grafPiso;
+	
+	protected Posicion ultimaPosClickeada;
+	
 	protected final int anchoMapa = 10;
 	protected final int altoMapa = 6;
 	
@@ -37,31 +42,38 @@ public class gMapa
 		grafPiso.setBounds(0,0, gui.getWidth(), gui.getHeight());
 		gui.add(grafPiso);
 		
+		grafPiso.addMouseListener(this);
+		
+	
 		//Creo un ThreadEnemigo 
 		enemigos = new ThreadPersonaje(this);
 		enemigos.start();	
 	}
 	
-	public void agregarEnemigo(int x, int y)
-	{
-		int X=(int) MouseInfo.getPointerInfo().getLocation().getX();
-		int Y=(int) MouseInfo.getPointerInfo().getLocation().getY();
-		JLabel grafEnemigo = m.agregarEnemigo(X, Y);
+	
+	public void agregarEnemigo()
+	{	
+	
+		JLabel grafEnemigo = m.agregarEnemigo();
 		if(grafEnemigo != null)
 		{	
 			grafPiso.add(grafEnemigo);
 			grafPiso.repaint();
 		}
-		
 	}
 	
-	public void agregarJugador(Jugador j)
+	public void agregarJugador()
 	{
-		JLabel grafJugador = m.agregarJugador(j);
-		if(grafJugador != null)
+		
+		if(ultimaPosClickeada != null)
 		{
-			grafPiso.add(grafJugador);
-			grafPiso.repaint();
+			JonSnow j = new JonSnow(ultimaPosClickeada,m);
+			JLabel grafJugador = m.agregarJugador(j);
+			if(grafJugador != null)
+			{
+				grafPiso.add(grafJugador);
+				grafPiso.repaint();
+			}
 		}
 	}
 	
@@ -74,5 +86,41 @@ public class gMapa
 	{
 		return grafPiso;
 	}
+
+
+	public void mouseClicked(java.awt.event.MouseEvent arg0)
+	{
+	
+		int PosX = (grafPiso.getMousePosition().x) / (gui.getWidth() / anchoMapa);
+		int PosY = (grafPiso.getMousePosition().y) / (gui.getHeight() / altoMapa);
+		
+		if(PosX == anchoMapa)
+		{
+			PosX--;
+		}
+		if(PosX == altoMapa)
+		{
+			PosY--;
+		}
+		
+		ultimaPosClickeada = new Posicion(PosX,PosY); //posición en la cual se agregará al jugador
+		
+	}
+
+
+	public void mouseEntered(java.awt.event.MouseEvent arg0)
+	{}
+
+
+	public void mouseExited(java.awt.event.MouseEvent arg0) 
+	{}
+
+
+	public void mousePressed(java.awt.event.MouseEvent arg0) 
+	{}
+
+
+	public void mouseReleased(java.awt.event.MouseEvent arg0)
+	{}
 	
 }

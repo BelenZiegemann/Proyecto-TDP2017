@@ -3,7 +3,6 @@ package Grafica;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.MouseInfo;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -14,11 +13,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
-import Logica.Posicion;
-import Logica.Jugadores.JonSnow;
 
 import java.awt.Font;
 
@@ -29,7 +26,7 @@ import java.awt.Font;
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
-public class GUI extends JFrame 
+public class GUI extends JFrame
 {
 	private JPanel contentPane;	
 	private gMapa mapa;	
@@ -72,6 +69,7 @@ public class GUI extends JFrame
 		
 		//creo el mapa gráfico
 		mapa = new gMapa(contentPane);
+	
 		
 		//Botón agregar Enemigo
 		JButton btnAgregarEnemigo = new JButton("Agregar Enemigo");
@@ -86,10 +84,7 @@ public class GUI extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-
-				int X=(int) MouseInfo.getPointerInfo().getLocation().getX();
-				int Y=(int) MouseInfo.getPointerInfo().getLocation().getY();
-				mapa.agregarEnemigo(X, Y);
+				mapa.agregarEnemigo();
 			}
 		});
 		
@@ -158,8 +153,7 @@ public class GUI extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				JonSnow j = new JonSnow(new Posicion(8,0), mapa.obtenerMapaLogico());
-				mapa.agregarJugador(j);
+				mapa.agregarJugador();
 			}
 		});
 		
@@ -186,4 +180,5 @@ public class GUI extends JFrame
 		mapa.obtenerMapaLogico().obtenerPantalla().getMostrarNivel().setText("" + mapa.obtenerMapaLogico().obtenerPantalla().getNivel());
 		
 	}
+	
 }
