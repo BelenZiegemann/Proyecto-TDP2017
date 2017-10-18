@@ -8,6 +8,21 @@ package Logica;
 public abstract class Contenido
 {
 	protected int puntosVida = 100;
-	protected Celda misCeldas[];	
+	protected Celda miCelda;	
+	protected Visitor proyectil;
+	public abstract void seratacado(Visitor p);
 	
+	
+	public Visitor getProyectil()
+	{
+		return proyectil;
+	}
+	
+	public Celda getCelda() {
+		return miCelda;
+	}
+	
+	public void setCelda(Celda c) {
+		miCelda = c;
+	}
 }

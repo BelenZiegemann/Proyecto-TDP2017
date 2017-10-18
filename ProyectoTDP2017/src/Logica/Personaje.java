@@ -13,15 +13,13 @@ public abstract class Personaje extends Contenido
 
 	protected int fuerzaImpacto = 10;
 	protected int alcance = 1;
-	protected Posicion ubicacion;	
 	protected boolean estaVivo = true;
 	protected int desplX;
 	protected int desplY;
 	protected Icon imagen;
 	protected JLabel mGrafico;
-	protected Proyectil proyectil;
 	
-	public abstract void seratacado(Proyectil p);
+	public abstract void seratacado(Visitor p);
 	
 	public int getVida()
 	{
@@ -38,19 +36,10 @@ public abstract class Personaje extends Contenido
 		return fuerzaImpacto;
 	}
 	
-	public Posicion getPosicion()
-	{
-		return ubicacion;
-	}
 	
 	public JLabel getGrafico()
 	{
 		return mGrafico;
-	}
-	
-	public Proyectil getProyectil()
-	{
-		return proyectil;
 	}
 	
 	public boolean estaVivo()
@@ -64,5 +53,9 @@ public abstract class Personaje extends Contenido
 	}
 	
 	public abstract void mover();
+	
+	public void setEstaVivo(boolean b) {
+		estaVivo = b;
+	}
 
 }

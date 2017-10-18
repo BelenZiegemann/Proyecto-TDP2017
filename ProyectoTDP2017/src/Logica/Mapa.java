@@ -85,8 +85,9 @@ public class Mapa
 		Posicion posEnem = new Posicion(0,posYenemigo);
 		if((posYenemigo <= alto - 1) && (obtenerCelda(posEnem).getContenido() == null))
 		{	
-			Enemigo caminante = new CaminanteBlanco(posEnem, this);
-			obtenerCelda(caminante.getPosicion()).setContenido(caminante);
+			Celda miCelda = obtenerCelda(posEnem);
+			Enemigo caminante = new CaminanteBlanco(miCelda,this);
+			miCelda.setContenido(caminante);
 			misPersonajes.addLast(caminante);
 			posYenemigo = posYenemigo + 2;
 			return caminante.getGrafico();
@@ -102,14 +103,14 @@ public class Mapa
 	{
 		//Debo verificar si dispongo de la cantidad de monedas suficientes para comprar al jugador.
 		//También debo verificar que la celda donde agregaré al jugador no esté ocupada
-		if((miPantalla.getPresupuesto() >= j.getPrecio()) && (obtenerCelda(j.getPosicion()).getContenido() == null))
+		if((miPantalla.getPresupuesto() >= j.getPrecio()) && (obtenerCelda(j.getCelda().getPosCelda()).getContenido() == null))
 		{
 			
 			miPantalla.setPresupuesto(miPantalla.getPresupuesto() - j.getPrecio());
-			obtenerCelda(j.getPosicion()).setContenido(j);
+			obtenerCelda(j.getCelda().getPosCelda()).setContenido(j);
 			misPersonajes.addLast(j);
 			//agrego un proyectil al jugador
-			j.setProyectil(new ProyectilJugador(j.getFuerzaImpacto() * 20)); ////incrementé la fuerza de impacto para
+			//j.setProyectil(new VisitorJugador(j)); ////incrementé la fuerza de impacto para
 																		//que el enemigo se muera de un solo impacto
 			return j.getGrafico();
 		}
@@ -118,4 +119,5 @@ public class Mapa
 		
 		
 	}
+	
 }

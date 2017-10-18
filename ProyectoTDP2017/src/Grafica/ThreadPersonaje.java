@@ -37,7 +37,7 @@ public class ThreadPersonaje extends Thread
 				for(Personaje p: gmapa.obtenerMapaLogico().getListaPersonajes())
 				{	
 					//SI EL PERSONAJE ESTÁ VIVO ENTONCES MOVER, SINO LO AGREGO A LA LISTA AUXILIAR PARA LUEGO ELIMINARLO
-					if(p.estaVivo() == true)
+					if(p.estaVivo())
 						p.mover();
 					else
 					{

@@ -1,4 +1,5 @@
 package Grafica;
+import Logica.CreadorJugador.*;
 
 import java.awt.event.MouseListener;
 
@@ -11,6 +12,7 @@ import javax.swing.JPanel;
 import Logica.Mapa;
 import Logica.Posicion;
 import Logica.Jugadores.JonSnow;
+import Logica.*;
 
 /**
  * Clase gMapa
@@ -66,7 +68,9 @@ public class gMapa implements MouseListener
 	
 	public void agregarJugador(Posicion posClickeada)
 	{
-			JonSnow j = new JonSnow(posClickeada,m);
+			Celda miCelda = m.obtenerCelda(posClickeada);
+			CreadorJugador cj = new CreadorJonSnow();
+			Jugador j = cj.crearJugador(miCelda, m);
 			JLabel grafJugador = m.agregarJugador(j);
 			if(grafJugador != null)
 			{

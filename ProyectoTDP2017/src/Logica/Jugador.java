@@ -10,9 +10,9 @@ public abstract class Jugador extends Personaje
 	protected int precio = 125;
 	protected Mapa mapa;
 	
-	public void seratacado(Proyectil p)
+	public void seratacado(Visitor p)
 	{
-		p.atacarJugador(this);
+		p.atacar(this);
 	}
 	
 	public int getPrecio()
@@ -20,11 +20,31 @@ public abstract class Jugador extends Personaje
 		return precio;
 	}
 	
-	public void setProyectil(ProyectilJugador proyJug)
+	public void setProyectil(VisitorJugador proyJug)
 	{
 		proyectil = proyJug;
 	}
 	
-	public abstract void mover();
+	public void mover() {
 	
+		//////////////////////////
+		Posicion miPosicion = miCelda.getPosCelda();
+		int miX = miPosicion.getEjeX();
+		int miY = miPosicion.getEjeY();
+		int i = 1;
+		boolean encontre = false;
+		while(i <= alcance && !encontre) {
+			if (miX-i >= 0) {
+				Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX-i,miY));
+				Contenido contenidoSiguiente = celdaSiguiente.getContenido();
+				if (contenidoSiguiente != null) {
+					encontre = true;
+					contenidoSiguiente.seratacado(this.getProyectil());
+				}	
+			}
+			i++;
+		}
+	}
+	////////////////////////////////
+		
 }

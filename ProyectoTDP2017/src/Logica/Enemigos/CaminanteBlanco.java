@@ -1,11 +1,13 @@
 package Logica.Enemigos;
 
 import javax.swing.ImageIcon;
+import Logica.Celda;
 import javax.swing.JLabel;
 
 import Logica.Enemigo;
 import Logica.Mapa;
 import Logica.Posicion;
+import Logica.VisitorEnemigo;
 
 /**
  * Clase CaminanteBlanco
@@ -18,10 +20,10 @@ public class CaminanteBlanco extends Enemigo
 	/*
 	 * Constructor
 	 */
-	public CaminanteBlanco(Posicion p,Mapa m)
+	public CaminanteBlanco(Celda c, Mapa m)
 	{
-		ubicacion = p;
 		mapa = m;
+		miCelda = c;
 		puntosVida = 4 * puntosVida;
 		fuerzaImpacto = 4 * fuerzaImpacto;
 		puntaje = 400;
@@ -33,8 +35,9 @@ public class CaminanteBlanco extends Enemigo
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlanco.gif"));
 		mGrafico = new JLabel(imagen);	
 		desplX = 0;
-		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * ubicacion.getEjeY();
+		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();
 		mGrafico.setBounds(desplX,desplY,imagen.getIconWidth(),imagen.getIconHeight());	
+		proyectil = new VisitorEnemigo(this);
 	}
 	
 	
