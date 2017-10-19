@@ -33,7 +33,8 @@ public class Dothraki extends Jugador
 		mGrafico = new JLabel(imagen);			
 		desplX = (mapa.obtenerAnchoReal() / mapa.obtenerAncho()) * miCelda.getPosCelda().getEjeX();
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();						
-		mGrafico.setBounds(desplX, desplY ,imagen.getIconWidth(),imagen.getIconHeight());		
+		mGrafico.setBounds(desplX, desplY ,imagen.getIconWidth(),imagen.getIconHeight());	
+		proyectil = new VisitorJugador(this);
 	}
 	
 	

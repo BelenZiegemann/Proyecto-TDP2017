@@ -73,7 +73,7 @@ public class gMapa implements MouseListener
 	public void agregarJugador(Posicion posClickeada)
 	{
 			Celda miCelda = m.obtenerCelda(posClickeada);
-			CreadorJugador cj = new CreadorJonSnow();
+			CreadorJugador cj = new CreadorDothraki();
 			Jugador j = cj.crearJugador(miCelda, m);
 			JLabel grafJugador = m.agregarJugador(j);
 			if(grafJugador != null)
