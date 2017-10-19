@@ -30,28 +30,29 @@ public abstract class Enemigo extends Personaje
 			//Intento mover hacia la derecha
 			if(ubicacion.getEjeX() + 1 < mapa.obtenerAncho())
 			{
+			//////////////////////////
+			Posicion miPosicion = miCelda.getPosCelda();
+			int miX = miPosicion.getEjeX();
+			int miY = miPosicion.getEjeY();
+			int i = 1;
+			boolean encontre = false;
+			while(i <= alcance && !encontre) {
+				if (miX+i <= mapa.obtenerAncho()) {
+					Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX+i,miY));
+					Contenido contenidoSiguiente = celdaSiguiente.getContenido();
+					if (contenidoSiguiente != null) {
+						encontre = true;
+						contenidoSiguiente.seratacado(this.getProyectil());
+						System.out.print("Entro");
+					}	
+				}
+				i++;
+			}
+			////////////////////////////////
 				if(cantDesplazada == anchoRealCelda)
 				{	
 					
-					//////////////////////////
-					Posicion miPosicion = miCelda.getPosCelda();
-					int miX = miPosicion.getEjeX();
-					int miY = miPosicion.getEjeY();
-					int i = 1;
-					boolean encontre = false;
-					while(i <= alcance && !encontre) {
-						if (miX+i <= mapa.obtenerAncho()) {
-							Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX+i,miY));
-							Contenido contenidoSiguiente = celdaSiguiente.getContenido();
-							if (contenidoSiguiente != null) {
-								encontre = true;
-								contenidoSiguiente.seratacado(this.getProyectil());
-								System.out.print("Entro");
-							}	
-						}
-						i++;
-					}
-					////////////////////////////////
+					
 					
 					cantDesplazada = 0;
 					//se actualiza la posición del enemigo en la matriz de celdas
