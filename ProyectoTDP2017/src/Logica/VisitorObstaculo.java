@@ -2,19 +2,23 @@ package Logica;
 
 public class VisitorObstaculo extends Visitor
 {
-	protected Jugador j;
+	protected Obstaculo o;
 	public VisitorObstaculo(Jugador j)
 	{
-		this.j = j;
+		this.o = o;
 	}
 	
-	public void atacar(Jugador j)
+	public void atacar(Jugador o)
 	{
 		
 	}
 	
-	public void atacar(Enemigo e)
+	public void atacar(Enemigo o)
 	{
-		e.setVida(e.getVida() - j.getFuerzaImpacto() * 20);
+		o.setVida(o.getVida() - o.getFuerzaImpacto() * 20);
+	}
+	
+	public void atacar(ObstaculoConVida o) {
+		
 	}
 }

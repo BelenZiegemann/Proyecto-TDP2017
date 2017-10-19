@@ -20,6 +20,7 @@ public class Mapa
 	protected Celda[][] matrizCeldas;
 	protected Pantalla miPantalla;
 	protected LinkedList<Personaje> misPersonajes;
+	protected LinkedList<Obstaculo> misObstaculos;
 	
 	//protected LinkedList<Proyectil> misProyectiles;
 	//protected LinkedList<Objeto> misObjetos;
@@ -41,12 +42,18 @@ public class Mapa
 			
 		posYenemigo = 0;
 		misPersonajes = new LinkedList<Personaje>(); 
+		misObstaculos = new LinkedList<Obstaculo>();
 		miPantalla = new Pantalla(this);
 	}
 	
 	public LinkedList<Personaje> getListaPersonajes() 
 	{
 		return misPersonajes;
+	}
+	
+	public LinkedList<Obstaculo> getListaObstaculos() 
+	{
+		return misObstaculos;
 	}
 	
 	public Pantalla obtenerPantalla()
@@ -118,6 +125,12 @@ public class Mapa
 			return null;
 		
 		
+	}
+	
+	public JLabel agregarObstaculo(Obstaculo o) {
+		obtenerCelda(o.getCelda().getPosCelda()).setContenido(o);
+		misObstaculos.addLast(o);
+		return o.getGrafico();		
 	}
 	
 }

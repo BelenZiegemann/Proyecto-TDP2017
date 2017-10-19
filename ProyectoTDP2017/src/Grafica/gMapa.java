@@ -52,6 +52,10 @@ public class gMapa implements MouseListener
 		//Creo un ThreadEnemigo 
 		enemigos = new ThreadPersonaje(this);
 		enemigos.start();	
+		
+		JLabel grafPiedra = m.agregarObstaculo(new Piedra(m.obtenerCelda(new Posicion(3,4)),m));
+		grafPiso.add(grafPiedra);
+		grafPiso.repaint();
 	}
 	
 	

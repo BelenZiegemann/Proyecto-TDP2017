@@ -2,6 +2,7 @@ package Grafica;
 
 import java.util.LinkedList;
 
+import Logica.Obstaculo;
 import Logica.Personaje;
 
 /**
@@ -44,6 +45,16 @@ public class ThreadPersonaje extends Thread
 						
 						PersonajesParaEliminar.addLast(p);
 					}
+				}
+				
+				for(Obstaculo o: gmapa.obtenerMapaLogico().getListaObstaculos()) 
+				{
+					if (!o.estaVivo()) {
+						gmapa.obtenerPisoMapa().remove(o.getGrafico());
+						gmapa.obtenerPisoMapa().repaint();
+						gmapa.obtenerMapaLogico().getListaObstaculos().remove(o);
+					}
+						
 				}
 				
 				//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS PERSONAJES

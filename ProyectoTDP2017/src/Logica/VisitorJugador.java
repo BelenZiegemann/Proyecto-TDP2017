@@ -22,4 +22,8 @@ public class VisitorJugador extends Visitor
 			System.out.println("Se murio enemigo.");
 		}
 	}
+	
+public void atacar(ObstaculoConVida o) {
+		
+	}
 }

@@ -22,4 +22,15 @@ public class VisitorEnemigo extends Visitor
 	{
 		
 	}
+	
+	public void atacar(ObstaculoConVida o) {
+		System.out.println("Enemigo ataca a obstaculo");
+		e.setVelocidad(0);
+		o.setVida(o.getVida() - e.getFuerzaImpacto());
+		if (o.getVida() <= 0) {
+			o.getCelda().setContenido(null);
+			o.setEstaVivo(false);
+			e.setVelocidad(2);
+		}
+	}
 }

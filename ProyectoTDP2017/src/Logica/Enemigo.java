@@ -49,6 +49,7 @@ public abstract class Enemigo extends Personaje
 				i++;
 			}
 			////////////////////////////////
+			if(velocidad > 0) {
 				if(cantDesplazada == anchoRealCelda)
 				{	
 					
@@ -59,6 +60,7 @@ public abstract class Enemigo extends Personaje
 					Posicion p = new Posicion(ubicacion.getEjeX() + 1, ubicacion.getEjeY());
 					mapa.obtenerCelda(ubicacion).setContenido(null);
 					mapa.obtenerCelda(p).setContenido(this);
+					miCelda = mapa.obtenerCelda(p);
 				}	
 				else
 					cantDesplazada = cantDesplazada + 8;
@@ -68,11 +70,15 @@ public abstract class Enemigo extends Personaje
 				mGrafico.setBounds(desplX, desplY, imagen.getIconWidth(), imagen.getIconHeight());
 			}
 		
-	
+		}
 	}
 	
 	public void seratacado(Visitor p)
 	{
 		p.atacar(this);
+	}
+	
+	public void setVelocidad(int v) {
+		velocidad = v;
 	}
 }
