@@ -13,22 +13,20 @@ import Logica.*;
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
-public class Dothraki extends Jugador
+public class GuardianNocturno extends Jugador
 {
 	
 	/*
 	 * Constructor
 	 */
-	public Dothraki(Celda c, Mapa m)
+	public GuardianNocturno(Celda c, Mapa m)
 	{
 		miCelda = c;
 		mapa = m;
-		puntosVida = 2 * puntosVida;
 		fuerzaImpacto = 2 * fuerzaImpacto;
-		precio = 350;
-		alcance = 2 * alcance;
+	
 		
-		//agrego la gráfica a Dothraki
+		//agrego la gráfica a GuardianNocturno
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Dothraki.png"));
 		mGrafico = new JLabel(imagen);			
 		desplX = (mapa.obtenerAnchoReal() / mapa.obtenerAncho()) * miCelda.getPosCelda().getEjeX();

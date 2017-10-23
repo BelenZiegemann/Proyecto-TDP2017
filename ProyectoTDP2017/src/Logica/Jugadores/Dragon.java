@@ -13,29 +13,28 @@ import Logica.*;
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
-public class Dothraki extends Jugador
+public class Dragon extends Jugador
 {
 	
 	/*
 	 * Constructor
 	 */
-	public Dothraki(Celda c, Mapa m)
+	public Dragon(Celda c, Mapa m)
 	{
 		miCelda = c;
 		mapa = m;
-		puntosVida = 2 * puntosVida;
-		fuerzaImpacto = 2 * fuerzaImpacto;
-		precio = 350;
-		alcance = 2 * alcance;
+		puntosVida = 4 * puntosVida;
+		fuerzaImpacto = 7 * fuerzaImpacto;
+		precio = 2000;
+		alcance=4*alcance;
 		
-		//agrego la gráfica a Dothraki
-		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Dothraki.png"));
+		//agrego la gráfica a Dragon
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/JonSnow.png"));
 		mGrafico = new JLabel(imagen);			
 		desplX = (mapa.obtenerAnchoReal() / mapa.obtenerAncho()) * miCelda.getPosCelda().getEjeX();
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();						
 		mGrafico.setBounds(desplX, desplY ,imagen.getIconWidth(),imagen.getIconHeight());	
 		proyectil = new VisitorJugador(this);
+		
 	}
-	
-	
 }
