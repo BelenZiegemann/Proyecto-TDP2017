@@ -6,7 +6,6 @@ import javax.swing.JLabel;
 
 import Logica.Enemigo;
 import Logica.Mapa;
-import Logica.Posicion;
 import Logica.VisitorEnemigo;
 
 /**
@@ -25,7 +24,7 @@ public class CaminanteBlanco extends Enemigo
 		mapa = m;
 		miCelda = c;
 		puntosVida = 4 * puntosVida;
-		fuerzaImpacto = 4 * fuerzaImpacto;
+		fuerzaImpacto = 2 * fuerzaImpacto;
 		puntaje = 400;
 		rangoMonedas = 400;
 		

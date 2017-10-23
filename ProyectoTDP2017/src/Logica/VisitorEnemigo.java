@@ -11,7 +11,7 @@ public class VisitorEnemigo extends Visitor
 	public void atacar(Jugador j)
 	{
 		System.out.println("Enemigo ataca a jugador.");
-		j.setVida(j.getVida() - e.getFuerzaImpacto()*20);
+		j.setVida(j.getVida() - e.getFuerzaImpacto());
 		if (j.getVida() <= 0) {
 			j.setEstaVivo(false);
 			System.out.println("Se murio jugador.");

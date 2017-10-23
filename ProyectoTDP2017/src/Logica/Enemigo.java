@@ -50,31 +50,34 @@ public abstract class Enemigo extends Personaje
 						encontre = true;
 						contenidoSiguiente.seratacado(this.getProyectil());
 						System.out.print("Entro");
-					}	
+					}
+					else {
+						////////////////////////////////
+						if(velocidad > 0) {
+							if(cantDesplazada == anchoRealCelda)
+							{	
+								
+								
+								
+								cantDesplazada = 0;
+								//se actualiza la posición del enemigo en la matriz de celdas
+								Posicion p = new Posicion(ubicacion.getEjeX() + 1, ubicacion.getEjeY());
+								mapa.obtenerCelda(ubicacion).setContenido(null);
+								mapa.obtenerCelda(p).setContenido(this);
+								miCelda = mapa.obtenerCelda(p);
+							}	
+							else
+								cantDesplazada = cantDesplazada + 8;
+							
+							//muevo el JLabel que representa al enemigo
+							desplX = desplX + 4 * velocidad;
+							mGrafico.setBounds(desplX, desplY, imagen.getIconWidth(), imagen.getIconHeight());
+						}
+					}
 				}
 				i++;
 			}
-			////////////////////////////////
-			if(velocidad > 0) {
-				if(cantDesplazada == anchoRealCelda)
-				{	
-					
-					
-					
-					cantDesplazada = 0;
-					//se actualiza la posición del enemigo en la matriz de celdas
-					Posicion p = new Posicion(ubicacion.getEjeX() + 1, ubicacion.getEjeY());
-					mapa.obtenerCelda(ubicacion).setContenido(null);
-					mapa.obtenerCelda(p).setContenido(this);
-					miCelda = mapa.obtenerCelda(p);
-				}	
-				else
-					cantDesplazada = cantDesplazada + 8;
-				
-				//muevo el JLabel que representa al enemigo
-				desplX = desplX + 4 * velocidad;
-				mGrafico.setBounds(desplX, desplY, imagen.getIconWidth(), imagen.getIconHeight());
-			}
+			
 		
 		}
 	}
