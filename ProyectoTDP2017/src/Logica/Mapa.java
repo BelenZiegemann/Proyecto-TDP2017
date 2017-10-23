@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import javax.swing.JLabel;
 
 import Logica.Enemigos.CaminanteBlanco;
+import Logica.Enemigos.DragonDeHielo;
 
 /**
  * Clase Mapa
@@ -97,7 +98,7 @@ public class Mapa
 		if((posYenemigo <= alto - 1) && (obtenerCelda(posEnem).getContenido() == null))
 		{	
 			Celda miCelda = obtenerCelda(posEnem);
-			Enemigo caminante = new CaminanteBlanco(miCelda,this);
+			Enemigo caminante = new DragonDeHielo(miCelda,this);
 			miCelda.setContenido(caminante);
 			misPersonajes.addLast(caminante);
 			posYenemigo = posYenemigo + 2;

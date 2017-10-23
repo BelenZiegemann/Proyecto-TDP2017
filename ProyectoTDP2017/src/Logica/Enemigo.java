@@ -1,5 +1,7 @@
 package Logica;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  * Clase Abstracta Enemigo
@@ -42,23 +44,26 @@ public abstract class Enemigo extends Personaje
 			int miY = miPosicion.getEjeY();
 			int i = 1;
 			boolean encontre = false;
+			System.out.println("miX" + miX );
 			while(i <= alcance && !encontre) {
-				if (miX+i <= mapa.obtenerAncho()) {
+				
+				if (miX+i < mapa.obtenerAncho() ) {
+					System.out.println("miX: " + miX + "i: "+i);
+					System.out.println("obtenerAncho: " + mapa.obtenerAncho());
 					Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX+i,miY));
 					Contenido contenidoSiguiente = celdaSiguiente.getContenido();
 					if (contenidoSiguiente != null) {
 						encontre = true;
+						setImagenQuieto();
 						contenidoSiguiente.seratacado(this.getProyectil());
 						System.out.print("Entro");
 					}
 					else {
 						////////////////////////////////
 						if(velocidad > 0) {
-							if(cantDesplazada == anchoRealCelda)
-							{	
-								
-								
-								
+							if(cantDesplazada >= anchoRealCelda)
+							{		
+								setImagenEnMovimiento();
 								cantDesplazada = 0;
 								//se actualiza la posición del enemigo en la matriz de celdas
 								Posicion p = new Posicion(ubicacion.getEjeX() + 1, ubicacion.getEjeY());
@@ -70,7 +75,7 @@ public abstract class Enemigo extends Personaje
 								cantDesplazada = cantDesplazada + 8;
 							
 							//muevo el JLabel que representa al enemigo
-							desplX = desplX + 4 * velocidad;
+							desplX = desplX + velocidad;
 							mGrafico.setBounds(desplX, desplY, imagen.getIconWidth(), imagen.getIconHeight());
 						}
 					}
@@ -90,4 +95,8 @@ public abstract class Enemigo extends Personaje
 	public void setVelocidad(int v) {
 		velocidad = v;
 	}
+	
+	public abstract void setImagenEnMovimiento();
+	
+	public abstract void setImagenQuieto();
 }

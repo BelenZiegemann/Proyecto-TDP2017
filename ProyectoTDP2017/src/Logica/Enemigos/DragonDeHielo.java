@@ -33,7 +33,7 @@ public class DragonDeHielo extends Enemigo
 		cantDesplazada = 0;	// Se usará para controlar cuánto se mueve el JLabel dentro del ancho real de la celda
 		anchoRealCelda = mapa.obtenerAnchoReal() / mapa.obtenerAncho();	
 		//agrego la gráfica al caminante
-		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlanco.gif"));
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/DragonDeHielo.gif"));
 		mGrafico = new JLabel(imagen);	
 		desplX = 0;
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();
@@ -41,5 +41,17 @@ public class DragonDeHielo extends Enemigo
 		proyectil = new VisitorEnemigo(this);
 	}
 	
+	public void setImagenEnMovimiento()
+	{
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/DragonDeHielo.gif"));
+		mGrafico.setIcon(imagen);
+		
+	}
+	public void setImagenQuieto()
+	{
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/dragon1.png"));
+		mGrafico.setIcon(imagen);	
+		
+	}
 	
 }

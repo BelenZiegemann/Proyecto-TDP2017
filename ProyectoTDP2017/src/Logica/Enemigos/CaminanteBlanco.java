@@ -38,6 +38,17 @@ public class CaminanteBlanco extends Enemigo
 		mGrafico.setBounds(desplX,desplY,imagen.getIconWidth(),imagen.getIconHeight());	
 		proyectil = new VisitorEnemigo(this);
 	}
-	
+	public void setImagenEnMovimiento()
+	{
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlanco.gif"));
+		mGrafico.setIcon(imagen);
+		
+	}
+	public void setImagenQuieto()
+	{
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlancoQuieto.png"));
+		mGrafico.setIcon(imagen);	
+		
+	}
 	
 }
