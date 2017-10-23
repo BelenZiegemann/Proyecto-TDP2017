@@ -13,20 +13,22 @@ import Logica.VisitorEnemigo;
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
-public class CaminanteBlanco extends Enemigo 
+public class DragonDeHielo extends Enemigo 
 {
 
 	/*
 	 * Constructor
 	 */
-	public CaminanteBlanco(Celda c, Mapa m)
+	public DragonDeHielo(Celda c, Mapa m)
 	{
 		mapa = m;
 		miCelda = c;
 		puntosVida = 4 * puntosVida;
-		fuerzaImpacto = 4 * fuerzaImpacto;
-		puntaje = 400;
-		rangoMonedas = 400;
+		fuerzaImpacto = 10 * fuerzaImpacto;
+		alcance=4*alcance;
+		velocidad=5;
+		puntaje = 1000;
+		rangoMonedas = 1500;
 		
 		cantDesplazada = 0;	// Se usará para controlar cuánto se mueve el JLabel dentro del ancho real de la celda
 		anchoRealCelda = mapa.obtenerAnchoReal() / mapa.obtenerAncho();	
