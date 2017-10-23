@@ -69,7 +69,7 @@ public class Pantalla
 	
 	public void setPresupuesto(int coins)
 	{
-		monedas = coins;
+		monedas = monedas + coins;
 		mostrarMonedas.setText("" + monedas);
 	}
 	

@@ -26,6 +26,10 @@ public class Mapa
 	//protected LinkedList<Objeto> misObjetos;
 	protected int posYenemigo;
 	
+	public void eliminarContenido(Personaje j) {
+		
+	}
+	
 	public Mapa(int alto, int ancho, int altoReal, int anchoReal)
 	{
 		this.alto = alto;
@@ -113,7 +117,7 @@ public class Mapa
 		if((miPantalla.getPresupuesto() >= j.getPrecio()) && (obtenerCelda(j.getCelda().getPosCelda()).getContenido() == null))
 		{
 			
-			miPantalla.setPresupuesto(miPantalla.getPresupuesto() - j.getPrecio());
+			miPantalla.setPresupuesto(- j.getPrecio());
 			obtenerCelda(j.getCelda().getPosCelda()).setContenido(j);
 			misPersonajes.addLast(j);
 			//agrego un proyectil al jugador

@@ -20,6 +20,8 @@ public class VisitorJugador extends Visitor
 		if (e.getVida() <= 0) {
 			e.setEstaVivo(false);
 			System.out.println("Se murio enemigo.");
+			e.setPuntajeMonedas();
+			e.getCelda().setContenido(null);
 		}
 	}
 	

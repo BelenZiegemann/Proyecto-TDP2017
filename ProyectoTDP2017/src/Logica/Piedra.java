@@ -13,7 +13,7 @@ public class Piedra extends ObstaculoConVida {
 	protected Mapa mapa;
 	
 	public Piedra(Celda c, Mapa m) {
-		vida = 200;
+		vida = 400;
 		miCelda = c;
 		mapa = m;
 	

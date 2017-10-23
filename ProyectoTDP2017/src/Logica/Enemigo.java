@@ -16,6 +16,12 @@ public abstract class Enemigo extends Personaje
 	protected int cantDesplazada;
 	protected int anchoRealCelda;
 	
+	//Se debe invocar cuando se muere.
+	public void setPuntajeMonedas() {
+		mapa.obtenerPantalla().incrementarPuntaje(puntaje);
+		mapa.obtenerPantalla().setPresupuesto(rangoMonedas);
+	}
+	
 	public void setProyectil(VisitorEnemigo proyEnem)
 	{
 		proyectil = proyEnem;

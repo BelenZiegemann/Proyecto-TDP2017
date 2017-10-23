@@ -16,8 +16,7 @@ public abstract class Personaje extends Contenido
 	protected boolean estaVivo = true;
 	protected int desplX;
 	protected int desplY;
-	protected Icon imagen;
-	protected JLabel mGrafico;
+	
 	
 	public abstract void seratacado(Visitor p);
 	
