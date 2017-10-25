@@ -16,6 +16,7 @@ public class VisitorEnemigo extends Visitor
 			j.setEstaVivo(false);
 			System.out.println("Se murio jugador.");
 			j.getCelda().setContenido(null);
+			e.setMovimiento(true);;
 		}
 	}
 	

@@ -17,6 +17,7 @@ public abstract class Enemigo extends Personaje
 	protected Premio miPremio;
 	protected int cantDesplazada;
 	protected int anchoRealCelda;
+	protected boolean estaEnMovimiento = true;
 	
 	//Se debe invocar cuando se muere.
 	public void setPuntajeMonedas() {
@@ -33,7 +34,8 @@ public abstract class Enemigo extends Personaje
 	 * Modifica la ubicación del enemigo y actualiza su posición en el mapa
 	 */
 	public void mover()
-	{				
+	{		
+			System.out.print("v: " + velocidad);
 			Posicion ubicacion = miCelda.getPosCelda();
 			//Intento mover hacia la derecha
 			if(ubicacion.getEjeX() + 1 < mapa.obtenerAncho())
@@ -53,38 +55,47 @@ public abstract class Enemigo extends Personaje
 					Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX+i,miY));
 					Contenido contenidoSiguiente = celdaSiguiente.getContenido();
 					if (contenidoSiguiente != null) {
+						estaEnMovimiento = false;
 						encontre = true;
 						setImagenQuieto();
 						contenidoSiguiente.seratacado(this.getProyectil());
 						System.out.print("Entro");
 					}
-					else {
-						////////////////////////////////
-						if(velocidad > 0) {
-							if(cantDesplazada >= anchoRealCelda)
-							{		
-								setImagenEnMovimiento();
-								cantDesplazada = 0;
-								//se actualiza la posición del enemigo en la matriz de celdas
-								Posicion p = new Posicion(ubicacion.getEjeX() + 1, ubicacion.getEjeY());
-								mapa.obtenerCelda(ubicacion).setContenido(null);
-								mapa.obtenerCelda(p).setContenido(this);
-								miCelda = mapa.obtenerCelda(p);
-							}	
-							else
-								cantDesplazada = cantDesplazada + 8;
-							
-							//muevo el JLabel que representa al enemigo
-							desplX = desplX + velocidad;
-							mGrafico.setBounds(desplX, desplY, imagen.getIconWidth(), imagen.getIconHeight());
-						}
+					
 					}
+					i++;
+			}
+			
+			//
+			if (estaEnMovimiento) {
+				////////////////////////////////
+				if(velocidad > 0) {
+					if(cantDesplazada >= anchoRealCelda)
+					{		
+						setImagenEnMovimiento();
+						cantDesplazada = 0;
+						//se actualiza la posición del enemigo en la matriz de celdas
+						Posicion p = new Posicion(ubicacion.getEjeX() + 1, ubicacion.getEjeY());
+						mapa.obtenerCelda(ubicacion).setContenido(null);
+						mapa.obtenerCelda(p).setContenido(this);
+						miCelda = mapa.obtenerCelda(p);
+					}	
+					else
+						cantDesplazada = cantDesplazada + 8;
+					
+					//muevo el JLabel que representa al enemigo
+					desplX = desplX + velocidad;
+					mGrafico.setBounds(desplX, desplY, imagen.getIconWidth(), imagen.getIconHeight());
+					System.out.println("estaEnMov: " + estaEnMovimiento);
 				}
-				i++;
 			}
 			
 		
 		}
+	}
+	
+	public void setMovimiento(boolean m) {
+		estaEnMovimiento = m;
 	}
 	
 	public void seratacado(Visitor p)
