@@ -2,7 +2,8 @@ package Logica;
 
 public class VisitorEnemigo extends Visitor
 {
-	Enemigo e;
+	protected Enemigo e;
+	
 	public VisitorEnemigo(Enemigo e)
 	{
 		this.e = e;
@@ -12,11 +13,14 @@ public class VisitorEnemigo extends Visitor
 	{
 		System.out.println("Enemigo ataca a jugador.");
 		j.setVida(j.getVida() - e.getFuerzaImpacto());
-		if (j.getVida() <= 0) {
+		if (j.getVida() <= 0) 
+		{
 			j.setEstaVivo(false);
 			System.out.println("Se murio jugador.");
 			j.getCelda().setContenido(null);
-			e.setMovimiento(true);;
+			e.setMovimiento(true);
+				
+			e.setImagenEnMovimiento(); //ultimo cambio
 		}
 	}
 	
@@ -27,12 +31,19 @@ public class VisitorEnemigo extends Visitor
 	
 	public void atacar(ObstaculoConVida o) {
 		System.out.println("Enemigo ataca a obstaculo");
-		e.setVelocidad(0);
+		
+		
+		//e.setVelocidad(0);
 		o.setVida(o.getVida() - e.getFuerzaImpacto());
 		if (o.getVida() <= 0) {
 			o.getCelda().setContenido(null);
 			o.setEstaVivo(false);
-			e.setVelocidad(2);
+			
+		//	e.setVelocidad(5);
+			
+			e.setMovimiento(true);
+			e.setImagenEnMovimiento(); //ultimo cambio
+			
 		}
 	}
 }

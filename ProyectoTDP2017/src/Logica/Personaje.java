@@ -35,7 +35,6 @@ public abstract class Personaje extends Contenido
 		return fuerzaImpacto;
 	}
 	
-	
 	public JLabel getGrafico()
 	{
 		return mGrafico;

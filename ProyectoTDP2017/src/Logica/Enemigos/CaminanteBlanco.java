@@ -42,13 +42,11 @@ public class CaminanteBlanco extends Enemigo
 	{
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlanco.gif"));
 		mGrafico.setIcon(imagen);
-		
 	}
 	public void setImagenQuieto()
 	{
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlancoQuieto.png"));
 		mGrafico.setIcon(imagen);	
-		
 	}
 	
 }

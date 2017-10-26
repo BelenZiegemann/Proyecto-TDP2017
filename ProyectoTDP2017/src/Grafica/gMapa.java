@@ -8,10 +8,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
-import Logica.Mapa;
-import Logica.Posicion;
-import Logica.Jugadores.JonSnow;
 import Logica.*;
 
 /**

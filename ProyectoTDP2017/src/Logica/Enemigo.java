@@ -13,7 +13,6 @@ public abstract class Enemigo extends Personaje
 	protected int velocidad = 2;
 	protected int puntaje = 50;
 	protected int rangoMonedas = 150;
-	protected Mapa mapa;
 	protected Premio miPremio;
 	protected int cantDesplazada;
 	protected int anchoRealCelda;
@@ -37,61 +36,74 @@ public abstract class Enemigo extends Personaje
 	{		
 			System.out.print("v: " + velocidad);
 			Posicion ubicacion = miCelda.getPosCelda();
-			//Intento mover hacia la derecha
-			if(ubicacion.getEjeX() + 1 < mapa.obtenerAncho())
-			{
-			//////////////////////////
-			Posicion miPosicion = miCelda.getPosCelda();
-			int miX = miPosicion.getEjeX();
-			int miY = miPosicion.getEjeY();
-			int i = 1;
-			boolean encontre = false;
-			System.out.println("miX" + miX );
-			while(i <= alcance && !encontre) {
-				
-				if (miX+i < mapa.obtenerAncho() ) {
-					System.out.println("miX: " + miX + "i: "+i);
-					System.out.println("obtenerAncho: " + mapa.obtenerAncho());
-					Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX+i,miY));
-					Contenido contenidoSiguiente = celdaSiguiente.getContenido();
-					if (contenidoSiguiente != null) {
-						estaEnMovimiento = false;
-						encontre = true;
-						setImagenQuieto();
-						contenidoSiguiente.seratacado(this.getProyectil());
-						System.out.print("Entro");
-					}
-					
-					}
-					i++;//
-			}
+			int miX = ubicacion.getEjeX();
+			int miY = ubicacion.getEjeY();
 			
-			//
-			if (estaEnMovimiento) {
-				////////////////////////////////
-				if(velocidad > 0) {
-					if(cantDesplazada >= anchoRealCelda)
-					{		
-						setImagenEnMovimiento();
-						cantDesplazada = 0;
-						//se actualiza la posición del enemigo en la matriz de celdas
-						Posicion p = new Posicion(ubicacion.getEjeX() + 1, ubicacion.getEjeY());
-						mapa.obtenerCelda(ubicacion).setContenido(null);
-						mapa.obtenerCelda(p).setContenido(this);
-						miCelda = mapa.obtenerCelda(p);
-					}	
-					else
-						cantDesplazada = cantDesplazada + 8;
+			System.out.println("miX " + miX);
+			//Intento mover hacia la derecha
+			if(miX + 1 < mapa.obtenerAncho())
+			{
+				int i = 1;
+				boolean encontre = false;
+				//	System.out.println("miX " + miX);
+				
+				//verifico si hay alguien a mi alcance para atacar  
+				while(i <= alcance && !encontre) 
+				{
+				
+					if(miX+i < mapa.obtenerAncho()) 
+					{
+						//System.out.println("miX: " + miX + "i: "+i);
+						//System.out.println("obtenerAncho: " + mapa.obtenerAncho());
+						Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX+i,miY));
+						
+						Contenido contenidoSiguiente = celdaSiguiente.getContenido();
+						if(contenidoSiguiente != null) 
+						{
+							estaEnMovimiento = false;
+							setImagenQuieto();
+							encontre = true;
+							contenidoSiguiente.seratacado(this.getProyectil());
+							//System.out.print("Entro");
+						}
 					
-					//muevo el JLabel que representa al enemigo
-					desplX = desplX + velocidad;
-					mGrafico.setBounds(desplX, desplY, imagen.getIconWidth(), imagen.getIconHeight());
-					System.out.println("estaEnMov: " + estaEnMovimiento);
+					}
+					i++;
 				}
-			}
+			
+				
+				if (estaEnMovimiento)
+				{
+				////////////////////////////////
+					//if(velocidad > 0) 
+					//{
+						if(cantDesplazada >= anchoRealCelda)
+						{		
+						//	setImagenEnMovimiento();
+							cantDesplazada = 0;
+							//se actualiza la posición del enemigo en la matriz de celdas
+							Posicion p = new Posicion(ubicacion.getEjeX() + 1, ubicacion.getEjeY());
+							mapa.obtenerCelda(ubicacion).setContenido(null);
+							mapa.obtenerCelda(p).setContenido(this);
+							miCelda = mapa.obtenerCelda(p);
+						}	
+						else
+							cantDesplazada = (int) (cantDesplazada + Math.pow(2, velocidad));
+					
+						//muevo el JLabel que representa al enemigo
+						desplX = (int) (desplX + Math.pow(2,velocidad));
+						mGrafico.setBounds(desplX, desplY, imagen.getIconWidth(), imagen.getIconHeight());
+						System.out.println("estaEnMov: " + estaEnMovimiento);
+					//}
+				}
 			
 		
-		}
+			}
+			else // significa que ya atravesó el mapa 
+				 estaVivo = false; //lo hago para que ThreadPersonaje no lo haga mover y lo remueva
+									// de la lista de personajes
+			
+			
 	}
 	
 	public void setMovimiento(boolean m) {

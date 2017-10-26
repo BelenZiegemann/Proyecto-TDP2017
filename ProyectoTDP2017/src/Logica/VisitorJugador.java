@@ -17,7 +17,8 @@ public class VisitorJugador extends Visitor
 	{
 		System.out.println("Jugador ataca a enemigo.");
 		e.setVida(e.getVida() - j.getFuerzaImpacto());
-		if (e.getVida() <= 0) {
+		if (e.getVida() <= 0) 
+		{
 			e.setEstaVivo(false);
 			System.out.println("Se murio enemigo.");
 			e.setPuntajeMonedas();
@@ -25,7 +26,8 @@ public class VisitorJugador extends Visitor
 		}
 	}
 	
-public void atacar(ObstaculoConVida o) {
+	public void atacar(ObstaculoConVida o) 
+	{
 		
 	}
 }

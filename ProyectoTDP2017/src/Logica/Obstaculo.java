@@ -3,7 +3,7 @@ package Logica;
 import javax.swing.JLabel;
 
 public abstract class Obstaculo extends Contenido {
-	protected JLabel mGrafico;
+	
 	protected boolean estaVivo;
 	
 	public JLabel getGrafico()
@@ -11,11 +11,13 @@ public abstract class Obstaculo extends Contenido {
 		return mGrafico;
 	}
 	
-	public boolean estaVivo() {
+	public boolean estaVivo() 
+	{
 		return estaVivo;
 	}
 	
-	public void setEstaVivo(boolean b) {
+	public void setEstaVivo(boolean b)
+	{
 		estaVivo = b;
 	}
 }

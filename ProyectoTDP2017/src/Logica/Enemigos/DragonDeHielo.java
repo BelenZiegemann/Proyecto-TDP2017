@@ -25,7 +25,8 @@ public class DragonDeHielo extends Enemigo
 		miCelda = c;
 		puntosVida = 4 * puntosVida;
 		fuerzaImpacto = 10 * fuerzaImpacto;
-		alcance=4*alcance;
+		//alcance=4*alcance;
+		alcance = 4;
 		velocidad=5;
 		puntaje = 1000;
 		rangoMonedas = 1500;

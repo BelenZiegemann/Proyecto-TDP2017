@@ -12,6 +12,7 @@ public abstract class Contenido
 {
 	protected int puntosVida = 100;
 	protected Celda miCelda;	
+	protected Mapa mapa;
 	protected Visitor proyectil;
 	protected Icon imagen;
 	protected JLabel mGrafico;

@@ -23,7 +23,6 @@ public class Mapa
 	protected LinkedList<Personaje> misPersonajes;
 	protected LinkedList<Obstaculo> misObstaculos;
 	
-	//protected LinkedList<Proyectil> misProyectiles;
 	//protected LinkedList<Objeto> misObjetos;
 	protected int posYenemigo;
 	
@@ -121,15 +120,10 @@ public class Mapa
 			miPantalla.setPresupuesto(- j.getPrecio());
 			obtenerCelda(j.getCelda().getPosCelda()).setContenido(j);
 			misPersonajes.addLast(j);
-			//agrego un proyectil al jugador
-			//j.setProyectil(new VisitorJugador(j)); ////incrementé la fuerza de impacto para
-																		//que el enemigo se muera de un solo impacto
 			return j.getGrafico();
 		}
 		else
 			return null;
-		
-		
 	}
 	
 	public JLabel agregarObstaculo(Obstaculo o) {

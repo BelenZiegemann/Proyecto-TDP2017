@@ -8,7 +8,6 @@ package Logica;
 public abstract class Jugador extends Personaje
 {
 	protected int precio = 125;
-	protected Mapa mapa;
 	
 	public void seratacado(Visitor p)
 	{
