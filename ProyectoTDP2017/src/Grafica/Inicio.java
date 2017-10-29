@@ -57,7 +57,8 @@ public class Inicio extends JFrame
 		setTitle("GAME OF THRONES");
 		getContentPane().setBackground(Color.BLACK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(150, 150, 500,410); // (x,y,ancho,alto)
+		setBounds(0,0, 500,410); // (x,y,ancho,alto) 
+		setLocationRelativeTo(null); // para que la ventana se abra en el centro de la pantalla
 		getContentPane().setLayout(null);
 		
 		//imágen de fondo

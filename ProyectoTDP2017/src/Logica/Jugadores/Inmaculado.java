@@ -29,7 +29,7 @@ public class Inmaculado extends Jugador
 
 		
 		//agrego la gráfica a JonSnow
-		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Dothraki.png"));
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Inmaculado.png"));
 		mGrafico = new JLabel(imagen);			
 		desplX = (mapa.obtenerAnchoReal() / mapa.obtenerAncho()) * miCelda.getPosCelda().getEjeX();
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();						

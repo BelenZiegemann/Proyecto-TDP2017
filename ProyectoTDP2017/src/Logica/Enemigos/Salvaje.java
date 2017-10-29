@@ -41,5 +41,14 @@ public class Salvaje extends Enemigo
 		proyectil = new VisitorEnemigo(this);
 	}
 	
-	
+	public void setImagenEnMovimiento()
+	{
+		//imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlanco.gif"));
+	//	mGrafico.setIcon(imagen);
+	}
+	public void setImagenQuieto()
+	{
+		//imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlancoQuieto.png"));
+	//	mGrafico.setIcon(imagen);	
+	}
 }

@@ -97,7 +97,7 @@ public class Mapa
 		if((posYenemigo <= alto - 1) && (obtenerCelda(posEnem).getContenido() == null))
 		{	
 			Celda miCelda = obtenerCelda(posEnem);
-			Enemigo caminante = new DragonDeHielo(miCelda,this);
+			Enemigo caminante = new CaminanteBlanco(miCelda,this);
 			miCelda.setContenido(caminante);
 			misPersonajes.addLast(caminante);
 			posYenemigo = posYenemigo + 2;

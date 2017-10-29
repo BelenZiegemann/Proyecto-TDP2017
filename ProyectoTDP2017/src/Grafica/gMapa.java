@@ -24,6 +24,7 @@ public class gMapa implements MouseListener
 	protected JLabel grafPiso;
 	
 	protected boolean deboAgregar;
+	protected CreadorJugador jugadorParaAgregar;
 	
 	protected final int anchoMapa = 10;
 	protected final int altoMapa = 6;
@@ -42,6 +43,7 @@ public class gMapa implements MouseListener
 		
 		
 		deboAgregar = false;
+		jugadorParaAgregar = null;
 		grafPiso.addMouseListener(this);
 		
 	
@@ -66,11 +68,9 @@ public class gMapa implements MouseListener
 		}
 	}
 	
-	public void agregarJugador(Posicion posClickeada)
+	public void agregarJugador(Jugador j)
 	{
-			Celda miCelda = m.obtenerCelda(posClickeada);
-			CreadorJugador cj = new CreadorJonSnow();
-			Jugador j = cj.crearJugador(miCelda, m);
+
 			JLabel grafJugador = m.agregarJugador(j);
 			if(grafJugador != null)
 			{
@@ -82,6 +82,11 @@ public class gMapa implements MouseListener
 	public void DeboAgregarJugador(boolean deboAgregar)
 	{
 		this.deboAgregar = deboAgregar;
+	}
+	
+	public void setJugadorParaAgregar(CreadorJugador j)
+	{
+		jugadorParaAgregar = j;
 	}
 	
 	
@@ -111,7 +116,14 @@ public class gMapa implements MouseListener
 			PosY--;
 		}
 		if(deboAgregar)
-			agregarJugador(new Posicion(PosX,PosY));  //posición en la cual se agregará al jugador
+		{
+			
+			Posicion posClickeada = new Posicion(PosX,PosY);
+			Celda miCelda = m.obtenerCelda(posClickeada);
+			Jugador j = jugadorParaAgregar.crearJugador(miCelda, m);
+			agregarJugador(j);  //posición en la cual se agregará al jugador
+		}
+		
 		deboAgregar = false;	
 	}
 

@@ -27,7 +27,7 @@ public class GuardianNocturno extends Jugador
 	
 		
 		//agrego la gráfica a GuardianNocturno
-		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Dothraki.png"));
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/GuardianNocturno.png"));
 		mGrafico = new JLabel(imagen);			
 		desplX = (mapa.obtenerAnchoReal() / mapa.obtenerAncho()) * miCelda.getPosCelda().getEjeX();
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();						

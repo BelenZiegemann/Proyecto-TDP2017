@@ -29,7 +29,7 @@ public class Dragon extends Jugador
 		alcance=4*alcance;
 		
 		//agrego la gráfica a Dragon
-		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/JonSnow.png"));
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Dragon.png"));
 		mGrafico = new JLabel(imagen);			
 		desplX = (mapa.obtenerAnchoReal() / mapa.obtenerAncho()) * miCelda.getPosCelda().getEjeX();
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();						
