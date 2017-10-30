@@ -1,5 +1,10 @@
 package Logica;
 
+/**
+ * Clase abstracta Visitor
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
 public abstract class Visitor 
 {
 	

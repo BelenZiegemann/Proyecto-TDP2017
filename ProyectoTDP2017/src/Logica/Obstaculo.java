@@ -1,15 +1,13 @@
 package Logica;
 
-import javax.swing.JLabel;
-
+/**
+* Clase abstracta Obstaculo
+* @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+*
+*/
 public abstract class Obstaculo extends Contenido {
 	
 	protected boolean estaVivo;
-	
-	public JLabel getGrafico()
-	{
-		return mGrafico;
-	}
 	
 	public boolean estaVivo() 
 	{

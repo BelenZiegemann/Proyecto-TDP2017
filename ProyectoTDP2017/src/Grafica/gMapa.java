@@ -18,14 +18,16 @@ import Logica.*;
 public class gMapa implements MouseListener
 {
 	protected Mapa m;
-	protected ThreadPersonaje enemigos;
+	protected ThreadJugador jugadores;
+	protected ThreadEnemigo enemigos;
+	
+	
+	protected Nivel level;
 	protected Icon pisoNieve;
 	protected JPanel gui;
 	protected JLabel grafPiso;
-	
 	protected boolean deboAgregar;
 	protected CreadorJugador jugadorParaAgregar;
-	
 	protected final int anchoMapa = 10;
 	protected final int altoMapa = 6;
 	
@@ -35,38 +37,47 @@ public class gMapa implements MouseListener
 		this.gui = gui;
 		m = new Mapa(altoMapa, anchoMapa, gui.getHeight(), gui.getWidth());
 		
-		//Creo imagen
+		//inicialmente no se agrega ningún Jugador
+		deboAgregar = false;
+		jugadorParaAgregar = null;
+		
+		//Para agregar el piso al mapa
 		pisoNieve = new ImageIcon(this.getClass().getResource("/Imagenes/PisoNieve.jpg"));
 		grafPiso =  new JLabel(pisoNieve);
 		grafPiso.setBounds(0,0, gui.getWidth(), gui.getHeight());
 		gui.add(grafPiso);
-		
-		
-		deboAgregar = false;
-		jugadorParaAgregar = null;
-		grafPiso.addMouseListener(this);
-		
-	
-		//Creo un ThreadEnemigo 
-		enemigos = new ThreadPersonaje(this);
-		enemigos.start();	
-		
+		grafPiso.addMouseListener(this); //para detectar el click que agregará a un Jugador
+				
+		//agrego un obstáculo
 		JLabel grafPiedra = m.agregarObstaculo(new Piedra(m.obtenerCelda(new Posicion(3,4)),m));
 		grafPiso.add(grafPiedra);
 		grafPiso.repaint();
+		
+		//Creo un Thread para el Nivel
+		level = new Nivel(1,"src\\Logica\\Nivel1.txt",this);
+		level.start();
+		
+		//Creo un ThreadJugador
+		jugadores = new ThreadJugador(this);
+		jugadores.start();
+		
+		//Creo un ThreadJugador
+		enemigos = new ThreadEnemigo(this);
+		enemigos.start();	
 	}
 	
 	
-	public void agregarEnemigo()
+	public void agregarEnemigo(Enemigo e)
 	{	
 	
-		JLabel grafEnemigo = m.agregarEnemigo();
+		JLabel grafEnemigo = m.agregarEnemigo(e);
 		if(grafEnemigo != null)
 		{	
 			grafPiso.add(grafEnemigo);
 			grafPiso.repaint();
 		}
 	}
+	
 	
 	public void agregarJugador(Jugador j)
 	{

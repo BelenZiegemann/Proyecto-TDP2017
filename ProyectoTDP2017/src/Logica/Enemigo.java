@@ -1,10 +1,7 @@
 package Logica;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 /**
- * Clase Abstracta Enemigo
+ * Clase abstracta Enemigo
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
@@ -88,10 +85,10 @@ public abstract class Enemigo extends Personaje
 							miCelda = mapa.obtenerCelda(p);
 						}	
 						else
-							cantDesplazada = (int) (cantDesplazada + Math.pow(2, velocidad));
+							cantDesplazada = (int) (cantDesplazada + Math.pow(2, velocidad+1));
 					
 						//muevo el JLabel que representa al enemigo
-						desplX = (int) (desplX + Math.pow(2,velocidad));
+						desplX = (int) (desplX + Math.pow(2,velocidad+1));
 						mGrafico.setBounds(desplX, desplY, imagen.getIconWidth(), imagen.getIconHeight());
 						System.out.println("estaEnMov: " + estaEnMovimiento);
 					//}
@@ -102,6 +99,7 @@ public abstract class Enemigo extends Personaje
 			else // significa que ya atravesó el mapa 
 				 estaVivo = false; //lo hago para que ThreadPersonaje no lo haga mover y lo remueva
 									// de la lista de personajes
+			//ACÁ SE PERDERÍA EL JUEGO
 			
 			
 	}

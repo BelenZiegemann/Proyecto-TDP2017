@@ -1,8 +1,5 @@
 package Logica;
 
-import javax.swing.Icon;
-import javax.swing.JLabel;
-
 /**
  * Clase Abstracta Personaje
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
@@ -33,11 +30,6 @@ public abstract class Personaje extends Contenido
 	public int getFuerzaImpacto()
 	{
 		return fuerzaImpacto;
-	}
-	
-	public JLabel getGrafico()
-	{
-		return mGrafico;
 	}
 	
 	public boolean estaVivo()

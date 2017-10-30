@@ -9,7 +9,7 @@ import Logica.Mapa;
 import Logica.*;
 
 /**
- * Clase JonSnow 
+ * Clase Dothraki
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */

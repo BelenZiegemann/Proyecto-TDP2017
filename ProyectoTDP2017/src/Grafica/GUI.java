@@ -77,22 +77,6 @@ public class GUI extends JFrame
 		
 		//creo el mapa gráfico
 		mapa = new gMapa(contentPane);
-	
-		//Botón agregar Enemigo
-		JButton btnAgregarEnemigo = new JButton("Agregar Enemigo");
-		btnAgregarEnemigo.setBackground(Color.RED);
-		btnAgregarEnemigo.setForeground(Color.WHITE);
-		btnAgregarEnemigo.setFocusPainted(false);
-		btnAgregarEnemigo.setBounds(322, 552, 137, 23);
-		getContentPane().add(btnAgregarEnemigo);
-		//Oyente Botón agregar Enemigo
-		btnAgregarEnemigo.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent arg0)
-			{
-				mapa.agregarEnemigo();
-			}
-		});
 		
 		//Label Puntaje
 		JLabel lblPuntaje = new JLabel("Puntaje");

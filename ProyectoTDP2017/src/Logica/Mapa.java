@@ -1,11 +1,7 @@
 package Logica;
 
 import java.util.LinkedList;
-
 import javax.swing.JLabel;
-
-import Logica.Enemigos.CaminanteBlanco;
-import Logica.Enemigos.DragonDeHielo;
 
 /**
  * Clase Mapa
@@ -20,15 +16,9 @@ public class Mapa
 	protected int anchoReal;
 	protected Celda[][] matrizCeldas;
 	protected Pantalla miPantalla;
-	protected LinkedList<Personaje> misPersonajes;
+	protected LinkedList<Jugador> misJugadores;
+	protected LinkedList<Enemigo> misEnemigos;
 	protected LinkedList<Obstaculo> misObstaculos;
-	
-	//protected LinkedList<Objeto> misObjetos;
-	protected int posYenemigo;
-	
-	public void eliminarContenido(Personaje j) {
-		
-	}
 	
 	public Mapa(int alto, int ancho, int altoReal, int anchoReal)
 	{
@@ -44,15 +34,20 @@ public class Mapa
 				matrizCeldas[i][j] = new Celda(new Posicion(i, j));
 		}
 			
-		posYenemigo = 0;
-		misPersonajes = new LinkedList<Personaje>(); 
+		misJugadores = new LinkedList<Jugador>(); 
+		misEnemigos = new LinkedList<Enemigo>();
 		misObstaculos = new LinkedList<Obstaculo>();
 		miPantalla = new Pantalla(this);
 	}
 	
-	public LinkedList<Personaje> getListaPersonajes() 
+	public LinkedList<Jugador> getListaJugadores() 
 	{
-		return misPersonajes;
+		return misJugadores;
+	}
+	
+	public LinkedList<Enemigo> getListaEnemigos() 
+	{
+		return misEnemigos;
 	}
 	
 	public LinkedList<Obstaculo> getListaObstaculos() 
@@ -91,24 +86,19 @@ public class Mapa
 		return anchoReal;
 	}
 	
-	public JLabel agregarEnemigo()
+	public JLabel agregarEnemigo(Enemigo enem)
 	{
-		Posicion posEnem = new Posicion(0,posYenemigo);
-		if((posYenemigo <= alto - 1) && (obtenerCelda(posEnem).getContenido() == null))
+		if(obtenerCelda(enem.getCelda().getPosCelda()).getContenido() == null)
 		{	
-			Celda miCelda = obtenerCelda(posEnem);
-			Enemigo caminante = new CaminanteBlanco(miCelda,this);
-			miCelda.setContenido(caminante);
-			misPersonajes.addLast(caminante);
-			posYenemigo = posYenemigo + 2;
-			return caminante.getGrafico();
+			Celda miCelda = obtenerCelda(enem.getCelda().getPosCelda());
+			miCelda.setContenido(enem);
+			misEnemigos.addLast(enem);
+			return enem.getGrafico();
 		}
 		else
-		{
-			posYenemigo = posYenemigo + 2;
 			return null;
-		}
 	}
+	
 	
 	public JLabel agregarJugador(Jugador j)
 	{
@@ -119,7 +109,7 @@ public class Mapa
 			
 			miPantalla.setPresupuesto(- j.getPrecio());
 			obtenerCelda(j.getCelda().getPosCelda()).setContenido(j);
-			misPersonajes.addLast(j);
+			misJugadores.addLast(j);
 			return j.getGrafico();
 		}
 		else

@@ -1,10 +1,13 @@
 package Logica;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import Logica.*;
 
+/**
+* Clase Piedra 
+* @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+*
+*/
 public class Piedra extends ObstaculoConVida {
 	protected int desplX;
 	protected int desplY;

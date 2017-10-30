@@ -9,7 +9,7 @@ import Logica.Mapa;
 import Logica.VisitorEnemigo;
 
 /**
- * Clase CaminanteBlanco
+ * Clase Gigante
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */

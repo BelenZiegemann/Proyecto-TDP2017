@@ -2,27 +2,27 @@ package Grafica;
 
 import java.util.LinkedList;
 
+import Logica.Jugador;
 import Logica.Obstaculo;
-import Logica.Personaje;
 
 /**
- * Clase ThreadPersonaje
+ * Clase ThreadJugador
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
-public class ThreadPersonaje extends Thread
+public class ThreadJugador extends Thread
 {
-	private LinkedList<Personaje> PersonajesParaEliminar;
+	private LinkedList<Jugador> JugadoresParaEliminar;
 	private gMapa gmapa;
 	 
 	// Flag que indica cuando debe detenerse la ejecución del hilo.
 	private boolean Detener;
 
-	public ThreadPersonaje(gMapa gm) 
+	public ThreadJugador(gMapa gm) 
 	{
 		gmapa = gm;
 		Detener = false;
-		PersonajesParaEliminar = new LinkedList<Personaje>();
+		JugadoresParaEliminar = new LinkedList<Jugador>();
 	}	
 	
 	public void run() 
@@ -35,15 +35,15 @@ public class ThreadPersonaje extends Thread
 			{
 				Thread.sleep(400);
 				// Realizo el movimiento
-				for(Personaje p: gmapa.obtenerMapaLogico().getListaPersonajes())
+				for(Jugador j: gmapa.obtenerMapaLogico().getListaJugadores())
 				{	
-					//SI EL PERSONAJE ESTÁ VIVO ENTONCES MOVER, SINO LO AGREGO A LA LISTA AUXILIAR PARA LUEGO ELIMINARLO
-					if(p.estaVivo())
-						p.mover();
+					//SI EL JUGADOR ESTÁ VIVO ENTONCES MOVER, SINO LO AGREGO A LA LISTA AUXILIAR PARA LUEGO ELIMINARLO
+					if(j.estaVivo())
+						j.mover();
 					else
 					{
 						
-						PersonajesParaEliminar.addLast(p);
+						JugadoresParaEliminar.addLast(j);
 					}
 				}
 				
@@ -57,13 +57,12 @@ public class ThreadPersonaje extends Thread
 						
 				}
 				
-				//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS PERSONAJES
-				for(Personaje pElim : PersonajesParaEliminar)
+				//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS JUGADORES
+				for(Jugador jElim : JugadoresParaEliminar)
 				{
-					//pElim.getGrafico().setEnabled(false);
-					gmapa.obtenerPisoMapa().remove(pElim.getGrafico());
+					gmapa.obtenerPisoMapa().remove(jElim.getGrafico());
 					gmapa.obtenerPisoMapa().repaint();
-					gmapa.obtenerMapaLogico().getListaPersonajes().remove(pElim);
+					gmapa.obtenerMapaLogico().getListaJugadores().remove(jElim);
 				}
 					
 			} catch (InterruptedException e)

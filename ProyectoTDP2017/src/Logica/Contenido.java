@@ -4,7 +4,7 @@ import javax.swing.Icon;
 import javax.swing.JLabel;
 
 /**
- * Clase Abstracta Contenido 
+ * Clase abstracta Contenido 
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
@@ -23,6 +23,11 @@ public abstract class Contenido
 	public Visitor getProyectil()
 	{
 		return proyectil;
+	}
+	
+	public JLabel getGrafico()
+	{
+		return mGrafico;
 	}
 	
 	public Celda getCelda() {

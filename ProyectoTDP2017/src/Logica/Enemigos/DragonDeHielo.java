@@ -9,7 +9,7 @@ import Logica.Mapa;
 import Logica.VisitorEnemigo;
 
 /**
- * Clase CaminanteBlanco
+ * Clase DragonDeHielo
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
@@ -25,8 +25,7 @@ public class DragonDeHielo extends Enemigo
 		miCelda = c;
 		puntosVida = 4 * puntosVida;
 		fuerzaImpacto = 10 * fuerzaImpacto;
-		//alcance=4*alcance;
-		alcance = 4;
+		alcance= 4*alcance;
 		velocidad=5;
 		puntaje = 1000;
 		rangoMonedas = 1500;

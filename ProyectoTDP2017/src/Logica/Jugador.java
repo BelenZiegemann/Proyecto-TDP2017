@@ -1,7 +1,7 @@
 package Logica;
 
 /**
- * Clase Abstracta Jugador 
+ * Clase abstracta Jugador 
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */

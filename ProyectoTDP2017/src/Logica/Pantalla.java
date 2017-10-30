@@ -28,10 +28,9 @@ public class Pantalla
 	{
 		monedas = 1000;
 		puntos = 0;
-		nivel = 1;
 		mapa = m;
 		listaPremiosObtenidos = new LinkedList<Premio>();
-		
+		nivel = 1;
 		mostrarMonedas = new JLabel();
 		mostrarPuntaje = new JLabel();
 		mostrarNivel = new JLabel();
@@ -79,10 +78,10 @@ public class Pantalla
 		mostrarPuntaje.setText("" + puntos);
 	}
 	
-	public void incrementarNivel()
+	public void setNivel(int nivel)
 	{
-		nivel++;
-		mostrarNivel.setText("" + nivel);
+		this.nivel = nivel;
+		mostrarNivel.setText("" + this.nivel);
 	}
 
 	public void setMostrarPuntaje(JLabel lblPuntaje)

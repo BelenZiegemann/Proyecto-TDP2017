@@ -1,5 +1,10 @@
 package Logica;
 
+/**
+ * Clase VisitorEnemigo
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
 public class VisitorEnemigo extends Visitor
 {
 	protected Enemigo e;
@@ -25,9 +30,7 @@ public class VisitorEnemigo extends Visitor
 	}
 	
 	public void atacar(Enemigo e)
-	{
-		
-	}
+	{}
 	
 	public void atacar(ObstaculoConVida o) {
 		System.out.println("Enemigo ataca a obstaculo");

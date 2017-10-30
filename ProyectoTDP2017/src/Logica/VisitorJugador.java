@@ -1,5 +1,10 @@
 package Logica;
 
+/**
+ * Clase VisitorJugador
+ * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
+ *
+ */
 public class VisitorJugador extends Visitor
 {
 	protected Jugador j;
