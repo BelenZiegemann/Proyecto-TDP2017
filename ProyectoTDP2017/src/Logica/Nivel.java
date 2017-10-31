@@ -21,11 +21,13 @@ public class Nivel extends Thread
 	protected BufferedReader br;
 	protected String ruta;
 	protected boolean Detener;
+	protected boolean estaLeido;
 	protected gMapa gmapa;
 	
 	public Nivel(int numeroNivel, String ruta, gMapa gm)
 	{
 		Detener = false;
+		estaLeido = false;
 		gmapa = gm;
 		retardoOleada = 0;
 		this.numeroNivel = numeroNivel;
@@ -77,6 +79,7 @@ public class Nivel extends Thread
 		
 			}
 			
+		estaLeido = true;// significa que las tres tandas de enemigos ya están colocadas en el mapa	
 		cerrarArchivo();	
 		} 
 		catch (IOException e)
@@ -99,6 +102,11 @@ public class Nivel extends Thread
 		{}
 	}
 	
+	public boolean estaLeido()
+	{
+		return estaLeido;		
+	}
+
 	private void hacerRetardo()
 	{
 		try
@@ -147,4 +155,10 @@ public class Nivel extends Thread
 		// Seteamos el flag para detener su ejecución.
 		Detener = true;
 	}
+	
+	public int getNumNivel()
+	{
+		return numeroNivel;
+	}
+	
 }

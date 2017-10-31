@@ -14,6 +14,7 @@ public abstract class Enemigo extends Personaje
 	protected int cantDesplazada;
 	protected int anchoRealCelda;
 	protected boolean estaEnMovimiento = true;
+	protected boolean deboPerder = false;
 	
 	//Se debe invocar cuando se muere.
 	public void setPuntajeMonedas() {
@@ -96,14 +97,21 @@ public abstract class Enemigo extends Personaje
 			
 		
 			}
-			else // significa que ya atravesó el mapa 
-				 estaVivo = false; //lo hago para que ThreadPersonaje no lo haga mover y lo remueva
-									// de la lista de personajes
-			//ACÁ SE PERDERÍA EL JUEGO
-			
+			else // significa que el enemigo ya atravesó el mapa 
+			{ 		
+				estaVivo = false; 				//lo hago para que ThreadEnemigo no lo haga mover y lo remueva
+				miCelda.setContenido(null);		// de la lista de enemigos
+				//ACÁ SE PERDERÍA EL JUEGO
+				deboPerder = true;		
+			}
 			
 	}
 	
+	public boolean deboPerderJuego()
+	{
+		return deboPerder;
+	}
+
 	public void setMovimiento(boolean m) {
 		estaEnMovimiento = m;
 	}

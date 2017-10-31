@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -76,7 +77,7 @@ public class GUI extends JFrame
 		getContentPane().add(contentPane);
 		
 		//creo el mapa gráfico
-		mapa = new gMapa(contentPane);
+		mapa = new gMapa(this);
 		
 		//Label Puntaje
 		JLabel lblPuntaje = new JLabel("Puntaje");
@@ -238,4 +239,23 @@ public class GUI extends JFrame
 		
 	}
 	
+	public JPanel getPanelMapa()
+	{
+		return contentPane;
+	}
+	
+	public void mostrarMensajePerder()
+	{
+		JOptionPane.showMessageDialog(contentPane, "PERDISTE: HAN LLEGADO AL MURO", "GAME OF THRONES", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void mostrarMensajeGanar()
+	{
+		int resp = JOptionPane.showConfirmDialog(contentPane, "GANASTE EL NIVEL: ¿SIGUIENTE NIVEL?", "GAME OF THRONES", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		if(resp != 1) // si la respuesta es SI
+		{
+			mapa.siguienteNivel();
+		}
+	}
+
 }

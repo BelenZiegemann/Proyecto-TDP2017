@@ -6,7 +6,6 @@ import java.awt.event.MouseListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import Logica.*;
 
@@ -20,22 +19,18 @@ public class gMapa implements MouseListener
 	protected Mapa m;
 	protected ThreadJugador jugadores;
 	protected ThreadEnemigo enemigos;
-	
-	
 	protected Nivel level;
 	protected Icon pisoNieve;
-	protected JPanel gui;
+	protected GUI gui;
 	protected JLabel grafPiso;
 	protected boolean deboAgregar;
 	protected CreadorJugador jugadorParaAgregar;
 	protected final int anchoMapa = 10;
 	protected final int altoMapa = 6;
 	
-	
-	public gMapa(JPanel gui)
+	public gMapa(GUI gui)
 	{		
 		this.gui = gui;
-		m = new Mapa(altoMapa, anchoMapa, gui.getHeight(), gui.getWidth());
 		
 		//inicialmente no se agrega ningún Jugador
 		deboAgregar = false;
@@ -44,10 +39,12 @@ public class gMapa implements MouseListener
 		//Para agregar el piso al mapa
 		pisoNieve = new ImageIcon(this.getClass().getResource("/Imagenes/PisoNieve.jpg"));
 		grafPiso =  new JLabel(pisoNieve);
-		grafPiso.setBounds(0,0, gui.getWidth(), gui.getHeight());
-		gui.add(grafPiso);
+		grafPiso.setBounds(0,0, gui.getPanelMapa().getWidth(), gui.getPanelMapa().getHeight());
+		gui.getPanelMapa().add(grafPiso);
 		grafPiso.addMouseListener(this); //para detectar el click que agregará a un Jugador
-				
+	
+		m = new Mapa(altoMapa, anchoMapa, gui.getPanelMapa().getHeight(), gui.getPanelMapa().getWidth());
+		
 		//agrego un obstáculo
 		JLabel grafPiedra = m.agregarObstaculo(new Piedra(m.obtenerCelda(new Posicion(3,4)),m));
 		grafPiso.add(grafPiedra);
@@ -63,9 +60,9 @@ public class gMapa implements MouseListener
 		
 		//Creo un ThreadJugador
 		enemigos = new ThreadEnemigo(this);
-		enemigos.start();	
+		enemigos.start();
+		
 	}
-	
 	
 	public void agregarEnemigo(Enemigo e)
 	{	
@@ -81,13 +78,30 @@ public class gMapa implements MouseListener
 	
 	public void agregarJugador(Jugador j)
 	{
+		JLabel grafJugador = m.agregarJugador(j);
+		if(grafJugador != null)
+		{
+			grafPiso.add(grafJugador);
+			grafPiso.repaint();
+		}
+	}
+	
+	public void Perder()
+	{
+		level.detener();
+		jugadores.detener();
+		gui.mostrarMensajePerder();	
+	}
 
-			JLabel grafJugador = m.agregarJugador(j);
-			if(grafJugador != null)
-			{
-				grafPiso.add(grafJugador);
-				grafPiso.repaint();
-			}
+	public void Ganar()
+	{
+		gui.mostrarMensajeGanar();
+	}
+	
+	public void siguienteNivel()
+	{
+		level = new Nivel(level.getNumNivel() + 1,"src\\Logica\\Nivel2.txt",this);
+		level.start();
 	}
 	
 	public void DeboAgregarJugador(boolean deboAgregar)
@@ -111,12 +125,16 @@ public class gMapa implements MouseListener
 		return grafPiso;
 	}
 
+	public Nivel getNivel()
+	{
+		return level;
+	}
 
 	public void mouseClicked(java.awt.event.MouseEvent arg0)
 	{
 	
-		int PosX = (grafPiso.getMousePosition().x) / (gui.getWidth() / anchoMapa);
-		int PosY = (grafPiso.getMousePosition().y) / (gui.getHeight() / altoMapa);
+		int PosX = (grafPiso.getMousePosition().x) / (gui.getPanelMapa().getWidth() / anchoMapa);
+		int PosY = (grafPiso.getMousePosition().y) / (gui.getPanelMapa().getHeight() / altoMapa);
 		
 		if(PosX == anchoMapa)
 		{
