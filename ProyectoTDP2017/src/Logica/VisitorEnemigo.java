@@ -30,7 +30,10 @@ public class VisitorEnemigo extends Visitor
 	}
 	
 	public void atacar(Enemigo e)
-	{}
+	{
+		e.setImagenEnMovimiento();
+		
+	}
 	
 	public void atacar(ObstaculoConVida o) {
 		System.out.println("Enemigo ataca a obstaculo");

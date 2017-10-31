@@ -33,7 +33,7 @@ public class Salvaje extends Enemigo
 		cantDesplazada = 0;	// Se usará para controlar cuánto se mueve el JLabel dentro del ancho real de la celda
 		anchoRealCelda = mapa.obtenerAnchoReal() / mapa.obtenerAncho();	
 		//agrego la gráfica al salvaje
-		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlanco.gif"));
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Salvaje.gif"));
 		mGrafico = new JLabel(imagen);	
 		desplX = 0;
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();
@@ -43,12 +43,12 @@ public class Salvaje extends Enemigo
 	
 	public void setImagenEnMovimiento()
 	{
-		//imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlanco.gif"));
-	//	mGrafico.setIcon(imagen);
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Salvaje.gif"));
+		mGrafico.setIcon(imagen);
 	}
 	public void setImagenQuieto()
 	{
-		//imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlancoQuieto.png"));
-	//	mGrafico.setIcon(imagen);	
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/SalvajeQuieto.png"));
+		mGrafico.setIcon(imagen);	
 	}
 }

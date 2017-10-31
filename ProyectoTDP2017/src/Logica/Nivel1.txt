@@ -1,6 +1,7 @@
-_20
+_12
 CreadorCaminanteBlanco-0
 
-CreadorCaminanteBlanco-5
+CreadorSalvaje-3
 
-CreadorCaminanteBlanco-5
+CreadorCaminanteBlanco-4
+CreadorSalvaje-5
