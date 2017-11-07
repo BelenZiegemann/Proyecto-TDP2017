@@ -30,8 +30,8 @@ public class Gigante extends Enemigo
 		
 		cantDesplazada = 0;	// Se usará para controlar cuánto se mueve el JLabel dentro del ancho real de la celda
 		anchoRealCelda = mapa.obtenerAnchoReal() / mapa.obtenerAncho();	
-		//agrego la gráfica al caminante
-		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlanco.gif"));
+		//agrego la gráfica al Gigante
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Gigante.gif"));
 		mGrafico = new JLabel(imagen);	
 		desplX = 0;
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();
@@ -41,13 +41,13 @@ public class Gigante extends Enemigo
 	
 	public void setImagenEnMovimiento()
 	{
-		//imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlanco.gif"));
-	//	mGrafico.setIcon(imagen);
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Gigante.gif"));
+		mGrafico.setIcon(imagen);
 	}
 	public void setImagenQuieto()
 	{
-		//imagen = new ImageIcon(this.getClass().getResource("/Imagenes/camBlancoQuieto.png"));
-	//	mGrafico.setIcon(imagen);	
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/GiganteQuieto.png"));
+		mGrafico.setIcon(imagen);	
 	}
 	
 }

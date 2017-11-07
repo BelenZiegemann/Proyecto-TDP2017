@@ -1,7 +1,8 @@
 _12
-CreadorCaminanteBlanco-0
+CreadorLannister-0
+CreadorGigante-4
 
-CreadorSalvaje-3
+CreadorCaminanteBlanco-1
+CreadorSalvaje-2
 
-CreadorCaminanteBlanco-4
-CreadorSalvaje-5
+CreadorReyDeLaNoche-5

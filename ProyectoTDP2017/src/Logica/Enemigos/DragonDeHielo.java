@@ -32,7 +32,7 @@ public class DragonDeHielo extends Enemigo
 		
 		cantDesplazada = 0;	// Se usará para controlar cuánto se mueve el JLabel dentro del ancho real de la celda
 		anchoRealCelda = mapa.obtenerAnchoReal() / mapa.obtenerAncho();	
-		//agrego la gráfica al caminante
+		//agrego la gráfica al Dragón de Hielo
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/DragonDeHielo.gif"));
 		mGrafico = new JLabel(imagen);	
 		desplX = 0;
@@ -49,7 +49,7 @@ public class DragonDeHielo extends Enemigo
 	}
 	public void setImagenQuieto()
 	{
-		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/dragon1.png"));
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/DragonDeHieloQuieto.png"));
 		mGrafico.setIcon(imagen);	
 		
 	}
