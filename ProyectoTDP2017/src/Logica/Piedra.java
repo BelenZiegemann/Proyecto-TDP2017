@@ -18,7 +18,7 @@ public class Piedra extends ObstaculoConVida {
 		mapa = m;
 	
 		//agrego la gráfica a Piedra
-		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/piedra.png"));
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/piedraConNieve.png"));
 		mGrafico = new JLabel(imagen);			
 		desplX = (mapa.obtenerAnchoReal() / mapa.obtenerAncho()) * miCelda.getPosCelda().getEjeX();
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();						

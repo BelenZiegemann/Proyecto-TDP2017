@@ -1,7 +1,6 @@
 package Grafica;
  
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.Icon;
@@ -198,6 +197,7 @@ public class GUI extends JFrame
 		JButton btnGNocturno = new JButton(imagenGNocturno);
 		btnGNocturno.setBorderPainted(false);
 		btnGNocturno.setFocusPainted(false);
+		btnGNocturno.setToolTipText("-GUARDIÁN NOCTURNO- Puntos de vida = 100; Alcance = 1; Fuerza de impacto = 20");
 		btnGNocturno.setBounds(71, 65,imagenGNocturno.getIconWidth(),imagenGNocturno.getIconHeight());
 		getContentPane().add(btnGNocturno);	
 		btnGNocturno.addActionListener(new ActionListener()
@@ -225,6 +225,7 @@ public class GUI extends JFrame
 		JButton btnJonSnow = new JButton(imagenJonSnow);
 		btnJonSnow.setBorderPainted(false);
 		btnJonSnow.setFocusPainted(false);
+		btnJonSnow.setToolTipText("-JON SNOW- Puntos de vida = 200; Alcance = 1; Fuerza de impacto = 20");
 		btnJonSnow.setBounds(167, 65, imagenJonSnow.getIconWidth(), imagenJonSnow.getIconHeight());
 		getContentPane().add(btnJonSnow);
 		btnJonSnow.addActionListener(new ActionListener()
@@ -252,6 +253,7 @@ public class GUI extends JFrame
 		JButton btnInmaculado = new JButton(imagenInmaculado);
 		btnInmaculado.setBorderPainted(false);
 		btnInmaculado.setFocusPainted(false);
+		btnInmaculado.setToolTipText("-INMACULADO- Puntos de vida = 200; Alcance = 1; Fuerza de impacto = 30");
 		btnInmaculado.setBounds(263, 65,imagenInmaculado.getIconWidth(),imagenInmaculado.getIconHeight());
 		getContentPane().add(btnInmaculado);	
 		btnInmaculado.addActionListener(new ActionListener()
@@ -279,6 +281,7 @@ public class GUI extends JFrame
 		JButton btnDothraki = new JButton(imagenDothraki);
 		btnDothraki.setBorderPainted(false);
 		btnDothraki.setFocusPainted(false);
+		btnDothraki.setToolTipText("-DOTHRAKI- Puntos de vida = 200; Alcance = 2; Fuerza de impacto = 20");
 		btnDothraki.setBounds(359, 65,imagenDothraki.getIconWidth(),imagenDothraki.getIconHeight());
 		getContentPane().add(btnDothraki);		
 		btnDothraki.addActionListener(new ActionListener()
@@ -306,6 +309,7 @@ public class GUI extends JFrame
 		JButton btnDragon = new JButton(imagenDragon);
 		btnDragon.setBorderPainted(false);
 		btnDragon.setFocusPainted(false);
+		btnDragon.setToolTipText("-DRAGÓN- Puntos de vida = 400; Alcance = 4; Fuerza de impacto = 70");
 		btnDragon.setBounds(455, 65,imagenDragon.getIconWidth(),imagenDragon.getIconHeight());
 		getContentPane().add(btnDragon);	
 		btnDragon.addActionListener(new ActionListener()
@@ -318,6 +322,16 @@ public class GUI extends JFrame
 			}
 		});
 		
+		//Muro
+		ImageIcon imagenMuro = new ImageIcon(this.getClass().getResource("/Imagenes/muro.jpg"));
+		JLabel labelMuro = new JLabel(imagenMuro);
+		labelMuro.setSize(imagenMuro.getIconWidth(), imagenMuro.getIconHeight());
+		JPanel panelMuro = new JPanel();
+		panelMuro.setBounds(contentPane.getX() + contentPane.getWidth(), contentPane.getY(), labelMuro.getWidth(), labelMuro.getHeight());
+		panelMuro.setLayout(null);
+		panelMuro.add(labelMuro);
+		getContentPane().add(panelMuro);
+		
 		//Fondo para la GUI
 		ImageIcon imagenFondo = new ImageIcon(this.getClass().getResource("/Imagenes/fondoGUI1.jpg"));
 		JLabel labelFondo = new JLabel(imagenFondo);
@@ -327,6 +341,7 @@ public class GUI extends JFrame
 		panelFondo.setLayout(null);
 		panelFondo.add(labelFondo);
 		getContentPane().add(panelFondo);
+		
 	}
 	
 	public JPanel getPanelMapa()

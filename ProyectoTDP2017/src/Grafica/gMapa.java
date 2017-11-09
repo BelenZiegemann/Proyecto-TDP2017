@@ -44,7 +44,7 @@ public class gMapa implements MouseListener
 		//Para agregar el piso al mapa
 		pisoNieve = new ImageIcon(this.getClass().getResource("/Imagenes/PisoNieve.jpg"));
 		grafPiso =  new JLabel(pisoNieve);
-		grafPiso.setBounds(0,0, gui.getPanelMapa().getWidth(), gui.getPanelMapa().getHeight());
+		grafPiso.setSize(gui.getPanelMapa().getWidth(), gui.getPanelMapa().getHeight());
 		gui.getPanelMapa().add(grafPiso);
 		grafPiso.addMouseListener(this); //para detectar el click que agregará o quitará a un Jugador
 	
