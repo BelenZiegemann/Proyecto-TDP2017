@@ -42,7 +42,6 @@ public class ThreadJugador extends Thread
 						j.mover();
 					else
 					{
-						
 						JugadoresParaEliminar.addLast(j);
 					}
 				}
@@ -64,8 +63,8 @@ public class ThreadJugador extends Thread
 					gmapa.obtenerPisoMapa().repaint();
 					gmapa.obtenerMapaLogico().getListaJugadores().remove(jElim);
 				}
-					
-			} catch (InterruptedException e)
+			}
+			catch (InterruptedException e)
 			{}
 		}
 	}

@@ -45,6 +45,7 @@ public abstract class Personaje extends Contenido
 	public abstract void mover();
 	
 	public void setEstaVivo(boolean b) {
+		
 		estaVivo = b;
 	}
 

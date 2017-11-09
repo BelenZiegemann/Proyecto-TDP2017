@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -85,12 +86,14 @@ public class Inicio extends JFrame
 						try 
 						{
 							GUI frame = new GUI();
-							frame.setVisible(true);
+							frame.setVisible(true);	
 						} 
 						catch (Exception e)
 						{
 							e.printStackTrace();
 						}
+						
+						
 					}
 				});
 			}

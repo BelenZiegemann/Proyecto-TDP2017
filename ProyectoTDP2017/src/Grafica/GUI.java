@@ -1,6 +1,7 @@
 package Grafica;
  
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.Icon;
@@ -11,12 +12,14 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+
 import java.awt.event.ActionEvent;
 
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import Logica.Jugador;
 import Logica.CreadorJugador.CreadorDothraki;
 import Logica.CreadorJugador.CreadorDragon;
 import Logica.CreadorJugador.CreadorGuardianNocturno;
@@ -57,22 +60,19 @@ public class GUI extends JFrame
 	/**
 	 * Create the frame.
 	 */
-	public GUI() 
+	public GUI()
 	{
 		setForeground(Color.BLACK);
 		setTitle("GAME OF THRONES");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setBackground(Color.DARK_GRAY);
 		setBounds(0, 0, 800, 614);
 		setLocationRelativeTo(null);	// para que la ventana se abra en el centro de la pantalla
 		getContentPane().setLayout(null);
-
 		
 		//Panel para el mapa
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.BLACK);
-		contentPane.setBounds(80,155,640,384);
+		contentPane.setBounds(80,178,640,384);
 		contentPane.setLayout(null);
 		getContentPane().add(contentPane);
 		
@@ -81,6 +81,7 @@ public class GUI extends JFrame
 		
 		//Label Puntaje
 		JLabel lblPuntaje = new JLabel("Puntaje");
+		lblPuntaje.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblPuntaje.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPuntaje.setBounds(642, 19, 87, 23);
 		lblPuntaje.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
@@ -90,6 +91,7 @@ public class GUI extends JFrame
 		
 		//Label Mostrar Puntaje
 		JLabel lblMostrarPuntaje = new JLabel("");
+		lblMostrarPuntaje.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMostrarPuntaje.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMostrarPuntaje.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
 		lblMostrarPuntaje.setBackground(Color.LIGHT_GRAY);
@@ -102,6 +104,7 @@ public class GUI extends JFrame
 		
 		//Label Monedas
 		JLabel lblMonedas = new JLabel("Monedas");
+		lblMonedas.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMonedas.setForeground(Color.WHITE);
 		lblMonedas.setBackground(Color.RED);
 		lblMonedas.setHorizontalAlignment(SwingConstants.CENTER);
@@ -111,6 +114,7 @@ public class GUI extends JFrame
 		
 		//Label Mostrar Monedas
 		JLabel lblMostrarMonedas = new JLabel("");
+		lblMostrarMonedas.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMostrarMonedas.setBackground(Color.LIGHT_GRAY);
 		lblMostrarMonedas.setForeground(Color.RED);
 		lblMostrarMonedas.setHorizontalAlignment(SwingConstants.CENTER);
@@ -121,9 +125,57 @@ public class GUI extends JFrame
 		mapa.obtenerMapaLogico().obtenerPantalla().setMostrarMonedas(lblMostrarMonedas);
 		mapa.obtenerMapaLogico().obtenerPantalla().getMostrarMonedas().setText("" + mapa.obtenerMapaLogico().obtenerPantalla().getPresupuesto());
 		
+		//Label Nivel
+		JLabel lblNivel = new JLabel("Nivel");
+		lblNivel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNivel.setBackground(Color.RED);
+		lblNivel.setForeground(Color.WHITE);
+		lblNivel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNivel.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
+		lblNivel.setBounds(555, 69, 174, 23);
+		getContentPane().add(lblNivel);
+				
+		//Label mostrarNivel
+		JLabel lblMostrarNivel = new JLabel("");
+		lblMostrarNivel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblMostrarNivel.setBackground(Color.LIGHT_GRAY);
+		lblMostrarNivel.setForeground(Color.RED);
+		lblMostrarNivel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMostrarNivel.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
+		lblMostrarNivel.setBounds(555, 92, 174, 23);
+		getContentPane().add(lblMostrarNivel);
+				
+		mapa.obtenerMapaLogico().obtenerPantalla().setMostrarNivel(lblMostrarNivel);
+		mapa.obtenerMapaLogico().obtenerPantalla().getMostrarNivel().setText("" + mapa.obtenerMapaLogico().obtenerPantalla().getNivel());
+		
+		//Label Vender Jugador
+		JButton btnVenderJugador = new JButton("Vender Jugador");
+		btnVenderJugador.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnVenderJugador.setBackground(new Color(255, 0, 0));
+		btnVenderJugador.setForeground(new Color(0, 255, 0));
+		btnVenderJugador.setFocusPainted(false);
+		btnVenderJugador.setBounds(555, 120, 174, 40);
+		getContentPane().add(btnVenderJugador);
+		btnVenderJugador.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(mapa.deboVenderJugador())
+				{
+					Jugador jugParaVender = mapa.getJugadorParaVender();
+					int precioVenta = jugParaVender.getPrecio() / 2;
+					mapa.obtenerMapaLogico().obtenerPantalla().setPresupuesto(precioVenta);
+					jugParaVender.setEstaVivo(false); //para que se remueva de la lista de jugadores y del mapa.
+																	//Lo hace la clase ThreadJugador
+					jugParaVender.getCelda().setContenido(null);
+				}
+				mapa.setDeboVenderJugador(false);
+			}
+		});
+	
 		//Label Jugadores
 		JLabel lblJugadores = new JLabel("Jugadores");
-		lblJugadores.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblJugadores.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblJugadores.setForeground(Color.WHITE);
 		lblJugadores.setBackground(new Color(255, 140, 0));
 		lblJugadores.setHorizontalAlignment(SwingConstants.CENTER);
@@ -131,29 +183,22 @@ public class GUI extends JFrame
 		lblJugadores.setBounds(71, 19, 480, 23);
 		getContentPane().add(lblJugadores);
 		
-		//Label para elegir al jugador Jon Snow
-		Icon imagenJonSnow = new ImageIcon(this.getClass().getResource("/Imagenes/JugJonSnow.jpg"));
-		JButton btnJonSnow = new JButton(imagenJonSnow);
-		btnJonSnow.setBorderPainted(false);
-		btnJonSnow.setFocusPainted(false);
-		btnJonSnow.setBounds(71, 42,imagenJonSnow.getIconWidth(), imagenJonSnow.getIconHeight());
-		getContentPane().add(btnJonSnow);
-		btnJonSnow.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent arg0)
-			{
-				CreadorJugador cj = new CreadorJonSnow();
-				mapa.setJugadorParaAgregar(cj);
-				mapa.DeboAgregarJugador(true);
-			}
-		});
-		
+		//Label precio Guardián Nocturno
+		JLabel lblPrecioGNocturno = new JLabel("125");
+		lblPrecioGNocturno.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPrecioGNocturno.setForeground(new Color(255,140,0));
+		lblPrecioGNocturno.setBackground(Color.WHITE);
+		lblPrecioGNocturno.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPrecioGNocturno.setOpaque(true);
+		lblPrecioGNocturno.setBounds(71, 42, 96, 23);
+		getContentPane().add(lblPrecioGNocturno);
+				
 		//Label para elegir al jugador Guardián Nocturno
 		Icon imagenGNocturno = new ImageIcon(this.getClass().getResource("/Imagenes/JugGNocturno.jpg"));
 		JButton btnGNocturno = new JButton(imagenGNocturno);
 		btnGNocturno.setBorderPainted(false);
 		btnGNocturno.setFocusPainted(false);
-		btnGNocturno.setBounds(167, 42,imagenGNocturno.getIconWidth(),imagenGNocturno.getIconHeight());
+		btnGNocturno.setBounds(71, 65,imagenGNocturno.getIconWidth(),imagenGNocturno.getIconHeight());
 		getContentPane().add(btnGNocturno);	
 		btnGNocturno.addActionListener(new ActionListener()
 		{
@@ -165,12 +210,49 @@ public class GUI extends JFrame
 			}
 		});
 		
+		//Label precio Jon Snow
+		JLabel lblPrecioJonSnow = new JLabel("250");
+		lblPrecioJonSnow.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPrecioJonSnow.setForeground(new Color(255,140,0));
+		lblPrecioJonSnow.setBackground(Color.WHITE);
+		lblPrecioJonSnow.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPrecioJonSnow.setOpaque(true);
+		lblPrecioJonSnow.setBounds(167,42, 96,23);
+		getContentPane().add(lblPrecioJonSnow);
+		
+		//Label para elegir al jugador Jon Snow
+		Icon imagenJonSnow = new ImageIcon(this.getClass().getResource("/Imagenes/JugJonSnow.jpg"));
+		JButton btnJonSnow = new JButton(imagenJonSnow);
+		btnJonSnow.setBorderPainted(false);
+		btnJonSnow.setFocusPainted(false);
+		btnJonSnow.setBounds(167, 65, imagenJonSnow.getIconWidth(), imagenJonSnow.getIconHeight());
+		getContentPane().add(btnJonSnow);
+		btnJonSnow.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				CreadorJugador cj = new CreadorJonSnow();
+				mapa.setJugadorParaAgregar(cj);
+				mapa.DeboAgregarJugador(true);
+			}
+		});
+	
+		//Label precio Inmaculado
+		JLabel lblPrecioInmaculado = new JLabel("300");
+		lblPrecioInmaculado.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPrecioInmaculado.setForeground(new Color(255,140,0));
+		lblPrecioInmaculado.setBackground(Color.WHITE);
+		lblPrecioInmaculado.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPrecioInmaculado.setOpaque(true);
+		lblPrecioInmaculado.setBounds(263,42, 96,23);
+		getContentPane().add(lblPrecioInmaculado);
+		
 		//Label para elegir al jugador Inmaculado
 		Icon imagenInmaculado = new ImageIcon(this.getClass().getResource("/Imagenes/JugInmaculado.jpg"));
 		JButton btnInmaculado = new JButton(imagenInmaculado);
 		btnInmaculado.setBorderPainted(false);
 		btnInmaculado.setFocusPainted(false);
-		btnInmaculado.setBounds(263, 42,imagenInmaculado.getIconWidth(),imagenInmaculado.getIconHeight());
+		btnInmaculado.setBounds(263, 65,imagenInmaculado.getIconWidth(),imagenInmaculado.getIconHeight());
 		getContentPane().add(btnInmaculado);	
 		btnInmaculado.addActionListener(new ActionListener()
 		{
@@ -182,12 +264,22 @@ public class GUI extends JFrame
 			}
 		});
 		
+		//Label precio Dothraki
+		JLabel lblPrecioDothraki = new JLabel("350");
+		lblPrecioDothraki.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPrecioDothraki.setForeground(new Color(255,140,0));
+		lblPrecioDothraki.setBackground(Color.WHITE);
+		lblPrecioDothraki.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPrecioDothraki.setOpaque(true);
+		lblPrecioDothraki.setBounds(359,42, 96,23);
+		getContentPane().add(lblPrecioDothraki);
+		
 		//Label para elegir al jugador Dothraki
 		Icon imagenDothraki = new ImageIcon(this.getClass().getResource("/Imagenes/JugDothraki.jpg"));
 		JButton btnDothraki = new JButton(imagenDothraki);
 		btnDothraki.setBorderPainted(false);
 		btnDothraki.setFocusPainted(false);
-		btnDothraki.setBounds(359, 42,imagenDothraki.getIconWidth(),imagenDothraki.getIconHeight());
+		btnDothraki.setBounds(359, 65,imagenDothraki.getIconWidth(),imagenDothraki.getIconHeight());
 		getContentPane().add(btnDothraki);		
 		btnDothraki.addActionListener(new ActionListener()
 		{
@@ -199,12 +291,22 @@ public class GUI extends JFrame
 			}
 		});
 		
+		//Label precio Dragón
+		JLabel lblPrecioDragon = new JLabel("2000");
+		lblPrecioDragon.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPrecioDragon.setForeground(new Color(255,140,0));
+		lblPrecioDragon.setBackground(Color.WHITE);
+		lblPrecioDragon.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPrecioDragon.setOpaque(true);
+		lblPrecioDragon.setBounds(455,42, 96,23);
+		getContentPane().add(lblPrecioDragon);
+		
 		//Label para elegir al jugador Dragon
 		Icon imagenDragon = new ImageIcon(this.getClass().getResource("/Imagenes/JugDragon.jpg"));
 		JButton btnDragon = new JButton(imagenDragon);
 		btnDragon.setBorderPainted(false);
 		btnDragon.setFocusPainted(false);
-		btnDragon.setBounds(455, 42,imagenDragon.getIconWidth(),imagenDragon.getIconHeight());
+		btnDragon.setBounds(455, 65,imagenDragon.getIconWidth(),imagenDragon.getIconHeight());
 		getContentPane().add(btnDragon);	
 		btnDragon.addActionListener(new ActionListener()
 		{
@@ -216,27 +318,15 @@ public class GUI extends JFrame
 			}
 		});
 		
-		//Label Nivel
-		JLabel lblNivel = new JLabel("Nivel");
-		lblNivel.setBackground(Color.RED);
-		lblNivel.setForeground(Color.WHITE);
-		lblNivel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNivel.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
-		lblNivel.setBounds(555, 92, 174, 23);
-		getContentPane().add(lblNivel);
-		
-		//Label mostrarNivel
-		JLabel lblMostrarNivel = new JLabel("");
-		lblMostrarNivel.setBackground(Color.LIGHT_GRAY);
-		lblMostrarNivel.setForeground(Color.RED);
-		lblMostrarNivel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMostrarNivel.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
-		lblMostrarNivel.setBounds(555, 115, 174, 23);
-		getContentPane().add(lblMostrarNivel);
-		
-		mapa.obtenerMapaLogico().obtenerPantalla().setMostrarNivel(lblMostrarNivel);
-		mapa.obtenerMapaLogico().obtenerPantalla().getMostrarNivel().setText("" + mapa.obtenerMapaLogico().obtenerPantalla().getNivel());
-		
+		//Fondo para la GUI
+		ImageIcon imagenFondo = new ImageIcon(this.getClass().getResource("/Imagenes/fondoGUI1.jpg"));
+		JLabel labelFondo = new JLabel(imagenFondo);
+		labelFondo.setSize(getWidth(), getHeight());
+		JPanel panelFondo = new JPanel();
+		panelFondo.setSize(getWidth(), getHeight());
+		panelFondo.setLayout(null);
+		panelFondo.add(labelFondo);
+		getContentPane().add(panelFondo);
 	}
 	
 	public JPanel getPanelMapa()
@@ -257,5 +347,4 @@ public class GUI extends JFrame
 			mapa.siguienteNivel();
 		}
 	}
-
 }

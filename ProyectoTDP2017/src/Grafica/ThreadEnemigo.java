@@ -78,7 +78,7 @@ public class ThreadEnemigo extends Thread
 						gmapa.obtenerPisoMapa().repaint();
 						gmapa.obtenerMapaLogico().getListaEnemigos().remove(eElim);
 					}
-				}		
+				}	
 		} 
 		catch (InterruptedException e)
 		{}

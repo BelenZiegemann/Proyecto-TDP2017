@@ -2,6 +2,7 @@ package Grafica;
 import Logica.CreadorJugador.*;
 
 import java.awt.event.MouseListener;
+import java.util.Iterator;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -24,7 +25,9 @@ public class gMapa implements MouseListener
 	protected GUI gui;
 	protected JLabel grafPiso;
 	protected boolean deboAgregar;
+	protected boolean deboVenderJugador;
 	protected CreadorJugador jugadorParaAgregar;
+	protected Jugador jugadorParaVender;
 	protected final int anchoMapa = 10;
 	protected final int altoMapa = 6;
 	
@@ -32,16 +35,18 @@ public class gMapa implements MouseListener
 	{		
 		this.gui = gui;
 		
-		//inicialmente no se agrega ningún Jugador
+		//inicialmente no se agrega o quita ningún Jugador
 		deboAgregar = false;
 		jugadorParaAgregar = null;
+		deboVenderJugador = false;
+		jugadorParaVender = null;
 		
 		//Para agregar el piso al mapa
 		pisoNieve = new ImageIcon(this.getClass().getResource("/Imagenes/PisoNieve.jpg"));
 		grafPiso =  new JLabel(pisoNieve);
 		grafPiso.setBounds(0,0, gui.getPanelMapa().getWidth(), gui.getPanelMapa().getHeight());
 		gui.getPanelMapa().add(grafPiso);
-		grafPiso.addMouseListener(this); //para detectar el click que agregará a un Jugador
+		grafPiso.addMouseListener(this); //para detectar el click que agregará o quitará a un Jugador
 	
 		m = new Mapa(altoMapa, anchoMapa, gui.getPanelMapa().getHeight(), gui.getPanelMapa().getWidth());
 		
@@ -61,6 +66,7 @@ public class gMapa implements MouseListener
 		//Creo un ThreadJugador
 		enemigos = new ThreadEnemigo(this);
 		enemigos.start();
+		
 		
 	}
 	
@@ -109,11 +115,26 @@ public class gMapa implements MouseListener
 		this.deboAgregar = deboAgregar;
 	}
 	
+	public void setDeboVenderJugador(boolean deboVenderJugador)
+	{
+		this.deboVenderJugador = deboVenderJugador;
+	}
+	
+	
 	public void setJugadorParaAgregar(CreadorJugador j)
 	{
 		jugadorParaAgregar = j;
 	}
 	
+	public boolean deboVenderJugador()
+	{
+		return deboVenderJugador;
+	}
+	
+	public Jugador getJugadorParaVender()
+	{
+		return jugadorParaVender;
+	}
 	
 	public Mapa obtenerMapaLogico()
 	{
@@ -135,7 +156,6 @@ public class gMapa implements MouseListener
 	
 		int PosX = (grafPiso.getMousePosition().x) / (gui.getPanelMapa().getWidth() / anchoMapa);
 		int PosY = (grafPiso.getMousePosition().y) / (gui.getPanelMapa().getHeight() / altoMapa);
-		
 		if(PosX == anchoMapa)
 		{
 			PosX--;
@@ -144,19 +164,32 @@ public class gMapa implements MouseListener
 		{
 			PosY--;
 		}
+		Posicion posClickeada = new Posicion(PosX,PosY);
 		if(deboAgregar)
 		{
-			
-			Posicion posClickeada = new Posicion(PosX,PosY);
 			Celda miCelda = m.obtenerCelda(posClickeada);
 			Jugador j = jugadorParaAgregar.crearJugador(miCelda, m);
 			agregarJugador(j);  //posición en la cual se agregará al jugador
 		}
-		
-		deboAgregar = false;	
+		deboAgregar = false;
+		 ///////////////////////////////////////////////////////////////////
+		// Recorro la lista de Jugadores del mapa para ver si la posición clickeada corresponde a la posición
+		// de un Jugador en el mapa. Entonces ese Jugador podrá ser vendido.
+		Iterator<Jugador> itJugador = m.getListaJugadores().iterator();
+		boolean encontre = false;
+		while(itJugador.hasNext() && !encontre)
+		{
+			Jugador jug = itJugador.next();
+			Posicion pJug = jug.getCelda().getPosCelda();
+			if(posClickeada.equals(pJug))
+			{
+				jugadorParaVender = jug;
+				deboVenderJugador = true;
+				encontre = true;
+			}	
+		}		
 	}
-
-
+		
 	public void mouseEntered(java.awt.event.MouseEvent arg0)
 	{}
 
