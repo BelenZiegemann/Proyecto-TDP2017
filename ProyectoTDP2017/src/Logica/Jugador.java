@@ -24,9 +24,8 @@ public abstract class Jugador extends Personaje
 		proyectil = proyJug;
 	}
 	
-	public void mover() {
-	
-		//////////////////////////
+	public void mover() 
+	{	
 		Posicion miPosicion = miCelda.getPosCelda();
 		int miX = miPosicion.getEjeX();
 		int miY = miPosicion.getEjeY();
@@ -43,7 +42,5 @@ public abstract class Jugador extends Personaje
 			}
 			i++;
 		}
-	}
-	////////////////////////////////
-		
+	}	
 }

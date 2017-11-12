@@ -7,7 +7,7 @@ package Logica;
  */
 public abstract class Personaje extends Contenido 
 {
-
+	protected int puntosVida = 100;
 	protected int fuerzaImpacto = 10;
 	protected int alcance = 1;
 	protected boolean estaVivo = true;

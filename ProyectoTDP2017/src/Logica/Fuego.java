@@ -4,26 +4,27 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
-* Clase Piedra 
+* Clase Fuego
 * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
 *
 */
-public class Piedra extends ObstaculoConVida 
+public class Fuego extends ObstaculoPorTiempo
 {
 	protected int desplX;
 	protected int desplY;
 	
-	public Piedra(Celda c, Mapa m) 
+	public Fuego(Celda c, Mapa m) 
 	{
-		vida = 400;
+		tiempo = 8; //tiempo en segundos
+		DuracionObstaculo.setRepeats(false);
 		miCelda = c;
 		mapa = m;
-		//agrego la gráfica a Piedra
-		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/piedraConNieve.png"));
+		//agrego la gráfica al Fuego
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/fuego.gif"));
 		mGrafico = new JLabel(imagen);			
 		desplX = (mapa.obtenerAnchoReal() / mapa.obtenerAncho()) * miCelda.getPosCelda().getEjeX();
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();						
 		mGrafico.setBounds(desplX, desplY ,imagen.getIconWidth(),imagen.getIconHeight());
 	}
-	
+
 }

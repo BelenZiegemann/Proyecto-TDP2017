@@ -16,40 +16,41 @@ public class VisitorEnemigo extends Visitor
 	
 	public void atacar(Jugador j)
 	{
-		System.out.println("Enemigo ataca a jugador.");
 		j.setVida(j.getVida() - e.getFuerzaImpacto());
-		if (j.getVida() <= 0) 
-		{
-			j.setEstaVivo(false);
-			System.out.println("Se murio jugador.");
-			j.getCelda().setContenido(null);
-			e.setMovimiento(true);
-				
-			e.setImagenEnMovimiento(); //ultimo cambio
-		}
+			if (j.getVida() <= 0) 
+			{
+				j.setEstaVivo(false);
+				j.getCelda().setContenido(null);
+				e.setMovimiento(true);	
+				e.setImagenEnMovimiento();
+			}
 	}
 	
 	public void atacar(Enemigo e)
 	{
-		e.setImagenEnMovimiento();
-		
+		this.e.setMovimiento(true);
+		this.e.setImagenEnMovimiento();
 	}
 	
-	public void atacar(ObstaculoConVida o) {
-		System.out.println("Enemigo ataca a obstaculo");
-		
-		
-		//e.setVelocidad(0);
+	public void atacar(ObstaculoConVida o) 
+	{
 		o.setVida(o.getVida() - e.getFuerzaImpacto());
-		if (o.getVida() <= 0) {
-			o.getCelda().setContenido(null);
+		if (o.getVida() <= 0)
+		{
 			o.setEstaVivo(false);
-			
-		//	e.setVelocidad(5);
-			
-			e.setMovimiento(true);
-			e.setImagenEnMovimiento(); //ultimo cambio
-			
+			o.getCelda().setContenido(null);
+			this.e.setMovimiento(true);
+			this.e.setImagenEnMovimiento();
 		}
+	}
+	
+	public void atacar(ObstaculoPorTiempo o)
+	{
+		if(!o.estaVivo())
+		{
+			this.e.setMovimiento(true);
+			this.e.setImagenEnMovimiento();
+		}
+		
 	}
 }

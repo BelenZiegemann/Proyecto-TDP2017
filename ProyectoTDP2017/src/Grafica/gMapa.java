@@ -3,7 +3,6 @@ import Logica.CreadorJugador.*;
 
 import java.awt.event.MouseListener;
 import java.util.Iterator;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -20,6 +19,7 @@ public class gMapa implements MouseListener
 	protected Mapa m;
 	protected ThreadJugador jugadores;
 	protected ThreadEnemigo enemigos;
+	protected ThreadObstaculosPorTiempo obstaculosPorTiempo;
 	protected Nivel level;
 	protected Icon pisoNieve;
 	protected GUI gui;
@@ -50,11 +50,6 @@ public class gMapa implements MouseListener
 	
 		m = new Mapa(altoMapa, anchoMapa, gui.getPanelMapa().getHeight(), gui.getPanelMapa().getWidth());
 		
-		//agrego un obstáculo
-		JLabel grafPiedra = m.agregarObstaculo(new Piedra(m.obtenerCelda(new Posicion(3,4)),m));
-		grafPiso.add(grafPiedra);
-		grafPiso.repaint();
-		
 		//Creo un Thread para el Nivel
 		level = new Nivel(1,"src\\Logica\\Nivel1.txt",this);
 		level.start();
@@ -65,9 +60,10 @@ public class gMapa implements MouseListener
 		
 		//Creo un ThreadJugador
 		enemigos = new ThreadEnemigo(this);
-		enemigos.start();
+		enemigos.start();	
 		
-		
+		obstaculosPorTiempo = new ThreadObstaculosPorTiempo(this);
+		obstaculosPorTiempo.start();	
 	}
 	
 	public void agregarEnemigo(Enemigo e)
@@ -82,7 +78,7 @@ public class gMapa implements MouseListener
 	}
 	
 	
-	public void agregarJugador(Jugador j)
+	public void  agregarJugador(Jugador j)
 	{
 		JLabel grafJugador = m.agregarJugador(j);
 		if(grafJugador != null)
@@ -92,10 +88,32 @@ public class gMapa implements MouseListener
 		}
 	}
 	
+	public  void agregarObstaculoConVida(ObstaculoConVida obsVida)
+	{
+		JLabel grafObstaculoVida = m.agregarObstaculoConVida(obsVida);
+		if(grafObstaculoVida!= null)
+		{
+			grafPiso.add(grafObstaculoVida);
+			grafPiso.repaint();
+		}
+	}
+	
+	public void agregarObstaculoPorTiempo(ObstaculoPorTiempo obsTiempo)
+	{
+		JLabel grafObstaculoTiempo = m.agregarObstaculoPorTiempo(obsTiempo);
+		if(grafObstaculoTiempo!= null)
+		{
+			grafPiso.add(grafObstaculoTiempo);
+			grafPiso.repaint();
+		}
+	}
+	
+	
 	public void Perder()
 	{
 		level.detener();
 		jugadores.detener();
+		obstaculosPorTiempo.detener();
 		gui.mostrarMensajePerder();	
 	}
 
@@ -203,6 +221,5 @@ public class gMapa implements MouseListener
 
 
 	public void mouseReleased(java.awt.event.MouseEvent arg0)
-	{}
-	
+	{}	
 }

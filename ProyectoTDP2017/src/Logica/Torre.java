@@ -4,22 +4,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
-* Clase Piedra 
+* Clase Torre 
 * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
 *
 */
-public class Piedra extends ObstaculoConVida 
+public class Torre extends ObstaculoConVida 
 {
 	protected int desplX;
 	protected int desplY;
 	
-	public Piedra(Celda c, Mapa m) 
-	{
-		vida = 400;
+	public Torre(Celda c, Mapa m) {
+		vida = 500;
 		miCelda = c;
 		mapa = m;
-		//agrego la gráfica a Piedra
-		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/piedraConNieve.png"));
+		//agrego la gráfica a la Torre
+		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/torre.png"));
 		mGrafico = new JLabel(imagen);			
 		desplX = (mapa.obtenerAnchoReal() / mapa.obtenerAncho()) * miCelda.getPosCelda().getEjeX();
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();						

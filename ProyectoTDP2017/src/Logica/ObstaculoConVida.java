@@ -5,10 +5,12 @@ package Logica;
 * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
 *
 */
-public abstract class ObstaculoConVida extends Obstaculo {
+public abstract class ObstaculoConVida extends Obstaculo 
+{
 	protected int vida;
 	
-	public void setVida(int v) {
+	public void setVida(int v) 
+	{
 		vida = v;
 	}
 	

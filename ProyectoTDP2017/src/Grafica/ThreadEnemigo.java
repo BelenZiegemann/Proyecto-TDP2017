@@ -1,9 +1,8 @@
 package Grafica;
 
 import java.util.LinkedList;
-
 import Logica.Enemigo;
-import Logica.Obstaculo;
+import Logica.ObstaculoConVida;
 
 /**
  * Clase ThreadEnemigo
@@ -13,8 +12,8 @@ import Logica.Obstaculo;
 public class ThreadEnemigo extends Thread
 {
 	private LinkedList<Enemigo> EnemigosParaEliminar;
+	private LinkedList<ObstaculoConVida> ObstaculosParaEliminar;
 	private gMapa gmapa;
-	 
 	// Flag que indica cuando debe detenerse la ejecución del hilo.
 	private boolean Detener;
 
@@ -23,6 +22,7 @@ public class ThreadEnemigo extends Thread
 		gmapa = gm;
 		Detener = false;
 		EnemigosParaEliminar = new LinkedList<Enemigo>();
+		ObstaculosParaEliminar = new LinkedList<ObstaculoConVida>();
 	}	
 	
 	public void run() 
@@ -33,11 +33,8 @@ public class ThreadEnemigo extends Thread
 			try 
 			{
 				Thread.sleep(400);
-				
 				if(gmapa.getNivel().estaLeido() && gmapa.obtenerMapaLogico().getListaEnemigos().isEmpty())
-				{
 					gmapa.Ganar();
-				}
 				else
 				{
 					// Realizo el movimiento
@@ -59,18 +56,6 @@ public class ThreadEnemigo extends Thread
 							EnemigosParaEliminar.addLast(e);
 						}
 					}
-						
-				
-					for(Obstaculo o: gmapa.obtenerMapaLogico().getListaObstaculos()) 
-					{
-						if (!o.estaVivo())
-						{
-							gmapa.obtenerPisoMapa().remove(o.getGrafico());
-							gmapa.obtenerPisoMapa().repaint();
-							gmapa.obtenerMapaLogico().getListaObstaculos().remove(o);
-						}	
-					}
-				
 					//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS ENEMIGOS
 					for(Enemigo eElim : EnemigosParaEliminar)
 					{
@@ -78,6 +63,22 @@ public class ThreadEnemigo extends Thread
 						gmapa.obtenerPisoMapa().repaint();
 						gmapa.obtenerMapaLogico().getListaEnemigos().remove(eElim);
 					}
+					EnemigosParaEliminar.clear();
+					////////////////////////////////////////////////////////////////////////////////
+					for(ObstaculoConVida o: gmapa.obtenerMapaLogico().getListaObstaculosConVida()) 
+					{
+						if (!o.estaVivo())
+							ObstaculosParaEliminar.addLast(o);
+					}
+				
+					//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS OBSTÁCULOS
+					for(ObstaculoConVida oElim : ObstaculosParaEliminar)
+					{
+						gmapa.obtenerPisoMapa().remove(oElim.getGrafico());
+						gmapa.obtenerPisoMapa().repaint();
+						gmapa.obtenerMapaLogico().getListaObstaculosConVida().remove(oElim);
+					}
+					ObstaculosParaEliminar.clear();
 				}	
 		} 
 		catch (InterruptedException e)
@@ -88,10 +89,6 @@ public class ThreadEnemigo extends Thread
 
 	public void detener() 
 	{
-		//gmapa.obtenerMapaLogico().getListaEnemigos().clear();
-		//gmapa.obtenerPisoMapa().removeAll();
-		//gmapa.obtenerPisoMapa().repaint();
-		
 		// Interrumpo el hilo para que no continue con su ejecución.
 		this.interrupt();
 		// Seteamos el flag para detener su ejecución.

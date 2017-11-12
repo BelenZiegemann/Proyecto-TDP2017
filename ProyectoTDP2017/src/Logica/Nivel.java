@@ -3,6 +3,7 @@ package Logica;
 import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Random;
 
 import Grafica.gMapa;
 import Logica.CreadorEnemigo.CreadorEnemigo;
@@ -33,6 +34,8 @@ public class Nivel extends Thread
 		this.numeroNivel = numeroNivel;
 		gm.obtenerMapaLogico().obtenerPantalla().setNivel(this.numeroNivel);
 		this.ruta = ruta;
+		//agrego los obstáculos con Vida
+		agregarObstaculosConVida();
 	}
 	
 	public void run()
@@ -161,4 +164,41 @@ public class Nivel extends Thread
 		return numeroNivel;
 	}
 	
+	public void agregarObstaculosConVida()
+	{
+		Random aleatorio = new Random(System.currentTimeMillis());
+		int cantObstaculos = aleatorio.nextInt(6) + 1; // número aleatorio entre 1 y 6
+		int posX, posY, obstaculoElegido;
+		//Refresco datos aleatorios 
+		aleatorio.setSeed(aleatorio.nextLong());
+		for(int i=1; i <= cantObstaculos; i++)
+		{
+			posX = aleatorio.nextInt(8)+1; //número aleatorio entre 1 y 8
+			aleatorio.setSeed(aleatorio.nextLong());//refresco datos aleatorios
+			posY = aleatorio.nextInt(6); //número aleatorio entre 0 y 5
+			aleatorio.setSeed(aleatorio.nextLong());//refresco datos aleatorios
+			obstaculoElegido = aleatorio.nextInt(3); //número aleatorio entre 0 y 2
+			Posicion posObs = new Posicion(posX,posY);
+			Celda celdaObs = gmapa.obtenerMapaLogico().obtenerCelda(posObs);
+			ObstaculoConVida obsVida;
+			if(obstaculoElegido == 0)
+			{
+				obsVida = new Piedra(celdaObs, gmapa.obtenerMapaLogico());
+				gmapa.agregarObstaculoConVida(obsVida);
+			}
+			else
+				if(obstaculoElegido == 1)
+				{
+					obsVida = new Arbol(celdaObs, gmapa.obtenerMapaLogico());
+					gmapa.agregarObstaculoConVida(obsVida);
+				}
+				else
+				{
+					obsVida = new Torre(celdaObs, gmapa.obtenerMapaLogico());
+					gmapa.agregarObstaculoConVida(obsVida);
+				}
+			aleatorio.setSeed(aleatorio.nextLong());//refresco datos aleatorios
+		}
+	
+	}
 }

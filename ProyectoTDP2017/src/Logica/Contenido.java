@@ -10,7 +10,6 @@ import javax.swing.JLabel;
  */
 public abstract class Contenido
 {
-	protected int puntosVida = 100;
 	protected Celda miCelda;	
 	protected Mapa mapa;
 	protected Visitor proyectil;

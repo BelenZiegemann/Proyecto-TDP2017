@@ -17,7 +17,8 @@ public abstract class Enemigo extends Personaje
 	protected boolean deboPerder = false;
 	
 	//Se debe invocar cuando se muere.
-	public void setPuntajeMonedas() {
+	public void setPuntajeMonedas() 
+	{
 		mapa.obtenerPantalla().incrementarPuntaje(puntaje);
 		mapa.obtenerPantalla().setPresupuesto(rangoMonedas);
 	}
@@ -32,29 +33,26 @@ public abstract class Enemigo extends Personaje
 	 */
 	public void mover()
 	{		
-			System.out.print("v: " + velocidad);
+			//System.out.print("v: " + velocidad);
 			Posicion ubicacion = miCelda.getPosCelda();
 			int miX = ubicacion.getEjeX();
 			int miY = ubicacion.getEjeY();
 			
-			System.out.println("miX " + miX);
+			//System.out.println("miX " + miX);
 			//Intento mover hacia la derecha
 			if(miX + 1 < mapa.obtenerAncho())
 			{
 				int i = 1;
 				boolean encontre = false;
 				//	System.out.println("miX " + miX);
-				
 				//verifico si hay alguien a mi alcance para atacar  
 				while(i <= alcance && !encontre) 
 				{
-				
 					if(miX+i < mapa.obtenerAncho()) 
 					{
 						//System.out.println("miX: " + miX + "i: "+i);
 						//System.out.println("obtenerAncho: " + mapa.obtenerAncho());
 						Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX+i,miY));
-						
 						Contenido contenidoSiguiente = celdaSiguiente.getContenido();
 						if(contenidoSiguiente != null) 
 						{
@@ -63,13 +61,12 @@ public abstract class Enemigo extends Personaje
 							encontre = true;
 							contenidoSiguiente.seratacado(this.getProyectil());
 							//System.out.print("Entro");
-						}
-					
+							
+						}	
 					}
 					i++;
 				}
 			
-				
 				if (estaEnMovimiento)
 				{
 				////////////////////////////////
@@ -91,10 +88,9 @@ public abstract class Enemigo extends Personaje
 						//muevo el JLabel que representa al enemigo
 						desplX = (int) (desplX + Math.pow(2,velocidad+1));
 						mGrafico.setBounds(desplX, desplY, imagen.getIconWidth(), imagen.getIconHeight());
-						System.out.println("estaEnMov: " + estaEnMovimiento);
+						//System.out.println("estaEnMov: " + estaEnMovimiento);
 					//}
 				}
-			
 		
 			}
 			else // significa que el enemigo ya atravesó el mapa 
@@ -103,8 +99,7 @@ public abstract class Enemigo extends Personaje
 				miCelda.setContenido(null);		// de la lista de enemigos
 				//ACÁ SE PERDERÍA EL JUEGO
 				deboPerder = true;		
-			}
-			
+			}		
 	}
 	
 	public boolean deboPerderJuego()
@@ -112,7 +107,8 @@ public abstract class Enemigo extends Personaje
 		return deboPerder;
 	}
 
-	public void setMovimiento(boolean m) {
+	public void setMovimiento(boolean m) 
+	{
 		estaEnMovimiento = m;
 	}
 	

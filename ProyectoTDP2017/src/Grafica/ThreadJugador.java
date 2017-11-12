@@ -3,7 +3,6 @@ package Grafica;
 import java.util.LinkedList;
 
 import Logica.Jugador;
-import Logica.Obstaculo;
 
 /**
  * Clase ThreadJugador
@@ -16,7 +15,7 @@ public class ThreadJugador extends Thread
 	private gMapa gmapa;
 	 
 	// Flag que indica cuando debe detenerse la ejecución del hilo.
-	private boolean Detener;
+	private volatile boolean Detener;
 
 	public ThreadJugador(gMapa gm) 
 	{
@@ -26,8 +25,7 @@ public class ThreadJugador extends Thread
 	}	
 	
 	public void run() 
-	{
-		
+	{	
 		// Ejecuto indefinidamente hasta que el flag sea verdadero.
 		while (!Detener) 
 		{
@@ -41,21 +39,8 @@ public class ThreadJugador extends Thread
 					if(j.estaVivo())
 						j.mover();
 					else
-					{
 						JugadoresParaEliminar.addLast(j);
-					}
 				}
-				
-				for(Obstaculo o: gmapa.obtenerMapaLogico().getListaObstaculos()) 
-				{
-					if (!o.estaVivo()) {
-						gmapa.obtenerPisoMapa().remove(o.getGrafico());
-						gmapa.obtenerPisoMapa().repaint();
-						gmapa.obtenerMapaLogico().getListaObstaculos().remove(o);
-					}
-						
-				}
-				
 				//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS JUGADORES
 				for(Jugador jElim : JugadoresParaEliminar)
 				{
@@ -63,6 +48,7 @@ public class ThreadJugador extends Thread
 					gmapa.obtenerPisoMapa().repaint();
 					gmapa.obtenerMapaLogico().getListaJugadores().remove(jElim);
 				}
+				JugadoresParaEliminar.clear();
 			}
 			catch (InterruptedException e)
 			{}
@@ -73,9 +59,7 @@ public class ThreadJugador extends Thread
 	{
 		// Interrumpo el hilo para que no continue con su ejecución.
 		this.interrupt();
-
 		// Seteamos el flag para detener su ejecución.
 		Detener = true;
 	}
-
 }

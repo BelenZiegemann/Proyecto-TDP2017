@@ -18,7 +18,8 @@ public class Mapa
 	protected Pantalla miPantalla;
 	protected LinkedList<Jugador> misJugadores;
 	protected LinkedList<Enemigo> misEnemigos;
-	protected LinkedList<Obstaculo> misObstaculos;
+	protected LinkedList<ObstaculoConVida> misObstaculosConVida;
+	protected LinkedList<ObstaculoPorTiempo> misObstaculosPorTiempo;
 	
 	public Mapa(int alto, int ancho, int altoReal, int anchoReal)
 	{
@@ -36,7 +37,8 @@ public class Mapa
 			
 		misJugadores = new LinkedList<Jugador>(); 
 		misEnemigos = new LinkedList<Enemigo>();
-		misObstaculos = new LinkedList<Obstaculo>();
+		misObstaculosConVida = new LinkedList<ObstaculoConVida>();
+		misObstaculosPorTiempo = new LinkedList<ObstaculoPorTiempo>();
 		miPantalla = new Pantalla(this);
 	}
 	
@@ -50,9 +52,14 @@ public class Mapa
 		return misEnemigos;
 	}
 	
-	public LinkedList<Obstaculo> getListaObstaculos() 
+	public LinkedList<ObstaculoConVida> getListaObstaculosConVida() 
 	{
-		return misObstaculos;
+		return misObstaculosConVida;
+	}
+	
+	public LinkedList<ObstaculoPorTiempo> getListaObstaculosPorTiempo() 
+	{
+		return misObstaculosPorTiempo;
 	}
 	
 	public Pantalla obtenerPantalla()
@@ -116,10 +123,27 @@ public class Mapa
 			return null;
 	}
 	
-	public JLabel agregarObstaculo(Obstaculo o) {
-		obtenerCelda(o.getCelda().getPosCelda()).setContenido(o);
-		misObstaculos.addLast(o);
-		return o.getGrafico();		
+	public  JLabel agregarObstaculoConVida(ObstaculoConVida o) 
+	{
+		if(obtenerCelda(o.getCelda().getPosCelda()).getContenido() == null)
+		{
+			obtenerCelda(o.getCelda().getPosCelda()).setContenido(o);
+			misObstaculosConVida.addLast(o);
+			return o.getGrafico();
+		}
+		else
+			return null;
 	}
 	
+	public JLabel agregarObstaculoPorTiempo(ObstaculoPorTiempo o) 
+	{
+		if(obtenerCelda(o.getCelda().getPosCelda()).getContenido() == null)
+		{
+			obtenerCelda(o.getCelda().getPosCelda()).setContenido(o);
+			misObstaculosPorTiempo.addLast(o);
+			return o.getGrafico();
+		}
+		else
+			return null;
+	}	
 }

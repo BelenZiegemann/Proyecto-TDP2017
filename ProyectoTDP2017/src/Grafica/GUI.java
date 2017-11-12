@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import Logica.Enemigo;
 import Logica.Jugador;
 import Logica.CreadorJugador.CreadorDothraki;
 import Logica.CreadorJugador.CreadorDragon;
@@ -147,7 +148,7 @@ public class GUI extends JFrame
 		mapa.obtenerMapaLogico().obtenerPantalla().setMostrarNivel(lblMostrarNivel);
 		mapa.obtenerMapaLogico().obtenerPantalla().getMostrarNivel().setText("" + mapa.obtenerMapaLogico().obtenerPantalla().getNivel());
 		
-		//Label Vender Jugador
+		//Botón Vender Jugador
 		JButton btnVenderJugador = new JButton("Vender Jugador");
 		btnVenderJugador.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnVenderJugador.setBackground(new Color(255, 0, 0));
@@ -164,11 +165,34 @@ public class GUI extends JFrame
 					Jugador jugParaVender = mapa.getJugadorParaVender();
 					int precioVenta = jugParaVender.getPrecio() / 2;
 					mapa.obtenerMapaLogico().obtenerPantalla().setPresupuesto(precioVenta);
+					
+					//elimino al jugador que es vendido
 					jugParaVender.setEstaVivo(false); //para que se remueva de la lista de jugadores y del mapa.
 																	//Lo hace la clase ThreadJugador
 					jugParaVender.getCelda().setContenido(null);
+					mapa.obtenerPisoMapa().remove(jugParaVender.getGrafico());
+					mapa.obtenerPisoMapa().repaint();
+					mapa.obtenerMapaLogico().getListaJugadores().remove(jugParaVender);
+					
+					////////////
+					try
+					{	
+						ThreadJugador.sleep(50);
+						ThreadEnemigo.sleep(50);	
+					} catch (InterruptedException e) 
+					{}
+				
+					for(Enemigo enem : mapa.obtenerMapaLogico().getListaEnemigos())
+					{
+						enem.setImagenEnMovimiento();
+						enem.setMovimiento(true);
+						enem.mover();
+					}	
+					//////////////
+					mapa.setDeboVenderJugador(false);
 				}
-				mapa.setDeboVenderJugador(false);
+				
+				
 			}
 		});
 	

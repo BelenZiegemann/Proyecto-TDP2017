@@ -25,7 +25,6 @@ public class GuardianNocturno extends Jugador
 		mapa = m;
 		fuerzaImpacto = 2 * fuerzaImpacto;
 	
-		
 		//agrego la gráfica a GuardianNocturno
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/GuardianNocturno.png"));
 		mGrafico = new JLabel(imagen);			

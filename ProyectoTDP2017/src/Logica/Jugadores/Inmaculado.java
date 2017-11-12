@@ -27,7 +27,6 @@ public class Inmaculado extends Jugador
 		fuerzaImpacto = 3 * fuerzaImpacto;
 		precio = 300;
 
-		
 		//agrego la gráfica a JonSnow
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Inmaculado.png"));
 		mGrafico = new JLabel(imagen);			

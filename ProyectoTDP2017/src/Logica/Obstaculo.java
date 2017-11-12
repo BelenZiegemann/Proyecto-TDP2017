@@ -5,9 +5,9 @@ package Logica;
 * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
 *
 */
-public abstract class Obstaculo extends Contenido {
-	
-	protected boolean estaVivo;
+public abstract class Obstaculo extends Contenido 
+{	
+	protected boolean estaVivo = true;
 	
 	public boolean estaVivo() 
 	{
@@ -18,4 +18,5 @@ public abstract class Obstaculo extends Contenido {
 	{
 		estaVivo = b;
 	}
+
 }
