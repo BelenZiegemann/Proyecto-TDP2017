@@ -1,5 +1,6 @@
 package Logica;
 
+
 /**
  * Clase abstracta Enemigo
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
@@ -15,6 +16,10 @@ public abstract class Enemigo extends Personaje
 	protected int anchoRealCelda;
 	protected boolean estaEnMovimiento = true;
 	protected boolean deboPerder = false;
+	
+	protected int alcance = 2;
+	
+	
 	
 	//Se debe invocar cuando se muere.
 	public void setPuntajeMonedas() 
@@ -59,7 +64,15 @@ public abstract class Enemigo extends Personaje
 							estaEnMovimiento = false;
 							setImagenQuieto();
 							encontre = true;
-							contenidoSiguiente.seratacado(this.getProyectil());
+							/////////////////////////////////7
+							Posicion posInicialDisparo = new Posicion(miX+1, miY);
+							Celda celdaDisparo = mapa.obtenerCelda(posInicialDisparo);
+							DisparoEnemigo disparoEnem = new DisparoEnemigo(celdaDisparo, mapa, proyectil, this, contenidoSiguiente);
+							
+							mapa.agregarDisparo(disparoEnem);
+							
+							/////////////
+							//contenidoSiguiente.seratacado(this.getProyectil());
 							//System.out.print("Entro");
 							
 						}	
@@ -112,7 +125,7 @@ public abstract class Enemigo extends Personaje
 		estaEnMovimiento = m;
 	}
 	
-	public void seratacado(Visitor p)
+	public synchronized  void seratacado(Visitor p)
 	{
 		p.atacar(this);
 	}

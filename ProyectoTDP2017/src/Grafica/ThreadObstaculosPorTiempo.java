@@ -38,6 +38,11 @@ public class ThreadObstaculosPorTiempo extends Thread
 			{
 				int tiempoAleatorio = aleatorio.nextInt(6) + 5; // número aleatorio entre 5 y 10			
 				Thread.sleep(tiempoAleatorio * 1000);
+			}
+			catch (InterruptedException e)
+			{}
+			synchronized(gmapa.obtenerMapaLogico().getListaObstaculosPorTiempo())
+			{
 				agregarObstaculosPorTiempo(); // Cada cierto tiempo aleatorio se intentarán agregar obstáculos
 											  // que estarán en el mapa durante un tiempo (ese tiempo varía de
 											  // acuerdo al tipo de obstáculo (lago o fuego)			
@@ -58,8 +63,7 @@ public class ThreadObstaculosPorTiempo extends Thread
 				}	
 				obsPorTiempoAEliminar.clear();
 			}
-			catch (InterruptedException e)
-			{}
+		
 		}	
 	}
 	

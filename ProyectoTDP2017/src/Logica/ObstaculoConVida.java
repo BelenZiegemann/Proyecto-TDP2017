@@ -18,7 +18,7 @@ public abstract class ObstaculoConVida extends Obstaculo
 		return vida;
 	}
 	
-	public void seratacado(Visitor v) {
+	public synchronized  void seratacado(Visitor v) {
 		v.atacar(this);
 	}
 }

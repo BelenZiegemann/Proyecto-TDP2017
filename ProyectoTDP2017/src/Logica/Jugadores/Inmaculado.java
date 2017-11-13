@@ -26,6 +26,7 @@ public class Inmaculado extends Jugador
 		puntosVida = 2 * puntosVida;
 		fuerzaImpacto = 3 * fuerzaImpacto;
 		precio = 300;
+		alcance = 4;
 
 		//agrego la gráfica a JonSnow
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Inmaculado.png"));

@@ -1,5 +1,6 @@
 package Logica;
 
+
 /**
  * Clase abstracta Jugador 
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
@@ -9,7 +10,7 @@ public abstract class Jugador extends Personaje
 {
 	protected int precio = 125;
 	
-	public void seratacado(Visitor p)
+	public synchronized void seratacado(Visitor p)
 	{
 		p.atacar(this);
 	}
@@ -31,13 +32,26 @@ public abstract class Jugador extends Personaje
 		int miY = miPosicion.getEjeY();
 		int i = 1;
 		boolean encontre = false;
-		while(i <= alcance && !encontre) {
-			if (miX-i >= 0) {
+		while(i <= alcance && !encontre) 
+		{
+			if (miX-i >= 0)
+			{
 				Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX-i,miY));
 				Contenido contenidoSiguiente = celdaSiguiente.getContenido();
-				if (contenidoSiguiente != null) {
+				if (contenidoSiguiente != null)
+				{
 					encontre = true;
-					contenidoSiguiente.seratacado(this.getProyectil());
+					///////////
+					
+					Posicion posInicialDisparo = new Posicion(miX-1, miY);
+					Celda celdaDisparo = mapa.obtenerCelda(posInicialDisparo);
+					DisparoJugador disparoJug= new DisparoJugador(celdaDisparo, mapa, proyectil, this, contenidoSiguiente);
+					mapa.agregarDisparo(disparoJug);
+					
+					//////////////77777
+					//contenidoSiguiente.seratacado(this.getProyectil());
+					
+					 
 				}	
 			}
 			i++;

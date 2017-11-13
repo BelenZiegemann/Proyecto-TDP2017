@@ -21,6 +21,9 @@ public class Mapa
 	protected LinkedList<ObstaculoConVida> misObstaculosConVida;
 	protected LinkedList<ObstaculoPorTiempo> misObstaculosPorTiempo;
 	
+	protected LinkedList<Disparo> misDisparos;
+	
+	
 	public Mapa(int alto, int ancho, int altoReal, int anchoReal)
 	{
 		this.alto = alto;
@@ -39,6 +42,7 @@ public class Mapa
 		misEnemigos = new LinkedList<Enemigo>();
 		misObstaculosConVida = new LinkedList<ObstaculoConVida>();
 		misObstaculosPorTiempo = new LinkedList<ObstaculoPorTiempo>();
+		misDisparos = new LinkedList<Disparo>();
 		miPantalla = new Pantalla(this);
 	}
 	
@@ -61,6 +65,11 @@ public class Mapa
 	{
 		return misObstaculosPorTiempo;
 	}
+	
+	public LinkedList<Disparo> getListaDisparos()
+	{
+		return misDisparos;
+	}	
 	
 	public Pantalla obtenerPantalla()
 	{
@@ -123,7 +132,7 @@ public class Mapa
 			return null;
 	}
 	
-	public  JLabel agregarObstaculoConVida(ObstaculoConVida o) 
+	public JLabel agregarObstaculoConVida(ObstaculoConVida o) 
 	{
 		if(obtenerCelda(o.getCelda().getPosCelda()).getContenido() == null)
 		{
@@ -146,4 +155,17 @@ public class Mapa
 		else
 			return null;
 	}	
+	
+	public void agregarDisparo(Disparo d)
+	{
+		if(obtenerCelda(d.getCelda().getPosCelda()).getContenido() == null)
+		{
+			
+			misDisparos.addLast(d);	
+		}
+		
+		
+	}
+	
+	
 }

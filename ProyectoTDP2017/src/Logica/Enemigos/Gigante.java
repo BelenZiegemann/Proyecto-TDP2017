@@ -28,6 +28,7 @@ public class Gigante extends Enemigo
 		puntaje = 250;
 		rangoMonedas = 275;
 		
+		
 		cantDesplazada = 0;	// Se usará para controlar cuánto se mueve el JLabel dentro del ancho real de la celda
 		anchoRealCelda = mapa.obtenerAnchoReal() / mapa.obtenerAncho();	
 		//agrego la gráfica al Gigante

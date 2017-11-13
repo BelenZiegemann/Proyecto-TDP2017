@@ -176,9 +176,13 @@ public class GUI extends JFrame
 					
 					////////////
 					try
+					
+					
 					{	
 						ThreadJugador.sleep(50);
 						ThreadEnemigo.sleep(50);	
+						ThreadDisparo.sleep(50);
+						ThreadObstaculosPorTiempo.sleep(10);
 					} catch (InterruptedException e) 
 					{}
 				

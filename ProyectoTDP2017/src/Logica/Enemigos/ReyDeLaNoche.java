@@ -28,7 +28,7 @@ public class ReyDeLaNoche extends Enemigo
 		puntaje = 550;
 		rangoMonedas = 500;
 		velocidad=3;
-		alcance=2*alcance;
+		alcance=3;
 		
 		cantDesplazada = 0;	// Se usará para controlar cuánto se mueve el JLabel dentro del ancho real de la celda
 		anchoRealCelda = mapa.obtenerAnchoReal() / mapa.obtenerAncho();	

@@ -14,7 +14,7 @@ public class VisitorEnemigo extends Visitor
 		this.e = e;
 	}
 	
-	public void atacar(Jugador j)
+	public synchronized void atacar(Jugador j)
 	{
 		j.setVida(j.getVida() - e.getFuerzaImpacto());
 			if (j.getVida() <= 0) 
@@ -26,13 +26,13 @@ public class VisitorEnemigo extends Visitor
 			}
 	}
 	
-	public void atacar(Enemigo e)
+	public synchronized void atacar(Enemigo e)
 	{
 		this.e.setMovimiento(true);
 		this.e.setImagenEnMovimiento();
 	}
 	
-	public void atacar(ObstaculoConVida o) 
+	public  synchronized void atacar(ObstaculoConVida o) 
 	{
 		o.setVida(o.getVida() - e.getFuerzaImpacto());
 		if (o.getVida() <= 0)
@@ -44,7 +44,7 @@ public class VisitorEnemigo extends Visitor
 		}
 	}
 	
-	public void atacar(ObstaculoPorTiempo o)
+	public synchronized void atacar(ObstaculoPorTiempo o)
 	{
 		if(!o.estaVivo())
 		{

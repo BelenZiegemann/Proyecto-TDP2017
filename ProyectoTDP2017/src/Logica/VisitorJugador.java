@@ -13,10 +13,10 @@ public class VisitorJugador extends Visitor
 		this.j = j;
 	}
 	
-	public void atacar(Jugador j)
+	public synchronized void atacar(Jugador j)
 	{}
 	
-	public void atacar(Enemigo e)
+	public synchronized void atacar(Enemigo e)
 	{
 		e.setVida(e.getVida() - j.getFuerzaImpacto());
 		if (e.getVida() <= 0) 
@@ -27,9 +27,9 @@ public class VisitorJugador extends Visitor
 		}
 	}
 	
-	public void atacar(ObstaculoConVida o) 
+	public synchronized void atacar(ObstaculoConVida o) 
 	{}
 	
-	public void atacar(ObstaculoPorTiempo o)
+	public synchronized void atacar(ObstaculoPorTiempo o)
 	{}
 }

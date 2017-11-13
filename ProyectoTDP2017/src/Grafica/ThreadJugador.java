@@ -32,12 +32,19 @@ public class ThreadJugador extends Thread
 			try 
 			{
 				Thread.sleep(400);
+			}
+			catch (InterruptedException e)
+			{}
+				synchronized(gmapa.obtenerMapaLogico().getListaJugadores())
+				{
 				// Realizo el movimiento
 				for(Jugador j: gmapa.obtenerMapaLogico().getListaJugadores())
 				{	
 					//SI EL JUGADOR ESTÁ VIVO ENTONCES MOVER, SINO LO AGREGO A LA LISTA AUXILIAR PARA LUEGO ELIMINARLO
 					if(j.estaVivo())
+					{
 						j.mover();
+					}
 					else
 						JugadoresParaEliminar.addLast(j);
 				}
@@ -49,9 +56,9 @@ public class ThreadJugador extends Thread
 					gmapa.obtenerMapaLogico().getListaJugadores().remove(jElim);
 				}
 				JugadoresParaEliminar.clear();
-			}
-			catch (InterruptedException e)
-			{}
+				
+				}
+					
 		}
 	}
 

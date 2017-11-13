@@ -19,6 +19,7 @@ public class gMapa implements MouseListener
 	protected Mapa m;
 	protected ThreadJugador jugadores;
 	protected ThreadEnemigo enemigos;
+	protected ThreadDisparo disparos;
 	protected ThreadObstaculosPorTiempo obstaculosPorTiempo;
 	protected Nivel level;
 	protected Icon pisoNieve;
@@ -58,10 +59,15 @@ public class gMapa implements MouseListener
 		jugadores = new ThreadJugador(this);
 		jugadores.start();
 		
-		//Creo un ThreadJugador
+		//Creo un ThreadEnemigo
 		enemigos = new ThreadEnemigo(this);
 		enemigos.start();	
 		
+		//Creo un ThreadDisparo
+		disparos = new ThreadDisparo(this);
+		disparos.start();
+		
+		//Creo un ThreadObstaculosPorTiempo
 		obstaculosPorTiempo = new ThreadObstaculosPorTiempo(this);
 		obstaculosPorTiempo.start();	
 	}
@@ -113,6 +119,7 @@ public class gMapa implements MouseListener
 	{
 		level.detener();
 		jugadores.detener();
+		disparos.detener();
 		obstaculosPorTiempo.detener();
 		gui.mostrarMensajePerder();	
 	}
@@ -125,6 +132,9 @@ public class gMapa implements MouseListener
 	public void siguienteNivel()
 	{
 		level = new Nivel(level.getNumNivel() + 1,"src\\Logica\\Nivel2.txt",this);
+		
+		Thread tl = new Thread(level);
+		tl.start();
 		level.start();
 	}
 	

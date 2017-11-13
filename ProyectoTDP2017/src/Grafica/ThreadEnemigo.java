@@ -33,10 +33,17 @@ public class ThreadEnemigo extends Thread
 			try 
 			{
 				Thread.sleep(400);
+			}
+			catch (InterruptedException e)
+			{}
+		
 				if(gmapa.getNivel().estaLeido() && gmapa.obtenerMapaLogico().getListaEnemigos().isEmpty())
 					gmapa.Ganar();
 				else
 				{
+					
+					synchronized(gmapa.obtenerMapaLogico().getListaEnemigos())
+					{
 					// Realizo el movimiento
 					for(Enemigo e: gmapa.obtenerMapaLogico().getListaEnemigos())
 					{	
@@ -60,11 +67,15 @@ public class ThreadEnemigo extends Thread
 					for(Enemigo eElim : EnemigosParaEliminar)
 					{
 						gmapa.obtenerPisoMapa().remove(eElim.getGrafico());
+						
 						gmapa.obtenerPisoMapa().repaint();
 						gmapa.obtenerMapaLogico().getListaEnemigos().remove(eElim);
 					}
 					EnemigosParaEliminar.clear();
+					}
 					////////////////////////////////////////////////////////////////////////////////
+					synchronized(gmapa.obtenerMapaLogico().getListaObstaculosConVida())
+					{
 					for(ObstaculoConVida o: gmapa.obtenerMapaLogico().getListaObstaculosConVida()) 
 					{
 						if (!o.estaVivo())
@@ -79,11 +90,13 @@ public class ThreadEnemigo extends Thread
 						gmapa.obtenerMapaLogico().getListaObstaculosConVida().remove(oElim);
 					}
 					ObstaculosParaEliminar.clear();
+					}
+					
+					
+					
+					
 				}	
-		} 
-		catch (InterruptedException e)
-		{}
-	
+		
 		}
 	}
 

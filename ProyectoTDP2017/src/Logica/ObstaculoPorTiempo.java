@@ -36,7 +36,7 @@ public abstract class ObstaculoPorTiempo extends Obstaculo
 		DuracionObstaculo.start();	
 	}
 	
-	public void seratacado(Visitor p)
+	public synchronized void seratacado(Visitor p)
 	{
 		p.atacar(this);
 	}
