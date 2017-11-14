@@ -1,5 +1,7 @@
 package Logica;
 
+import Logica.Visitor.Visitor;
+import Logica.Visitor.VisitorEnemigo;
 
 /**
  * Clase abstracta Enemigo
@@ -11,7 +13,7 @@ public abstract class Enemigo extends Personaje
 	protected int velocidad = 2;
 	protected int puntaje = 50;
 	protected int rangoMonedas = 150;
-	protected Premio miPremio;
+	protected PowerUp miPremio;
 	protected int cantDesplazada;
 	protected int anchoRealCelda;
 	protected boolean estaEnMovimiento = true;

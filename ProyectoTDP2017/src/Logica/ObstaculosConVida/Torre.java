@@ -1,7 +1,10 @@
-package Logica;
+package Logica.ObstaculosConVida;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import Logica.Celda;
+import Logica.Mapa;
 
 /**
 * Clase Torre 

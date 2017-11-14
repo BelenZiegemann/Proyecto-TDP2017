@@ -1,4 +1,12 @@
-package Logica;
+package Logica.Visitor;
+
+import Logica.Celda;
+import Logica.Enemigo;
+import Logica.Jugador;
+import Logica.Posicion;
+import Logica.Disparo.DisparoJugador;
+import Logica.ObstaculosConVida.ObstaculoConVida;
+import Logica.ObstaculosPorTiempo.ObstaculoPorTiempo;
 
 /**
  * Clase VisitorJugador
@@ -23,9 +31,9 @@ public class VisitorJugador extends Visitor
 		Posicion posJug = j.getCelda().getPosCelda();
 		int miX = posJug.getEjeX();
 		int miY = posJug.getEjeY();
-		Celda celdaDisparo = j.mapa.obtenerCelda(new Posicion(miX-1, miY));
-		DisparoJugador disparoJug = new DisparoJugador(celdaDisparo, j.mapa,e);
-		j.mapa.agregarDisparo(disparoJug);	
+		Celda celdaDisparo = j.getMapa().obtenerCelda(new Posicion(miX-1, miY));
+		DisparoJugador disparoJug = new DisparoJugador(celdaDisparo, j.getMapa(),e);
+		j.getMapa().agregarDisparo(disparoJug);	
 		
 		//realizo el ataque
 		e.setVida(e.getVida() - j.getFuerzaImpacto());

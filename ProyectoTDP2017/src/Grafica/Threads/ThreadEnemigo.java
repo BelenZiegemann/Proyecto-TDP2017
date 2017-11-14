@@ -1,9 +1,10 @@
-package Grafica;
+package Grafica.Threads;
 
 import java.util.LinkedList;
 
+import Grafica.gMapa;
 import Logica.Enemigo;
-import Logica.ObstaculoConVida;
+import Logica.ObstaculosConVida.ObstaculoConVida;
 
 /**
  * Clase ThreadEnemigo

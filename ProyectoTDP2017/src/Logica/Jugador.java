@@ -1,5 +1,7 @@
 package Logica;
 
+import Logica.Visitor.Visitor;
+import Logica.Visitor.VisitorJugador;
 
 /**
  * Clase abstracta Jugador 

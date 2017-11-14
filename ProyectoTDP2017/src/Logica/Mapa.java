@@ -3,6 +3,10 @@ package Logica;
 import java.util.LinkedList;
 import javax.swing.JLabel;
 
+import Logica.Disparo.Disparo;
+import Logica.ObstaculosConVida.ObstaculoConVida;
+import Logica.ObstaculosPorTiempo.ObstaculoPorTiempo;
+
 /**
  * Clase Mapa
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann

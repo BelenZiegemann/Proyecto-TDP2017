@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 import Logica.Enemigo;
 import Logica.Mapa;
-import Logica.VisitorEnemigo;
+import Logica.Visitor.VisitorEnemigo;
 
 /**
  * Clase Salvaje

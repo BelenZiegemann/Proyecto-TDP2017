@@ -1,5 +1,7 @@
 package Grafica;
 import Logica.CreadorJugador.*;
+import Logica.ObstaculosConVida.ObstaculoConVida;
+import Logica.ObstaculosPorTiempo.ObstaculoPorTiempo;
 
 import java.awt.event.MouseListener;
 import java.util.Iterator;
@@ -7,6 +9,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import Grafica.Threads.ThreadDisparo;
+import Grafica.Threads.ThreadEnemigo;
+import Grafica.Threads.ThreadJugador;
+import Grafica.Threads.ThreadObstaculosPorTiempo;
 import Logica.*;
 
 /**
@@ -52,7 +58,7 @@ public class gMapa implements MouseListener
 		m = new Mapa(altoMapa, anchoMapa, gui.getPanelMapa().getHeight(), gui.getPanelMapa().getWidth());
 		
 		//Creo un Thread para el Nivel
-		level = new Nivel(1,"src\\Logica\\Nivel1.txt",this);
+		level = new Nivel(1,"src\\Logica\\Niveles\\Nivel1.txt",this);
 		level.start();
 		
 		//Creo un ThreadJugador
@@ -128,7 +134,7 @@ public class gMapa implements MouseListener
 	
 	public void siguienteNivel()
 	{
-		level = new Nivel(level.getNumNivel() + 1,"src\\Logica\\Nivel2.txt",this);
+		level = new Nivel(level.getNumNivel() + 1,"src\\Logica\\Niveles\\Nivel2.txt",this);
 		
 		Thread tl = new Thread(level);
 		tl.start();

@@ -1,11 +1,11 @@
 package Logica;
 
 /**
- * Clase Abstracta Premio 
+ * Clase Abstracta PowerUp
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
-public abstract class Premio 
+public abstract class PowerUp 
 {
 
 	

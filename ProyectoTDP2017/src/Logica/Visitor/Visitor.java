@@ -1,4 +1,9 @@
-package Logica;
+package Logica.Visitor;
+
+import Logica.Enemigo;
+import Logica.Jugador;
+import Logica.ObstaculosConVida.ObstaculoConVida;
+import Logica.ObstaculosPorTiempo.ObstaculoPorTiempo;
 
 /**
  * Clase abstracta Visitor

@@ -1,4 +1,7 @@
-package Logica;
+package Logica.ObstaculosConVida;
+
+import Logica.Obstaculo;
+import Logica.Visitor.Visitor;
 
 /**
 * Clase abstracta ObstaculoConVida 

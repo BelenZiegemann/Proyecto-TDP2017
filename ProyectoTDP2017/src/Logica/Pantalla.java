@@ -15,7 +15,7 @@ public class Pantalla
 	protected int puntos;
 	protected int nivel;
 	protected Mapa mapa;
-	protected LinkedList<Premio> listaPremiosObtenidos;
+	protected LinkedList<PowerUp> listaPremiosObtenidos;
 	
 	protected JLabel mostrarMonedas;
 	protected JLabel mostrarPuntaje;
@@ -29,7 +29,7 @@ public class Pantalla
 		monedas = 1000;
 		puntos = 0;
 		mapa = m;
-		listaPremiosObtenidos = new LinkedList<Premio>();
+		listaPremiosObtenidos = new LinkedList<PowerUp>();
 		nivel = 1;
 		mostrarMonedas = new JLabel();
 		mostrarPuntaje = new JLabel();

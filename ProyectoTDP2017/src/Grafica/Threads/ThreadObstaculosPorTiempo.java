@@ -1,12 +1,14 @@
-package Grafica;
+package Grafica.Threads;
 
 import java.util.LinkedList;
 import java.util.Random;
+
+import Grafica.gMapa;
 import Logica.Celda;
-import Logica.Fuego;
-import Logica.Lago;
-import Logica.ObstaculoPorTiempo;
 import Logica.Posicion;
+import Logica.ObstaculosPorTiempo.Fuego;
+import Logica.ObstaculosPorTiempo.Lago;
+import Logica.ObstaculosPorTiempo.ObstaculoPorTiempo;
 
 /**
  * Clase ThreadObstaculosPorTiempo
@@ -34,20 +36,21 @@ public class ThreadObstaculosPorTiempo extends Thread
 	public void run() 
 	{
 		// Ejecuto indefinidamente hasta que el flag sea verdadero.
-		while (!Detener) 
+		while (!Detener) 	
 		{
-			try
-			{
-				int tiempoAleatorio = aleatorio.nextInt(6) + 5; // número aleatorio entre 5 y 10			
-				Thread.sleep(tiempoAleatorio * 1000);
+			try    
+			{		
+				Thread.sleep(600);
 			}
 			catch (InterruptedException e)
 			{}
-	
-				agregarObstaculosPorTiempo(); // Cada cierto tiempo aleatorio se intentarán agregar obstáculos
-											  // que estarán en el mapa durante un tiempo (ese tiempo varía de
-											  // acuerdo al tipo de obstáculo (lago o fuego)			
-				
+			
+				int tiempoAleatorio = aleatorio.nextInt(6) + 5; // número aleatorio entre 5 y 10
+				if(tiempoAleatorio == 5)
+					agregarObstaculosPorTiempo(); // Cada cierto tiempo aleatorio se intentarán agregar obstáculos
+											  	// que estarán en el mapa durante un tiempo (ese tiempo varía de
+											  	// acuerdo al tipo de obstáculo (lago o fuego)			
+
 				//copio la lista de obstáculos por tiempo
 				obsAuxiliar = new LinkedList<ObstaculoPorTiempo>(gmapa.obtenerMapaLogico().getListaObstaculosPorTiempo());
 				for(ObstaculoPorTiempo obsTiempo : obsAuxiliar)

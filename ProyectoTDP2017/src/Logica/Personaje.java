@@ -1,5 +1,7 @@
 package Logica;
 
+import Logica.Visitor.Visitor;
+
 /**
  * Clase Abstracta Personaje
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
@@ -14,8 +16,9 @@ public abstract class Personaje extends Contenido
 	protected int desplX;
 	protected int desplY;
 	
-	
 	public abstract void seratacado(Visitor p);
+	
+	public abstract void mover();
 	
 	public int getVida()
 	{
@@ -42,11 +45,8 @@ public abstract class Personaje extends Contenido
 		puntosVida = v;
 	}
 	
-	public abstract void mover();
-	
-	public void setEstaVivo(boolean b) {
-		
+	public void setEstaVivo(boolean b) 
+	{	
 		estaVivo = b;
 	}
-
 }
