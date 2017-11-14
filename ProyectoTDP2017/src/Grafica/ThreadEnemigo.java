@@ -1,6 +1,7 @@
 package Grafica;
 
 import java.util.LinkedList;
+
 import Logica.Enemigo;
 import Logica.ObstaculoConVida;
 
@@ -14,8 +15,10 @@ public class ThreadEnemigo extends Thread
 	private LinkedList<Enemigo> EnemigosParaEliminar;
 	private LinkedList<ObstaculoConVida> ObstaculosParaEliminar;
 	private gMapa gmapa;
+	private LinkedList<Enemigo> enemigosAuxiliar;
+	private LinkedList<ObstaculoConVida> obsAuxiliar;
 	// Flag que indica cuando debe detenerse la ejecución del hilo.
-	private boolean Detener;
+	private volatile boolean Detener;
 
 	public ThreadEnemigo(gMapa gm) 
 	{
@@ -23,6 +26,8 @@ public class ThreadEnemigo extends Thread
 		Detener = false;
 		EnemigosParaEliminar = new LinkedList<Enemigo>();
 		ObstaculosParaEliminar = new LinkedList<ObstaculoConVida>();
+		enemigosAuxiliar = new LinkedList<Enemigo>();
+		obsAuxiliar = new LinkedList<ObstaculoConVida>();
 	}	
 	
 	public void run() 
@@ -41,11 +46,10 @@ public class ThreadEnemigo extends Thread
 					gmapa.Ganar();
 				else
 				{
-					
-					synchronized(gmapa.obtenerMapaLogico().getListaEnemigos())
-					{
+					//copio la lista de enemigos
+					enemigosAuxiliar = new LinkedList<Enemigo>(gmapa.obtenerMapaLogico().getListaEnemigos());
 					// Realizo el movimiento
-					for(Enemigo e: gmapa.obtenerMapaLogico().getListaEnemigos())
+					for(Enemigo e: enemigosAuxiliar)
 					{	
 						//SI EL ENEMIGO ESTÁ VIVO ENTONCES MOVER, SINO LO AGREGO A LA LISTA AUXILIAR PARA LUEGO ELIMINARLO
 						if(e.estaVivo())
@@ -67,16 +71,15 @@ public class ThreadEnemigo extends Thread
 					for(Enemigo eElim : EnemigosParaEliminar)
 					{
 						gmapa.obtenerPisoMapa().remove(eElim.getGrafico());
-						
 						gmapa.obtenerPisoMapa().repaint();
 						gmapa.obtenerMapaLogico().getListaEnemigos().remove(eElim);
 					}
 					EnemigosParaEliminar.clear();
-					}
+					
 					////////////////////////////////////////////////////////////////////////////////
-					synchronized(gmapa.obtenerMapaLogico().getListaObstaculosConVida())
-					{
-					for(ObstaculoConVida o: gmapa.obtenerMapaLogico().getListaObstaculosConVida()) 
+					//copio la lista de obstáculos con vida
+					obsAuxiliar = new LinkedList<ObstaculoConVida>(gmapa.obtenerMapaLogico().getListaObstaculosConVida());
+					for(ObstaculoConVida o: obsAuxiliar) 
 					{
 						if (!o.estaVivo())
 							ObstaculosParaEliminar.addLast(o);
@@ -90,11 +93,6 @@ public class ThreadEnemigo extends Thread
 						gmapa.obtenerMapaLogico().getListaObstaculosConVida().remove(oElim);
 					}
 					ObstaculosParaEliminar.clear();
-					}
-					
-					
-					
-					
 				}	
 		
 		}

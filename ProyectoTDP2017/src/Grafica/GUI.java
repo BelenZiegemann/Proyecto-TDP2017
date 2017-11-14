@@ -11,15 +11,17 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
-
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import Logica.Contenido;
 import Logica.Enemigo;
 import Logica.Jugador;
+import Logica.Posicion;
 import Logica.CreadorJugador.CreadorDothraki;
 import Logica.CreadorJugador.CreadorDragon;
 import Logica.CreadorJugador.CreadorGuardianNocturno;
@@ -161,11 +163,11 @@ public class GUI extends JFrame
 			public void actionPerformed(ActionEvent arg0)
 			{
 				if(mapa.deboVenderJugador())
-				{
+				{	
+					
 					Jugador jugParaVender = mapa.getJugadorParaVender();
 					int precioVenta = jugParaVender.getPrecio() / 2;
 					mapa.obtenerMapaLogico().obtenerPantalla().setPresupuesto(precioVenta);
-					
 					//elimino al jugador que es vendido
 					jugParaVender.setEstaVivo(false); //para que se remueva de la lista de jugadores y del mapa.
 																	//Lo hace la clase ThreadJugador
@@ -174,29 +176,40 @@ public class GUI extends JFrame
 					mapa.obtenerPisoMapa().repaint();
 					mapa.obtenerMapaLogico().getListaJugadores().remove(jugParaVender);
 					
-					////////////
-					try
-					
-					
-					{	
-						ThreadJugador.sleep(50);
-						ThreadEnemigo.sleep(50);	
-						ThreadDisparo.sleep(50);
-						ThreadObstaculosPorTiempo.sleep(10);
-					} catch (InterruptedException e) 
-					{}
-				
-					for(Enemigo enem : mapa.obtenerMapaLogico().getListaEnemigos())
+					// lo hago porque debo actualizar el movimiento de algún enemigo que lo estaba atacando
+					Posicion posJugVenta = jugParaVender.getCelda().getPosCelda();
+					int posjugX = posJugVenta.getEjeX();
+					int posjugY = posJugVenta.getEjeY();
+					for(int i = 1; i<= jugParaVender.getAlcance();i++)
 					{
-						enem.setImagenEnMovimiento();
-						enem.setMovimiento(true);
-						enem.mover();
-					}	
-					//////////////
+						if((posjugX - i) >= 0)
+						{
+							Posicion pos = new Posicion(posjugX-i,posjugY);
+							Contenido c  = mapa.obtenerMapaLogico().obtenerCelda(pos).getContenido();
+							if(c != null)
+							{
+								Iterator<Enemigo> itEnem = mapa.obtenerMapaLogico().getListaEnemigos().iterator();
+								boolean encontre = false;
+								while(itEnem.hasNext() && !encontre)
+								{
+									Enemigo enem = itEnem.next();
+									Posicion pEnem = enem.getCelda().getPosCelda();
+									if(pEnem.equals(pos))
+									{
+										enem.setImagenEnMovimiento();
+										enem.setMovimiento(true);
+										enem.mover();
+										encontre = true;
+									}
+									
+								}
+								
+							}
+						}
+					}
+					
 					mapa.setDeboVenderJugador(false);
-				}
-				
-				
+				}		
 			}
 		});
 	

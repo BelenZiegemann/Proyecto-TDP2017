@@ -17,7 +17,7 @@ public abstract class ObstaculoPorTiempo extends Obstaculo
 	{ 
 	    public void actionPerformed(ActionEvent e) 
 	    {   
-	    	setEstaVivo(false);
+	    	estaVivo = true;
 	    } 
 	}); 
 
@@ -36,8 +36,13 @@ public abstract class ObstaculoPorTiempo extends Obstaculo
 		DuracionObstaculo.start();	
 	}
 	
-	public synchronized void seratacado(Visitor p)
+	public Timer getTimerDuracionObstaculo()
 	{
+		return DuracionObstaculo;
+	}
+	
+	public synchronized void seratacado(Visitor p)
+	{ 	
 		p.atacar(this);
 	}
 	

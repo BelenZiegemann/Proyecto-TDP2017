@@ -41,17 +41,7 @@ public abstract class Jugador extends Personaje
 				if (contenidoSiguiente != null)
 				{
 					encontre = true;
-					///////////
-					
-					Posicion posInicialDisparo = new Posicion(miX-1, miY);
-					Celda celdaDisparo = mapa.obtenerCelda(posInicialDisparo);
-					DisparoJugador disparoJug= new DisparoJugador(celdaDisparo, mapa, proyectil, this, contenidoSiguiente);
-					mapa.agregarDisparo(disparoJug);
-					
-					//////////////77777
-					//contenidoSiguiente.seratacado(this.getProyectil());
-					
-					 
+					contenidoSiguiente.seratacado(this.proyectil);		 
 				}	
 			}
 			i++;

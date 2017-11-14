@@ -74,7 +74,6 @@ public class gMapa implements MouseListener
 	
 	public void agregarEnemigo(Enemigo e)
 	{	
-	
 		JLabel grafEnemigo = m.agregarEnemigo(e);
 		if(grafEnemigo != null)
 		{	
@@ -82,7 +81,6 @@ public class gMapa implements MouseListener
 			grafPiso.repaint();
 		}
 	}
-	
 	
 	public void  agregarJugador(Jugador j)
 	{
@@ -113,7 +111,6 @@ public class gMapa implements MouseListener
 			grafPiso.repaint();
 		}
 	}
-	
 	
 	public void Perder()
 	{

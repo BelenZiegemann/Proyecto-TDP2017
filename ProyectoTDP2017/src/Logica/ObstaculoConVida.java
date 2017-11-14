@@ -14,11 +14,13 @@ public abstract class ObstaculoConVida extends Obstaculo
 		vida = v;
 	}
 	
-	public int getVida() {
+	public int getVida()
+	{
 		return vida;
 	}
 	
-	public synchronized  void seratacado(Visitor v) {
+	public synchronized void seratacado(Visitor v) 
+	{
 		v.atacar(this);
 	}
 }

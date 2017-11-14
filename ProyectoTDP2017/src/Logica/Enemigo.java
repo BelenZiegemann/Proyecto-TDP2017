@@ -19,8 +19,6 @@ public abstract class Enemigo extends Personaje
 	
 	protected int alcance = 2;
 	
-	
-	
 	//Se debe invocar cuando se muere.
 	public void setPuntajeMonedas() 
 	{
@@ -38,25 +36,20 @@ public abstract class Enemigo extends Personaje
 	 */
 	public void mover()
 	{		
-			//System.out.print("v: " + velocidad);
 			Posicion ubicacion = miCelda.getPosCelda();
 			int miX = ubicacion.getEjeX();
 			int miY = ubicacion.getEjeY();
 			
-			//System.out.println("miX " + miX);
 			//Intento mover hacia la derecha
 			if(miX + 1 < mapa.obtenerAncho())
 			{
 				int i = 1;
 				boolean encontre = false;
-				//	System.out.println("miX " + miX);
 				//verifico si hay alguien a mi alcance para atacar  
 				while(i <= alcance && !encontre) 
 				{
 					if(miX+i < mapa.obtenerAncho()) 
 					{
-						//System.out.println("miX: " + miX + "i: "+i);
-						//System.out.println("obtenerAncho: " + mapa.obtenerAncho());
 						Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX+i,miY));
 						Contenido contenidoSiguiente = celdaSiguiente.getContenido();
 						if(contenidoSiguiente != null) 
@@ -64,17 +57,7 @@ public abstract class Enemigo extends Personaje
 							estaEnMovimiento = false;
 							setImagenQuieto();
 							encontre = true;
-							/////////////////////////////////7
-							Posicion posInicialDisparo = new Posicion(miX+1, miY);
-							Celda celdaDisparo = mapa.obtenerCelda(posInicialDisparo);
-							DisparoEnemigo disparoEnem = new DisparoEnemigo(celdaDisparo, mapa, proyectil, this, contenidoSiguiente);
-							
-							mapa.agregarDisparo(disparoEnem);
-							
-							/////////////
-							//contenidoSiguiente.seratacado(this.getProyectil());
-							//System.out.print("Entro");
-							
+							contenidoSiguiente.seratacado(this.proyectil);
 						}	
 					}
 					i++;
@@ -101,7 +84,7 @@ public abstract class Enemigo extends Personaje
 						//muevo el JLabel que representa al enemigo
 						desplX = (int) (desplX + Math.pow(2,velocidad+1));
 						mGrafico.setBounds(desplX, desplY, imagen.getIconWidth(), imagen.getIconHeight());
-						//System.out.println("estaEnMov: " + estaEnMovimiento);
+						
 					//}
 				}
 		
@@ -125,7 +108,7 @@ public abstract class Enemigo extends Personaje
 		estaEnMovimiento = m;
 	}
 	
-	public synchronized  void seratacado(Visitor p)
+	public  synchronized void seratacado(Visitor p)
 	{
 		p.atacar(this);
 	}

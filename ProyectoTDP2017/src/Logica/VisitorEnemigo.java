@@ -11,29 +11,49 @@ public class VisitorEnemigo extends Visitor
 	
 	public VisitorEnemigo(Enemigo e)
 	{
-		this.e = e;
+		this.e = e;		
 	}
 	
-	public synchronized void atacar(Jugador j)
+	public void atacar(Jugador j)
 	{
+		//lanzo el disparo
+		Posicion posEnem = e.getCelda().getPosCelda();
+		int miX = posEnem.getEjeX();
+		int miY = posEnem.getEjeY();
+		Posicion posInicialDisparo = new Posicion(miX+1, miY);
+		Celda celdaDisparo = e.mapa.obtenerCelda(posInicialDisparo);
+		DisparoEnemigo disparoEnem = new DisparoEnemigo(celdaDisparo, e.mapa, j);
+		e.mapa.agregarDisparo(disparoEnem);
+		
+		//realizo el ataque
 		j.setVida(j.getVida() - e.getFuerzaImpacto());
-			if (j.getVida() <= 0) 
-			{
-				j.setEstaVivo(false);
-				j.getCelda().setContenido(null);
-				e.setMovimiento(true);	
-				e.setImagenEnMovimiento();
-			}
+		if (j.getVida() <= 0) 
+		{
+			j.setEstaVivo(false);
+			j.getCelda().setContenido(null);
+			e.setMovimiento(true);	
+			e.setImagenEnMovimiento();
+		}
 	}
 	
-	public synchronized void atacar(Enemigo e)
+	public void atacar(Enemigo e)
 	{
 		this.e.setMovimiento(true);
 		this.e.setImagenEnMovimiento();
 	}
 	
-	public  synchronized void atacar(ObstaculoConVida o) 
+	public void atacar(ObstaculoConVida o) 
 	{
+		//lanzo el disparo
+		Posicion posEnem = e.getCelda().getPosCelda();
+		int miX = posEnem.getEjeX();
+		int miY = posEnem.getEjeY();
+		Posicion posInicialDisparo = new Posicion(miX+1, miY);
+		Celda celdaDisparo = e.mapa.obtenerCelda(posInicialDisparo);
+		DisparoEnemigo disparoEnem = new DisparoEnemigo(celdaDisparo, e.mapa, o);
+		e.mapa.agregarDisparo(disparoEnem);
+		
+		//realizo el ataque
 		o.setVida(o.getVida() - e.getFuerzaImpacto());
 		if (o.getVida() <= 0)
 		{
@@ -44,9 +64,9 @@ public class VisitorEnemigo extends Visitor
 		}
 	}
 	
-	public synchronized void atacar(ObstaculoPorTiempo o)
+	public void atacar(ObstaculoPorTiempo o)
 	{
-		if(!o.estaVivo())
+		if(o.estaVivo() && !o.getTimerDuracionObstaculo().isRunning())
 		{
 			this.e.setMovimiento(true);
 			this.e.setImagenEnMovimiento();

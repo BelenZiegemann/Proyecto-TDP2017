@@ -13,15 +13,16 @@ public class ThreadJugador extends Thread
 {
 	private LinkedList<Jugador> JugadoresParaEliminar;
 	private gMapa gmapa;
-	 
+	private LinkedList<Jugador> jugadoresAuxiliar;
 	// Flag que indica cuando debe detenerse la ejecución del hilo.
-	private volatile boolean Detener;
+	private volatile boolean Detener;	
 
 	public ThreadJugador(gMapa gm) 
 	{
 		gmapa = gm;
 		Detener = false;
-		JugadoresParaEliminar = new LinkedList<Jugador>();
+		JugadoresParaEliminar = new LinkedList<Jugador>();	
+		jugadoresAuxiliar = new LinkedList<Jugador>();
 	}	
 	
 	public void run() 
@@ -35,10 +36,10 @@ public class ThreadJugador extends Thread
 			}
 			catch (InterruptedException e)
 			{}
-				synchronized(gmapa.obtenerMapaLogico().getListaJugadores())
-				{
+				//copio la lista de jugadores
+				jugadoresAuxiliar = new LinkedList<Jugador>(gmapa.obtenerMapaLogico().getListaJugadores());
 				// Realizo el movimiento
-				for(Jugador j: gmapa.obtenerMapaLogico().getListaJugadores())
+				for(Jugador j: jugadoresAuxiliar)
 				{	
 					//SI EL JUGADOR ESTÁ VIVO ENTONCES MOVER, SINO LO AGREGO A LA LISTA AUXILIAR PARA LUEGO ELIMINARLO
 					if(j.estaVivo())
@@ -55,10 +56,7 @@ public class ThreadJugador extends Thread
 					gmapa.obtenerPisoMapa().repaint();
 					gmapa.obtenerMapaLogico().getListaJugadores().remove(jElim);
 				}
-				JugadoresParaEliminar.clear();
-				
-				}
-					
+				JugadoresParaEliminar.clear();					
 		}
 	}
 

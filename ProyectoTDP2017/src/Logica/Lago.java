@@ -15,6 +15,8 @@ public class Lago extends ObstaculoPorTiempo
 	
 	public Lago(Celda c, Mapa m) 
 	{
+		estaVivo = false; //se pone en true cuando comienza el timer
+		
 		tiempo = 4; //tiempo (en segundos)
 		DuracionObstaculo.setRepeats(false);
 		miCelda = c;

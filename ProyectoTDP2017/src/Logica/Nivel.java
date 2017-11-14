@@ -16,14 +16,14 @@ import Logica.CreadorEnemigo.CreadorEnemigo;
 public class Nivel extends Thread
 {
 	
-	protected int numeroNivel;
-	protected int retardoOleada; // en milisegundos
-	protected FileReader fichero;
-	protected BufferedReader br;
-	protected String ruta;
-	protected boolean Detener;
-	protected boolean estaLeido;
-	protected gMapa gmapa;
+	private int numeroNivel;
+	private int retardoOleada; // en milisegundos
+	private FileReader fichero;
+	private BufferedReader br;
+	private String ruta;
+	protected volatile boolean Detener;
+	private boolean estaLeido;
+	private gMapa gmapa;
 	
 	public Nivel(int numeroNivel, String ruta, gMapa gm)
 	{

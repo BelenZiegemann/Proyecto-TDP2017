@@ -15,11 +15,12 @@ import Logica.Posicion;
  */
 public class ThreadObstaculosPorTiempo extends Thread
 {
-	protected LinkedList<ObstaculoPorTiempo> obsPorTiempoAEliminar;
-	protected gMapa gmapa;
+	private LinkedList<ObstaculoPorTiempo> obsPorTiempoAEliminar;
+	private gMapa gmapa;
+	private Random aleatorio;
+	private LinkedList<ObstaculoPorTiempo> obsAuxiliar;
 	// Flag que indica cuando debe detenerse la ejecución del hilo.
-	protected boolean Detener;
-	protected Random aleatorio;
+	private volatile boolean Detener;
 	
 	public ThreadObstaculosPorTiempo(gMapa gm) 
 	{
@@ -27,6 +28,7 @@ public class ThreadObstaculosPorTiempo extends Thread
 		gmapa = gm;
 		Detener = false;
 		aleatorio =  new Random(System.currentTimeMillis());	
+		obsAuxiliar = new LinkedList<ObstaculoPorTiempo>();
 	}	
 	
 	public void run() 
@@ -41,17 +43,20 @@ public class ThreadObstaculosPorTiempo extends Thread
 			}
 			catch (InterruptedException e)
 			{}
-			synchronized(gmapa.obtenerMapaLogico().getListaObstaculosPorTiempo())
-			{
+	
 				agregarObstaculosPorTiempo(); // Cada cierto tiempo aleatorio se intentarán agregar obstáculos
 											  // que estarán en el mapa durante un tiempo (ese tiempo varía de
 											  // acuerdo al tipo de obstáculo (lago o fuego)			
-				for(ObstaculoPorTiempo obsTiempo : gmapa.obtenerMapaLogico().getListaObstaculosPorTiempo())
+				
+				//copio la lista de obstáculos por tiempo
+				obsAuxiliar = new LinkedList<ObstaculoPorTiempo>(gmapa.obtenerMapaLogico().getListaObstaculosPorTiempo());
+				for(ObstaculoPorTiempo obsTiempo : obsAuxiliar)
 				{
-					if(obsTiempo.estaVivo())
+					if(!obsTiempo.estaVivo())
 						obsTiempo.iniTimerDuracionObstaculo();
 					else
-						obsPorTiempoAEliminar.addLast(obsTiempo);	
+						if(!obsTiempo.getTimerDuracionObstaculo().isRunning())
+							obsPorTiempoAEliminar.addLast(obsTiempo);	
 				}
 				//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS OBSTÁCULOS
 				for(ObstaculoPorTiempo obsElim : obsPorTiempoAEliminar)
@@ -62,8 +67,6 @@ public class ThreadObstaculosPorTiempo extends Thread
 					gmapa.obtenerMapaLogico().getListaObstaculosPorTiempo().remove(obsElim);
 				}	
 				obsPorTiempoAEliminar.clear();
-			}
-		
 		}	
 	}
 	

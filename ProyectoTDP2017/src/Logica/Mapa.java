@@ -160,12 +160,8 @@ public class Mapa
 	{
 		if(obtenerCelda(d.getCelda().getPosCelda()).getContenido() == null)
 		{
-			
 			misDisparos.addLast(d);	
 		}
 		
-		
 	}
-	
-	
 }

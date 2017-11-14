@@ -15,6 +15,8 @@ public class Fuego extends ObstaculoPorTiempo
 	
 	public Fuego(Celda c, Mapa m) 
 	{
+		estaVivo = false; //se pone en true cuando comienza el timer
+		
 		tiempo = 8; //tiempo en segundos
 		DuracionObstaculo.setRepeats(false);
 		miCelda = c;

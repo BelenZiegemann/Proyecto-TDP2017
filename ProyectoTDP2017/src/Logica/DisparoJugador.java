@@ -12,17 +12,14 @@ public class DisparoJugador extends Disparo
 {
 	protected int desplX;
 	protected int desplY;
-	public DisparoJugador(Celda c,Mapa m, Visitor bala, Contenido inicio, Contenido destino)
+	public DisparoJugador(Celda c,Mapa m, Contenido destino)
 	{
 		miCelda = c;
-		proyectil = bala;
 		mapa = m;
-		this.inicio = inicio;
 		this.destino = destino;
 		
 		cantDesplazada = 0;	// Se usará para controlar cuánto se mueve el JLabel dentro del ancho real de la celda
 		anchoRealCelda = mapa.obtenerAnchoReal() / mapa.obtenerAncho();	
-		
 		//agrego la gráfica al disparo del Jugador
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/balaJugador.gif"));
 		mGrafico = new JLabel(imagen);			
@@ -32,7 +29,7 @@ public class DisparoJugador extends Disparo
 		
 	}
 	
-	public synchronized void mover()
+	public void mover()
 	{
 		Posicion ubicacion = miCelda.getPosCelda();
 		int miX = ubicacion.getEjeX();
@@ -43,8 +40,6 @@ public class DisparoJugador extends Disparo
 				cantDesplazada = 0;
 				//Se actualiza la celda a la cual pertenece el disparo del jugador
 				Posicion p = new Posicion(ubicacion.getEjeX() - 1, ubicacion.getEjeY());
-				//mapa.obtenerCelda(ubicacion).setContenido(null);
-				//mapa.obtenerCelda(p).setContenido(this);
 				miCelda = mapa.obtenerCelda(p);
 			}	
 			else

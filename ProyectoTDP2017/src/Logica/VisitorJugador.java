@@ -8,16 +8,26 @@ package Logica;
 public class VisitorJugador extends Visitor
 {
 	protected Jugador j;
+	
 	public VisitorJugador(Jugador j)
 	{
 		this.j = j;
 	}
 	
-	public synchronized void atacar(Jugador j)
+	public void atacar(Jugador j)
 	{}
 	
-	public synchronized void atacar(Enemigo e)
+	public void atacar(Enemigo e)
 	{
+		//lanzo el disparo
+		Posicion posJug = j.getCelda().getPosCelda();
+		int miX = posJug.getEjeX();
+		int miY = posJug.getEjeY();
+		Celda celdaDisparo = j.mapa.obtenerCelda(new Posicion(miX-1, miY));
+		DisparoJugador disparoJug = new DisparoJugador(celdaDisparo, j.mapa,e);
+		j.mapa.agregarDisparo(disparoJug);	
+		
+		//realizo el ataque
 		e.setVida(e.getVida() - j.getFuerzaImpacto());
 		if (e.getVida() <= 0) 
 		{
@@ -27,9 +37,9 @@ public class VisitorJugador extends Visitor
 		}
 	}
 	
-	public synchronized void atacar(ObstaculoConVida o) 
+	public void atacar(ObstaculoConVida o) 
 	{}
 	
-	public synchronized void atacar(ObstaculoPorTiempo o)
+	public void atacar(ObstaculoPorTiempo o)
 	{}
 }
