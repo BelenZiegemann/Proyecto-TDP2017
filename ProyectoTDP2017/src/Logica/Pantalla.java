@@ -1,7 +1,5 @@
 package Logica;
 
-import java.util.LinkedList;
-
 import javax.swing.JLabel;
 
 /**
@@ -15,8 +13,6 @@ public class Pantalla
 	protected int puntos;
 	protected int nivel;
 	protected Mapa mapa;
-	protected LinkedList<PowerUp> listaPremiosObtenidos;
-	
 	protected JLabel mostrarMonedas;
 	protected JLabel mostrarPuntaje;
 	protected JLabel mostrarNivel;
@@ -29,7 +25,6 @@ public class Pantalla
 		monedas = 1000;
 		puntos = 0;
 		mapa = m;
-		listaPremiosObtenidos = new LinkedList<PowerUp>();
 		nivel = 1;
 		mostrarMonedas = new JLabel();
 		mostrarPuntaje = new JLabel();

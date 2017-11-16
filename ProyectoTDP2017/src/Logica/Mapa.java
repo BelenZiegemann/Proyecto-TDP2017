@@ -24,9 +24,8 @@ public class Mapa
 	protected LinkedList<Enemigo> misEnemigos;
 	protected LinkedList<ObstaculoConVida> misObstaculosConVida;
 	protected LinkedList<ObstaculoPorTiempo> misObstaculosPorTiempo;
-	
 	protected LinkedList<Disparo> misDisparos;
-	
+	protected LinkedList<PowerUp> misPowerUps;
 	
 	public Mapa(int alto, int ancho, int altoReal, int anchoReal)
 	{
@@ -47,6 +46,7 @@ public class Mapa
 		misObstaculosConVida = new LinkedList<ObstaculoConVida>();
 		misObstaculosPorTiempo = new LinkedList<ObstaculoPorTiempo>();
 		misDisparos = new LinkedList<Disparo>();
+		misPowerUps = new LinkedList<PowerUp>();
 		miPantalla = new Pantalla(this);
 	}
 	
@@ -75,6 +75,11 @@ public class Mapa
 		return misDisparos;
 	}	
 	
+	public LinkedList<PowerUp> getListaPowerUp()
+	{
+		return misPowerUps;
+	}
+	
 	public Pantalla obtenerPantalla()
 	{
 		return miPantalla;
@@ -82,8 +87,7 @@ public class Mapa
 	
 	public Celda obtenerCelda(Posicion p)
 	{
-		return matrizCeldas[p.getEjeX()][p.getEjeY()];
-		
+		return matrizCeldas[p.getEjeX()][p.getEjeY()];	
 	}
 	
 	public int obtenerAncho()
@@ -118,7 +122,6 @@ public class Mapa
 		else
 			return null;
 	}
-	
 	
 	public JLabel agregarJugador(Jugador j)
 	{
@@ -167,5 +170,10 @@ public class Mapa
 			misDisparos.addLast(d);	
 		}
 		
+	}
+	
+	public void agregarPowerUp(PowerUp PU)
+	{
+		misPowerUps.addLast(PU);
 	}
 }

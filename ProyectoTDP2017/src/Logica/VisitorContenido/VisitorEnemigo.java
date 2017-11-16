@@ -1,4 +1,4 @@
-package Logica.Visitor;
+package Logica.VisitorContenido;
 
 import Logica.Celda;
 import Logica.Enemigo;

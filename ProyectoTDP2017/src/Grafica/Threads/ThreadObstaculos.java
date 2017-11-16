@@ -6,31 +6,37 @@ import java.util.Random;
 import Grafica.gMapa;
 import Logica.Celda;
 import Logica.Posicion;
+import Logica.ObstaculosConVida.ObstaculoConVida;
 import Logica.ObstaculosPorTiempo.Fuego;
 import Logica.ObstaculosPorTiempo.Lago;
 import Logica.ObstaculosPorTiempo.ObstaculoPorTiempo;
 
 /**
- * Clase ThreadObstaculosPorTiempo
+ * Clase ThreadObstaculos
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
-public class ThreadObstaculosPorTiempo extends Thread
+public class ThreadObstaculos extends Thread
 {
-	private LinkedList<ObstaculoPorTiempo> obsPorTiempoAEliminar;
+	private LinkedList<ObstaculoPorTiempo> obsTiempoParaEliminar;
+	private LinkedList<ObstaculoConVida> obsVidaParaEliminar; 
 	private gMapa gmapa;
 	private Random aleatorio;
-	private LinkedList<ObstaculoPorTiempo> obsAuxiliar;
+	private LinkedList<ObstaculoPorTiempo> obsTiempoAuxiliar;
+	private LinkedList<ObstaculoConVida> obsVidaAuxiliar;
 	// Flag que indica cuando debe detenerse la ejecución del hilo.
 	private volatile boolean Detener;
 	
-	public ThreadObstaculosPorTiempo(gMapa gm) 
+	public ThreadObstaculos(gMapa gm) 
 	{
-		obsPorTiempoAEliminar = new LinkedList<ObstaculoPorTiempo>();
+		obsTiempoParaEliminar = new LinkedList<ObstaculoPorTiempo>();
+		obsVidaParaEliminar = new LinkedList<ObstaculoConVida>();
 		gmapa = gm;
 		Detener = false;
 		aleatorio =  new Random(System.currentTimeMillis());	
-		obsAuxiliar = new LinkedList<ObstaculoPorTiempo>();
+		obsTiempoAuxiliar = new LinkedList<ObstaculoPorTiempo>();
+		obsVidaAuxiliar = new LinkedList<ObstaculoConVida>();
+		
 	}	
 	
 	public void run() 
@@ -52,25 +58,44 @@ public class ThreadObstaculosPorTiempo extends Thread
 											  	// acuerdo al tipo de obstáculo (lago o fuego)			
 
 				//copio la lista de obstáculos por tiempo
-				obsAuxiliar = new LinkedList<ObstaculoPorTiempo>(gmapa.obtenerMapaLogico().getListaObstaculosPorTiempo());
-				for(ObstaculoPorTiempo obsTiempo : obsAuxiliar)
+				obsTiempoAuxiliar = new LinkedList<ObstaculoPorTiempo>(gmapa.obtenerMapaLogico().getListaObstaculosPorTiempo());
+				for(ObstaculoPorTiempo obsTiempo : obsTiempoAuxiliar)
 				{
 					if(!obsTiempo.estaVivo())
 						obsTiempo.iniTimerDuracionObstaculo();
 					else
 						if(!obsTiempo.getTimerDuracionObstaculo().isRunning())
-							obsPorTiempoAEliminar.addLast(obsTiempo);	
+							obsTiempoParaEliminar.addLast(obsTiempo);	
 				}
-				//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS OBSTÁCULOS
-				for(ObstaculoPorTiempo obsElim : obsPorTiempoAEliminar)
+				//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS OBSTÁCULOS POR TIEMPO
+				for(ObstaculoPorTiempo obsElim : obsTiempoParaEliminar)
 				{
 					obsElim.getCelda().setContenido(null);
 					gmapa.obtenerPisoMapa().remove(obsElim.getGrafico());
 					gmapa.obtenerPisoMapa().repaint();
 					gmapa.obtenerMapaLogico().getListaObstaculosPorTiempo().remove(obsElim);
 				}	
-				obsPorTiempoAEliminar.clear();
-		}	
+				obsTiempoParaEliminar.clear();
+
+				//////////////////////////////////////////////////////////////////////////////////
+				
+				//copio la lista de obstáculos con vida
+				obsVidaAuxiliar = new LinkedList<ObstaculoConVida>(gmapa.obtenerMapaLogico().getListaObstaculosConVida());
+				for(ObstaculoConVida o : obsVidaAuxiliar) 
+				{
+					if (!o.estaVivo())
+						obsVidaParaEliminar.addLast(o);
+				}
+			
+				//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS OBSTÁCULOS CON VIDA
+				for(ObstaculoConVida oElim : obsVidaParaEliminar)
+				{
+					gmapa.obtenerPisoMapa().remove(oElim.getGrafico());
+					gmapa.obtenerPisoMapa().repaint();
+					gmapa.obtenerMapaLogico().getListaObstaculosConVida().remove(oElim);
+				}
+				obsVidaParaEliminar.clear();	
+		}		
 	}
 	
 	public void agregarObstaculosPorTiempo()

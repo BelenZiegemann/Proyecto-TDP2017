@@ -3,7 +3,7 @@ package Logica;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
-import Logica.Visitor.Visitor;
+import Logica.VisitorContenido.Visitor;
 
 /**
  * Clase abstracta Contenido 

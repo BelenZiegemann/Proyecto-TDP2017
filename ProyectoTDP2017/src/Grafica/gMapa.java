@@ -12,7 +12,8 @@ import javax.swing.JLabel;
 import Grafica.Threads.ThreadDisparo;
 import Grafica.Threads.ThreadEnemigo;
 import Grafica.Threads.ThreadJugador;
-import Grafica.Threads.ThreadObstaculosPorTiempo;
+import Grafica.Threads.ThreadMagiaTemporal;
+import Grafica.Threads.ThreadObstaculos;
 import Logica.*;
 
 /**
@@ -26,7 +27,8 @@ public class gMapa implements MouseListener
 	protected ThreadJugador jugadores;
 	protected ThreadEnemigo enemigos;
 	protected ThreadDisparo disparos;
-	protected ThreadObstaculosPorTiempo obstaculosPorTiempo;
+	protected ThreadObstaculos obstaculos;
+	protected ThreadMagiaTemporal magiaTemporal;
 	protected Nivel level;
 	protected Icon pisoNieve;
 	protected GUI gui;
@@ -73,9 +75,13 @@ public class gMapa implements MouseListener
 		disparos = new ThreadDisparo(this);
 		disparos.start();
 		
-		//Creo un ThreadObstaculosPorTiempo
-		obstaculosPorTiempo = new ThreadObstaculosPorTiempo(this);
-		obstaculosPorTiempo.start();	
+		//Creo un ThreadObstaculos
+		obstaculos = new ThreadObstaculos(this);
+		obstaculos.start();	
+		
+		//Creo un ThreadMagiaTemporal
+		magiaTemporal = new ThreadMagiaTemporal(this);
+		magiaTemporal.start();
 	}
 	
 	public void agregarEnemigo(Enemigo e)
@@ -123,7 +129,8 @@ public class gMapa implements MouseListener
 		level.detener();
 		jugadores.detener();
 		disparos.detener();
-		obstaculosPorTiempo.detener();
+		obstaculos.detener();
+		magiaTemporal.detener();
 		gui.mostrarMensajePerder();	
 	}
 
@@ -139,6 +146,11 @@ public class gMapa implements MouseListener
 		Thread tl = new Thread(level);
 		tl.start();
 		level.start();
+	}
+	
+	public GUI getGUI()
+	{
+		return gui;
 	}
 	
 	public void DeboAgregarJugador(boolean deboAgregar)

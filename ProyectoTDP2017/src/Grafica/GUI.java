@@ -42,6 +42,7 @@ public class GUI extends JFrame
 {
 	private JPanel contentPane;	
 	private gMapa mapa;	
+	private JLabel lblMensajeMagiaTemp = new JLabel(" ");
 
 	/**
 	 * Launch the application.
@@ -68,7 +69,7 @@ public class GUI extends JFrame
 		setTitle("GAME OF THRONES");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 800, 614);
+		setBounds(0, 0, 1020, 614);
 		setLocationRelativeTo(null);	// para que la ventana se abra en el centro de la pantalla
 		getContentPane().setLayout(null);
 		
@@ -80,6 +81,25 @@ public class GUI extends JFrame
 		
 		//creo el mapa gráfico
 		mapa = new gMapa(this);
+		
+		//Label para magia temporal
+		JLabel lblMagiaTemp = new JLabel("Estado de Magia");
+		lblMagiaTemp.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMagiaTemp.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMagiaTemp.setBounds(762, 178 , 240, 30);
+		lblMagiaTemp.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
+		lblMagiaTemp.setBackground(Color.ORANGE);
+		lblMagiaTemp.setForeground(Color.DARK_GRAY);
+		getContentPane().add(lblMagiaTemp);
+		
+		//Label mensaje magia temporal
+		lblMensajeMagiaTemp.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMensajeMagiaTemp.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensajeMagiaTemp.setBounds(762, 208 , 240, 30);
+		lblMensajeMagiaTemp.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
+		lblMensajeMagiaTemp.setBackground(Color.DARK_GRAY);
+		lblMensajeMagiaTemp.setForeground(Color.RED);
+		getContentPane().add(lblMensajeMagiaTemp);
 		
 		//Label Puntaje
 		JLabel lblPuntaje = new JLabel("Puntaje");
@@ -402,5 +422,10 @@ public class GUI extends JFrame
 		{
 			mapa.siguienteNivel();
 		}
+	}
+	
+	public void mostrarMensajeMagiaTemporal(String mensaje)
+	{
+		lblMensajeMagiaTemp.setText(mensaje); 
 	}
 }

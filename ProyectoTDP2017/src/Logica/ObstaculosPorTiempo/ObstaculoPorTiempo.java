@@ -3,7 +3,7 @@ package Logica.ObstaculosPorTiempo;
 import javax.swing.Timer;
 
 import Logica.Obstaculo;
-import Logica.Visitor.Visitor;
+import Logica.VisitorContenido.Visitor;
 
 /**
 * Clase abstracta ObstaculoPorTiempo
@@ -35,7 +35,7 @@ public abstract class ObstaculoPorTiempo extends Obstaculo
 		return DuracionObstaculo;
 	}
 	
-	public synchronized void seratacado(Visitor p)
+	public void seratacado(Visitor p)
 	{ 	
 		p.atacar(this);
 	}

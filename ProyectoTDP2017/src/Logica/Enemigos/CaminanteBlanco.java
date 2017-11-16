@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 import Logica.Enemigo;
 import Logica.Mapa;
-import Logica.Visitor.VisitorEnemigo;
+import Logica.VisitorContenido.VisitorEnemigo;
 
 /**
  * Clase CaminanteBlanco

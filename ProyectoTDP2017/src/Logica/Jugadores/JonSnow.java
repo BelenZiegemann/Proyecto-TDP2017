@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 import Logica.Jugador;
 import Logica.Mapa;
-import Logica.Visitor.VisitorJugador;
+import Logica.VisitorContenido.VisitorJugador;
 import Logica.*;
 
 /**

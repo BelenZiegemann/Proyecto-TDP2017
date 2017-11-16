@@ -1,6 +1,7 @@
 package Logica;
 
-import Logica.Visitor.Visitor;
+import Logica.VisitorContenido.Visitor;
+import Logica.VisitorPowerUp.VisitorPowerUp;
 
 /**
  * Clase Abstracta Personaje
@@ -18,7 +19,14 @@ public abstract class Personaje extends Contenido
 	
 	public abstract void seratacado(Visitor p);
 	
+	public abstract void serAfectado(VisitorPowerUp p);
+	
 	public abstract void mover();
+	
+	public boolean estaVivo()
+	{
+		return estaVivo;
+	}
 	
 	public int getVida()
 	{
@@ -35,9 +43,9 @@ public abstract class Personaje extends Contenido
 		return fuerzaImpacto;
 	}
 	
-	public boolean estaVivo()
-	{
-		return estaVivo;
+	public void setEstaVivo(boolean b) 
+	{	
+		estaVivo = b;
 	}
 	
 	public void setVida(int v)
@@ -45,8 +53,14 @@ public abstract class Personaje extends Contenido
 		puntosVida = v;
 	}
 	
-	public void setEstaVivo(boolean b) 
-	{	
-		estaVivo = b;
+	public void setFuerzaImpacto(int fuerzaI)
+	{
+		fuerzaImpacto = fuerzaI;
+		
+	}
+	
+	public void setAlcance(int a)
+	{
+		alcance = a;
 	}
 }

@@ -1,9 +1,10 @@
-package Logica.Visitor;
+package Logica.VisitorContenido;
 
 import Logica.Celda;
 import Logica.Enemigo;
 import Logica.Jugador;
 import Logica.Posicion;
+import Logica.PowerUp;
 import Logica.Disparo.DisparoJugador;
 import Logica.ObstaculosConVida.ObstaculoConVida;
 import Logica.ObstaculosPorTiempo.ObstaculoPorTiempo;
@@ -39,9 +40,16 @@ public class VisitorJugador extends Visitor
 		e.setVida(e.getVida() - j.getFuerzaImpacto());
 		if (e.getVida() <= 0) 
 		{
+			PowerUp PU = e.generarPowerUp();
+			if(PU != null)
+			{
+				j.serAfectado(PU.getVisitor());
+				j.getMapa().agregarPowerUp(PU);
+			}
 			e.setEstaVivo(false);
 			e.setPuntajeMonedas();
 			e.getCelda().setContenido(null);
+			
 		}
 	}
 	

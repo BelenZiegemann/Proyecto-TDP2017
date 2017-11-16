@@ -1,7 +1,7 @@
 package Logica.ObstaculosConVida;
 
 import Logica.Obstaculo;
-import Logica.Visitor.Visitor;
+import Logica.VisitorContenido.Visitor;
 
 /**
 * Clase abstracta ObstaculoConVida 
@@ -22,7 +22,7 @@ public abstract class ObstaculoConVida extends Obstaculo
 		return vida;
 	}
 	
-	public synchronized void seratacado(Visitor v) 
+	public void seratacado(Visitor v) 
 	{
 		v.atacar(this);
 	}
