@@ -5,7 +5,8 @@ import java.util.Random;
 
 import Logica.MagiaTemporal.DuplicarFuerza;
 import Logica.MagiaTemporal.DuplicarVida;
-import Logica.VisitorContenido.Visitor;
+import Logica.ObjetoPrecioso.Bomba;
+import Logica.VisitorPersonaje.Visitor;
 import Logica.VisitorPowerUp.VisitorPowerUp;
 
 /**
@@ -129,14 +130,15 @@ public abstract class Enemigo extends Personaje
 	{
 		PowerUp puObtenido = null;
 		double x = Math.random();
-		if (x<=0.50)
+		if (x<=0.60)
 		{
 			HashMap<Integer,PowerUp> mapeoPowerUp = new HashMap<Integer,PowerUp>();
 			mapeoPowerUp.put(0, new DuplicarFuerza());	
 			mapeoPowerUp.put(1, new DuplicarVida());
-			
+			mapeoPowerUp.put(2, new Bomba(miCelda,mapa));
 			Random generador = new Random(System.currentTimeMillis());
 			puObtenido = mapeoPowerUp.get(generador.nextInt(mapeoPowerUp.size()));
+			generador.setSeed(generador.nextLong());//refresco datos aleatorios
 			puObtenido = puObtenido.clone();
 		}
 		return puObtenido; 

@@ -13,8 +13,6 @@ import Logica.Mapa;
 */
 public class Piedra extends ObstaculoConVida 
 {
-	protected int desplX;
-	protected int desplY;
 	
 	public Piedra(Celda c, Mapa m) 
 	{

@@ -1,5 +1,6 @@
 package Logica;
 
+import Logica.VisitorPersonaje.Visitor;
 import Logica.VisitorPowerUp.VisitorPowerUp;
 
 /**
@@ -21,9 +22,7 @@ public abstract class Obstaculo extends Contenido
 		estaVivo = b;
 	}
 	
-	public void serAfectado(VisitorPowerUp p)
-	{
-		p.afectar(this);
-	}
+	public abstract void seratacado(Visitor p);
+	public abstract void serAfectado(VisitorPowerUp p);
 	
 }

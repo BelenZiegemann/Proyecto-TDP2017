@@ -2,7 +2,8 @@ package Logica.VisitorPowerUp;
 
 import Logica.Enemigo;
 import Logica.Jugador;
-import Logica.Obstaculo;
+import Logica.ObstaculosConVida.ObstaculoConVida;
+import Logica.ObstaculosPorTiempo.ObstaculoPorTiempo;
 
 /**
  * Clase abstracta VisitorPowerUp
@@ -13,5 +14,6 @@ public abstract class VisitorPowerUp
 {
 	public abstract void afectar(Jugador j);
 	public abstract void afectar(Enemigo e);
-	public abstract void afectar(Obstaculo o);
+	public abstract void afectar(ObstaculoConVida o);
+	public abstract void afectar(ObstaculoPorTiempo o);
 }

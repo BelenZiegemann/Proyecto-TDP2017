@@ -17,9 +17,6 @@ import Logica.Mapa;
 */
 public class Fuego extends ObstaculoPorTiempo
 {
-	protected int desplX;
-	protected int desplY;
-	
 	public Fuego(Celda c, Mapa m) 
 	{
 		estaVivo = false; //se pone en true cuando comienza el timer

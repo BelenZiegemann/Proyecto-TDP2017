@@ -1,6 +1,6 @@
 package Logica;
 
-import Logica.VisitorContenido.Visitor;
+import Logica.VisitorPersonaje.Visitor;
 import Logica.VisitorPowerUp.VisitorPowerUp;
 
 /**
@@ -14,14 +14,18 @@ public abstract class Personaje extends Contenido
 	protected int fuerzaImpacto = 10;
 	protected int alcance = 1;
 	protected boolean estaVivo = true;
-	protected int desplX;
-	protected int desplY;
+	protected Visitor proyectil;
 	
 	public abstract void seratacado(Visitor p);
 	
 	public abstract void serAfectado(VisitorPowerUp p);
 	
 	public abstract void mover();
+	
+	public Visitor getProyectil()
+	{
+		return proyectil;
+	}
 	
 	public boolean estaVivo()
 	{

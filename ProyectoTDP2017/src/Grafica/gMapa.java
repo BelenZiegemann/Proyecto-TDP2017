@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import Grafica.Threads.ThreadDisparo;
 import Grafica.Threads.ThreadEnemigo;
 import Grafica.Threads.ThreadJugador;
-import Grafica.Threads.ThreadMagiaTemporal;
+import Grafica.Threads.ThreadPowerUp;
 import Grafica.Threads.ThreadObstaculos;
 import Logica.*;
 
@@ -28,12 +28,13 @@ public class gMapa implements MouseListener
 	protected ThreadEnemigo enemigos;
 	protected ThreadDisparo disparos;
 	protected ThreadObstaculos obstaculos;
-	protected ThreadMagiaTemporal magiaTemporal;
+	protected ThreadPowerUp powerups;
 	protected Nivel level;
 	protected Icon pisoNieve;
 	protected GUI gui;
 	protected JLabel grafPiso;
 	protected boolean deboAgregar;
+	protected boolean deboPonerBomba;
 	protected boolean deboVenderJugador;
 	protected CreadorJugador jugadorParaAgregar;
 	protected Jugador jugadorParaVender;
@@ -48,6 +49,7 @@ public class gMapa implements MouseListener
 		deboAgregar = false;
 		jugadorParaAgregar = null;
 		deboVenderJugador = false;
+		deboPonerBomba = false;
 		jugadorParaVender = null;
 		
 		//Para agregar el piso al mapa
@@ -79,9 +81,9 @@ public class gMapa implements MouseListener
 		obstaculos = new ThreadObstaculos(this);
 		obstaculos.start();	
 		
-		//Creo un ThreadMagiaTemporal
-		magiaTemporal = new ThreadMagiaTemporal(this);
-		magiaTemporal.start();
+		//Creo un ThreadPowerUp
+		powerups = new ThreadPowerUp(this);
+		powerups.start();
 	}
 	
 	public void agregarEnemigo(Enemigo e)
@@ -130,7 +132,7 @@ public class gMapa implements MouseListener
 		jugadores.detener();
 		disparos.detener();
 		obstaculos.detener();
-		magiaTemporal.detener();
+		powerups.detener();
 		gui.mostrarMensajePerder();	
 	}
 
@@ -153,6 +155,11 @@ public class gMapa implements MouseListener
 		return gui;
 	}
 	
+	public void DeboColocarBomba(boolean deboPonerBomba)
+	{
+		this.deboPonerBomba = deboPonerBomba;
+	}
+	
 	public void DeboAgregarJugador(boolean deboAgregar)
 	{
 		this.deboAgregar = deboAgregar;
@@ -162,7 +169,6 @@ public class gMapa implements MouseListener
 	{
 		this.deboVenderJugador = deboVenderJugador;
 	}
-	
 	
 	public void setJugadorParaAgregar(CreadorJugador j)
 	{
@@ -208,13 +214,24 @@ public class gMapa implements MouseListener
 			PosY--;
 		}
 		Posicion posClickeada = new Posicion(PosX,PosY);
+		Celda miCelda = m.obtenerCelda(posClickeada);
 		if(deboAgregar)
-		{
-			Celda miCelda = m.obtenerCelda(posClickeada);
+		{	
 			Jugador j = jugadorParaAgregar.crearJugador(miCelda, m);
 			agregarJugador(j);  //posición en la cual se agregará al jugador
 		}
 		deboAgregar = false;
+		if(deboPonerBomba)
+		{
+			PowerUp bomba = gui.eliminarBomba();
+			bomba.setCelda(miCelda);
+			bomba.actualizarPosGrafico();
+			grafPiso.add(bomba.getGrafico());
+			grafPiso.repaint();
+			//inicio retardo de timepo antes de la explosión
+			bomba.iniTimer();	
+		}
+		deboPonerBomba = false;
 		 ///////////////////////////////////////////////////////////////////
 		// Recorro la lista de Jugadores del mapa para ver si la posición clickeada corresponde a la posición
 		// de un Jugador en el mapa. Entonces ese Jugador podrá ser vendido.

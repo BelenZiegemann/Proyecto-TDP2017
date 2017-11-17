@@ -3,7 +3,8 @@ package Logica.ObstaculosPorTiempo;
 import javax.swing.Timer;
 
 import Logica.Obstaculo;
-import Logica.VisitorContenido.Visitor;
+import Logica.VisitorPersonaje.Visitor;
+import Logica.VisitorPowerUp.VisitorPowerUp;
 
 /**
 * Clase abstracta ObstaculoPorTiempo
@@ -38,6 +39,11 @@ public abstract class ObstaculoPorTiempo extends Obstaculo
 	public void seratacado(Visitor p)
 	{ 	
 		p.atacar(this);
+	}
+	
+	public void serAfectado(VisitorPowerUp p)
+	{
+		p.afectar(this);
 	}
 	
 }

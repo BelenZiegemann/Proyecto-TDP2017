@@ -1,7 +1,7 @@
 package Logica.MagiaTemporal;
 
-import Logica.Jugador;
 import Logica.PowerUp;
+import Logica.VisitorPowerUp.VisitorDuplicarFuerza;
 
 /**
  * Clase DuplicarFuerza
@@ -9,27 +9,20 @@ import Logica.PowerUp;
  *
  */
 public class DuplicarFuerza extends MagiaTemporal
-{
+{ 
 
 	public DuplicarFuerza()
 	{
 		super();
+		visitorPU = new VisitorDuplicarFuerza(this);
 		tiempo = 9;
 		timer.setInitialDelay(tiempo * 1000);
 	}
 	
-	public void accion(Jugador j)
-	{
-		j.setFuerzaImpacto(2 * j.getFuerzaImpacto());
-		jugadorConMagia = j;
-		iniTimer();
-		mensajeEstadoMagia = "Fuerza Duplicada ACTIVADA";
-	}
-	
-	public void deshacerAccion()
+	public void accionFinTimer()
 	{
 		jugadorConMagia.setFuerzaImpacto(jugadorConMagia.getFuerzaImpacto() / 2);
-		mensajeEstadoMagia = "Fuerza Duplicada DESACTIVADA";
+		mensajeEstadoPU = "Fuerza Duplicada DESACTIVADA";
 	}
 	
 	public PowerUp clone()

@@ -26,6 +26,7 @@ public class Mapa
 	protected LinkedList<ObstaculoPorTiempo> misObstaculosPorTiempo;
 	protected LinkedList<Disparo> misDisparos;
 	protected LinkedList<PowerUp> misPowerUps;
+	protected LinkedList<JLabel> explosion;
 	
 	public Mapa(int alto, int ancho, int altoReal, int anchoReal)
 	{
@@ -47,6 +48,7 @@ public class Mapa
 		misObstaculosPorTiempo = new LinkedList<ObstaculoPorTiempo>();
 		misDisparos = new LinkedList<Disparo>();
 		misPowerUps = new LinkedList<PowerUp>();
+		explosion = new LinkedList<JLabel>();
 		miPantalla = new Pantalla(this);
 	}
 	
@@ -80,9 +82,19 @@ public class Mapa
 		return misPowerUps;
 	}
 	
+	public LinkedList<JLabel> getListaExplosion()
+	{
+		return explosion;
+	}
+	
 	public Pantalla obtenerPantalla()
 	{
 		return miPantalla;
+	}
+	
+	public Celda[][] getMatrizCeldas()
+	{
+		return matrizCeldas;
 	}
 	
 	public Celda obtenerCelda(Posicion p)
@@ -175,5 +187,10 @@ public class Mapa
 	public void agregarPowerUp(PowerUp PU)
 	{
 		misPowerUps.addLast(PU);
+	}
+	
+	public void agregarAExplosion(JLabel jExplosion)
+	{
+		explosion.addLast(jExplosion);
 	}
 }

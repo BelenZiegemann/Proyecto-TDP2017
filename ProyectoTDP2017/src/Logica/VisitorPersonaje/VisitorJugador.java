@@ -1,4 +1,4 @@
-package Logica.VisitorContenido;
+package Logica.VisitorPersonaje;
 
 import Logica.Celda;
 import Logica.Enemigo;
@@ -41,15 +41,17 @@ public class VisitorJugador extends Visitor
 		if (e.getVida() <= 0) 
 		{
 			PowerUp PU = e.generarPowerUp();
-			if(PU != null)
+			if(PU != null) 
 			{
-				j.serAfectado(PU.getVisitor());
+				if(PU.getGrafico() == null)
+				{	//entonces ataco diractamente porque es de magia temporal
+					j.serAfectado(PU.getVisitor());
+				}
 				j.getMapa().agregarPowerUp(PU);
 			}
 			e.setEstaVivo(false);
 			e.setPuntajeMonedas();
-			e.getCelda().setContenido(null);
-			
+			e.getCelda().setContenido(null);	
 		}
 	}
 	

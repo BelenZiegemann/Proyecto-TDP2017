@@ -1,6 +1,6 @@
 package Logica;
 
-import Logica.VisitorContenido.Visitor;
+import Logica.VisitorPersonaje.Visitor;
 import Logica.VisitorPowerUp.VisitorPowerUp;
 
 /**

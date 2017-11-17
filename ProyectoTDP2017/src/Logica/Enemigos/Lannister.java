@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 import Logica.Enemigo;
 import Logica.Mapa;
-import Logica.VisitorContenido.VisitorEnemigo;
+import Logica.VisitorPersonaje.VisitorEnemigo;
 
 /**
  * Clase Lannister

@@ -3,7 +3,8 @@ package Logica;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
-import Logica.VisitorContenido.Visitor;
+import Logica.VisitorPersonaje.Visitor;
+import Logica.VisitorPowerUp.VisitorPowerUp;
 
 /**
  * Clase abstracta Contenido 
@@ -14,20 +15,17 @@ public abstract class Contenido
 {
 	protected Celda miCelda;	
 	protected Mapa mapa;
-	protected Visitor proyectil;
 	protected Icon imagen;
 	protected JLabel mGrafico;
+	protected int desplX;
+	protected int desplY;
 	
 	public abstract void seratacado(Visitor p);
+	public abstract void serAfectado(VisitorPowerUp p);
 
 	public Mapa getMapa()
 	{
 		return mapa;
-	}
-	
-	public Visitor getProyectil()
-	{
-		return proyectil;
 	}
 	
 	public JLabel getGrafico()

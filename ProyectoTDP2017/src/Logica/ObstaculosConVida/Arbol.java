@@ -13,8 +13,6 @@ import Logica.Mapa;
 */
 public class Arbol extends ObstaculoConVida 
 {
-	protected int desplX;
-	protected int desplY;
 	
 	public Arbol(Celda c, Mapa m) 
 	{

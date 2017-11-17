@@ -2,7 +2,6 @@ package Logica.MagiaTemporal;
 
 import Logica.Jugador;
 import Logica.PowerUp;
-import Logica.VisitorPowerUp.VisitorMagiaTemporal;
 
 /**
  * Clase abstracta MagiaTemporal
@@ -13,22 +12,17 @@ public abstract class MagiaTemporal extends PowerUp
 {
 		protected int tiempo;
 		protected Jugador jugadorConMagia;
-		protected String mensajeEstadoMagia;
 		
 		protected MagiaTemporal()
 		{
 			super();
-			visitorPU = new VisitorMagiaTemporal(this);
 			jugadorConMagia =  null;
-			mensajeEstadoMagia = "";
 		}
 		
-		public String mensajeEstadoPU()
+		public void setJugadorMagia(Jugador j)
 		{
-			return mensajeEstadoMagia;
+			jugadorConMagia = j;
 		}
 		
-		public abstract void accion(Jugador j);
-		
-		public abstract void deshacerAccion();
+		public abstract void accionFinTimer();
 }

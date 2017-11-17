@@ -13,8 +13,6 @@ import Logica.Mapa;
 */
 public class Torre extends ObstaculoConVida 
 {
-	protected int desplX;
-	protected int desplY;
 	
 	public Torre(Celda c, Mapa m) {
 		vida = 500;
