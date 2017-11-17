@@ -3,6 +3,10 @@ package Logica;
 import java.util.LinkedList;
 import javax.swing.JLabel;
 
+import Logica.Disparo.Disparo;
+import Logica.ObstaculosConVida.ObstaculoConVida;
+import Logica.ObstaculosPorTiempo.ObstaculoPorTiempo;
+
 /**
  * Clase Mapa
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
@@ -20,9 +24,9 @@ public class Mapa
 	protected LinkedList<Enemigo> misEnemigos;
 	protected LinkedList<ObstaculoConVida> misObstaculosConVida;
 	protected LinkedList<ObstaculoPorTiempo> misObstaculosPorTiempo;
-	
 	protected LinkedList<Disparo> misDisparos;
-	
+	protected LinkedList<PowerUp> misPowerUps;
+	protected LinkedList<JLabel> explosion;
 	
 	public Mapa(int alto, int ancho, int altoReal, int anchoReal)
 	{
@@ -43,6 +47,8 @@ public class Mapa
 		misObstaculosConVida = new LinkedList<ObstaculoConVida>();
 		misObstaculosPorTiempo = new LinkedList<ObstaculoPorTiempo>();
 		misDisparos = new LinkedList<Disparo>();
+		misPowerUps = new LinkedList<PowerUp>();
+		explosion = new LinkedList<JLabel>();
 		miPantalla = new Pantalla(this);
 	}
 	
@@ -71,15 +77,29 @@ public class Mapa
 		return misDisparos;
 	}	
 	
+	public LinkedList<PowerUp> getListaPowerUp()
+	{
+		return misPowerUps;
+	}
+	
+	public LinkedList<JLabel> getListaExplosion()
+	{
+		return explosion;
+	}
+	
 	public Pantalla obtenerPantalla()
 	{
 		return miPantalla;
 	}
 	
+	public Celda[][] getMatrizCeldas()
+	{
+		return matrizCeldas;
+	}
+	
 	public Celda obtenerCelda(Posicion p)
 	{
-		return matrizCeldas[p.getEjeX()][p.getEjeY()];
-		
+		return matrizCeldas[p.getEjeX()][p.getEjeY()];	
 	}
 	
 	public int obtenerAncho()
@@ -114,7 +134,6 @@ public class Mapa
 		else
 			return null;
 	}
-	
 	
 	public JLabel agregarJugador(Jugador j)
 	{
@@ -163,5 +182,15 @@ public class Mapa
 			misDisparos.addLast(d);	
 		}
 		
+	}
+	
+	public void agregarPowerUp(PowerUp PU)
+	{
+		misPowerUps.addLast(PU);
+	}
+	
+	public void agregarAExplosion(JLabel jExplosion)
+	{
+		explosion.addLast(jExplosion);
 	}
 }

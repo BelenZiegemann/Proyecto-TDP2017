@@ -1,8 +1,10 @@
-package Grafica;
+package Grafica.Threads;
 
 
 import java.util.LinkedList;
-import Logica.Disparo;
+
+import Grafica.gMapa;
+import Logica.Disparo.Disparo;
 
 /**
  * Clase ThreadDisparo

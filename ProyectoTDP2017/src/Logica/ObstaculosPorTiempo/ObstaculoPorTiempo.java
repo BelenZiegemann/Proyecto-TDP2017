@@ -1,9 +1,10 @@
-package Logica;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+package Logica.ObstaculosPorTiempo;
 
 import javax.swing.Timer;
+
+import Logica.Obstaculo;
+import Logica.VisitorPersonaje.Visitor;
+import Logica.VisitorPowerUp.VisitorPowerUp;
 
 /**
 * Clase abstracta ObstaculoPorTiempo
@@ -13,14 +14,8 @@ import javax.swing.Timer;
 public abstract class ObstaculoPorTiempo extends Obstaculo 
 {
 	protected int tiempo;
-	Timer DuracionObstaculo = new Timer(tiempo * 1000 ,  new ActionListener () 
-	{ 
-	    public void actionPerformed(ActionEvent e) 
-	    {   
-	    	estaVivo = true;
-	    } 
-	}); 
-
+	protected Timer DuracionObstaculo;
+	
 	public void setTiempo(int t)
 	{
 		this.tiempo = t;
@@ -41,9 +36,14 @@ public abstract class ObstaculoPorTiempo extends Obstaculo
 		return DuracionObstaculo;
 	}
 	
-	public synchronized void seratacado(Visitor p)
+	public void seratacado(Visitor p)
 	{ 	
 		p.atacar(this);
+	}
+	
+	public void serAfectado(VisitorPowerUp p)
+	{
+		p.afectar(this);
 	}
 	
 }

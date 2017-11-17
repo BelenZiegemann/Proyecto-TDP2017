@@ -11,7 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.awt.event.ActionEvent;
 
 
@@ -22,12 +24,14 @@ import Logica.Contenido;
 import Logica.Enemigo;
 import Logica.Jugador;
 import Logica.Posicion;
+import Logica.PowerUp;
 import Logica.CreadorJugador.CreadorDothraki;
 import Logica.CreadorJugador.CreadorDragon;
 import Logica.CreadorJugador.CreadorGuardianNocturno;
 import Logica.CreadorJugador.CreadorInmaculado;
 import Logica.CreadorJugador.CreadorJonSnow;
 import Logica.CreadorJugador.CreadorJugador;
+import Logica.ObjetoPrecioso.Bomba;
 
 import java.awt.Font;
 
@@ -38,10 +42,16 @@ import java.awt.Font;
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
-public class GUI extends JFrame
+public class GUI extends JFrame implements MouseListener
 {
 	private JPanel contentPane;	
 	private gMapa mapa;	
+	private JLabel lblMensajePU = new JLabel(" ");
+	private LinkedList<PowerUp> bombas = new LinkedList<PowerUp>();
+	private	JLabel lblbomba= new JLabel("Bombas");
+	private JButton btnbomba= new JButton();
+	private	JLabel lblcantbombas = new JLabel("Cantidad");
+	private JLabel lblmostrarcantbombas = new JLabel("0");
 
 	/**
 	 * Launch the application.
@@ -68,7 +78,7 @@ public class GUI extends JFrame
 		setTitle("GAME OF THRONES");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 800, 614);
+		setBounds(0, 0, 1020, 614);
 		setLocationRelativeTo(null);	// para que la ventana se abra en el centro de la pantalla
 		getContentPane().setLayout(null);
 		
@@ -80,6 +90,70 @@ public class GUI extends JFrame
 		
 		//creo el mapa gráfico
 		mapa = new gMapa(this);
+		
+		//Label para powerup (magia temporal)
+		JLabel lblMagiaTemp = new JLabel("Estado de Magia");
+		lblMagiaTemp.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMagiaTemp.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMagiaTemp.setBounds(762, 178 , 240, 30);
+		lblMagiaTemp.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
+		lblMagiaTemp.setBackground(Color.ORANGE);
+		lblMagiaTemp.setForeground(Color.DARK_GRAY);
+		getContentPane().add(lblMagiaTemp);
+		
+		//Label mensaje powerup
+		lblMensajePU.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMensajePU.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensajePU.setBounds(762, 208 , 240, 30);
+		lblMensajePU.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
+		lblMensajePU.setBackground(Color.DARK_GRAY);
+		lblMensajePU.setForeground(Color.RED);
+		getContentPane().add(lblMensajePU);
+		
+		//Label bomba
+		lblbomba.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblbomba.setHorizontalAlignment(SwingConstants.CENTER);
+		lblbomba.setBounds(807, 248 , 150, 30);
+		lblbomba.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
+		lblbomba.setBackground(Color.ORANGE);
+		lblbomba.setForeground(Color.DARK_GRAY);
+		lblbomba.setVisible(false);
+		getContentPane().add(lblbomba);
+		
+		//JButton bomba
+		Icon imagenbtnBomba = new ImageIcon(this.getClass().getResource("/Imagenes/botonBomba.png"));
+		btnbomba.setIcon(imagenbtnBomba);
+		btnbomba.setBounds(807, 278 , imagenbtnBomba.getIconWidth(), imagenbtnBomba.getIconHeight());
+		btnbomba.setFocusPainted(false);
+		btnbomba.setVisible(false);
+		getContentPane().add(btnbomba);
+		btnbomba.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				mapa.DeboColocarBomba(true);
+			}
+		});
+
+		//Label cantidad de bombas
+		lblcantbombas.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblcantbombas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblcantbombas.setBounds(882, 278 , 75, 38);
+		lblcantbombas.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
+		lblcantbombas.setBackground(Color.DARK_GRAY);
+		lblcantbombas.setForeground(Color.ORANGE);
+		lblcantbombas.setVisible(false);
+		getContentPane().add(lblcantbombas);
+		
+		//Label mostrar cantidad de bombas
+		lblmostrarcantbombas.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblmostrarcantbombas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblmostrarcantbombas.setBounds(882, 316 , 75, 38);
+		lblmostrarcantbombas.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
+		lblmostrarcantbombas.setBackground(Color.WHITE);
+		lblmostrarcantbombas.setForeground(Color.DARK_GRAY);
+		lblmostrarcantbombas.setVisible(false);;
+		getContentPane().add(lblmostrarcantbombas);
 		
 		//Label Puntaje
 		JLabel lblPuntaje = new JLabel("Puntaje");
@@ -164,50 +238,51 @@ public class GUI extends JFrame
 			{
 				if(mapa.deboVenderJugador())
 				{	
-					
 					Jugador jugParaVender = mapa.getJugadorParaVender();
-					int precioVenta = jugParaVender.getPrecio() / 2;
-					mapa.obtenerMapaLogico().obtenerPantalla().setPresupuesto(precioVenta);
-					//elimino al jugador que es vendido
-					jugParaVender.setEstaVivo(false); //para que se remueva de la lista de jugadores y del mapa.
-																	//Lo hace la clase ThreadJugador
-					jugParaVender.getCelda().setContenido(null);
-					mapa.obtenerPisoMapa().remove(jugParaVender.getGrafico());
-					mapa.obtenerPisoMapa().repaint();
-					mapa.obtenerMapaLogico().getListaJugadores().remove(jugParaVender);
-					
-					// lo hago porque debo actualizar el movimiento de algún enemigo que lo estaba atacando
-					Posicion posJugVenta = jugParaVender.getCelda().getPosCelda();
-					int posjugX = posJugVenta.getEjeX();
-					int posjugY = posJugVenta.getEjeY();
-					for(int i = 1; i<= jugParaVender.getAlcance();i++)
+					if(jugParaVender.estaVivo())
 					{
-						if((posjugX - i) >= 0)
+						int precioVenta = jugParaVender.getPrecio() / 2;
+						mapa.obtenerMapaLogico().obtenerPantalla().setPresupuesto(precioVenta);
+						//elimino al jugador que es vendido
+						jugParaVender.setEstaVivo(false); //para que se remueva de la lista de jugadores y del mapa.
+																	//Lo hace la clase ThreadJugador
+						jugParaVender.getCelda().setContenido(null);
+						mapa.obtenerPisoMapa().remove(jugParaVender.getGrafico());
+						mapa.obtenerPisoMapa().repaint();
+						mapa.obtenerMapaLogico().getListaJugadores().remove(jugParaVender);
+					
+						// lo hago porque debo actualizar el movimiento de algún enemigo que lo estaba atacando
+						Posicion posJugVenta = jugParaVender.getCelda().getPosCelda();
+						int posjugX = posJugVenta.getEjeX();
+						int posjugY = posJugVenta.getEjeY();
+						for(int i = 1; i<= jugParaVender.getAlcance();i++)
 						{
-							Posicion pos = new Posicion(posjugX-i,posjugY);
-							Contenido c  = mapa.obtenerMapaLogico().obtenerCelda(pos).getContenido();
-							if(c != null)
+							if((posjugX - i) >= 0)
 							{
-								Iterator<Enemigo> itEnem = mapa.obtenerMapaLogico().getListaEnemigos().iterator();
-								boolean encontre = false;
-								while(itEnem.hasNext() && !encontre)
+								Posicion pos = new Posicion(posjugX-i,posjugY);
+								Contenido c  = mapa.obtenerMapaLogico().obtenerCelda(pos).getContenido();
+								if(c != null)
 								{
-									Enemigo enem = itEnem.next();
-									Posicion pEnem = enem.getCelda().getPosCelda();
-									if(pEnem.equals(pos))
+									Iterator<Enemigo> itEnem = mapa.obtenerMapaLogico().getListaEnemigos().iterator();
+									boolean encontre = false;
+									while(itEnem.hasNext() && !encontre)
 									{
-										enem.setImagenEnMovimiento();
-										enem.setMovimiento(true);
-										enem.mover();
-										encontre = true;
-									}
+										Enemigo enem = itEnem.next();
+										Posicion pEnem = enem.getCelda().getPosCelda();
+										if(pEnem.equals(pos))
+										{
+											enem.setImagenEnMovimiento();
+											enem.setMovimiento(true);
+											enem.mover();
+											encontre = true;
+										}
 									
-								}
+									}
 								
+								}
 							}
 						}
-					}
-					
+					}	
 					mapa.setDeboVenderJugador(false);
 				}		
 			}
@@ -403,4 +478,58 @@ public class GUI extends JFrame
 			mapa.siguienteNivel();
 		}
 	}
+	
+	public void mostrarMensajePU(String mensaje)
+	{
+		lblMensajePU.setText(mensaje); 
+	}
+	
+	public void agregarBomba(PowerUp bomba)
+	{
+		bombas.addLast(bomba);
+	}
+	
+	public PowerUp eliminarBomba()
+	{
+		PowerUp eliminado = null;
+		int cantBomb = bombas.size();
+		if(cantBomb >= 1)
+		{
+			if(cantBomb == 1)	
+			{
+				lblbomba.setVisible(false);
+				btnbomba.setVisible(false);
+				lblcantbombas.setVisible(false);
+				lblmostrarcantbombas.setVisible(false);
+			}
+			else
+			{
+				lblmostrarcantbombas.setText("" + (bombas.size()-1));
+			}
+			eliminado = bombas.removeLast();
+		}
+		return eliminado; 	
+	}
+	
+	public void mouseClicked(java.awt.event.MouseEvent arg0)
+	{ 	
+		if(bombas.size() > 0)
+		{
+			lblbomba.setVisible(true);
+			btnbomba.setVisible(true);
+			lblcantbombas.setVisible(true);
+			lblmostrarcantbombas.setVisible(true);
+			lblmostrarcantbombas.setText("" + bombas.size());
+			mapa.obtenerPisoMapa().remove(bombas.getLast().getGrafico());
+			mapa.obtenerPisoMapa().repaint();
+		}
+	}
+	public void mouseEntered(java.awt.event.MouseEvent arg0)
+	{}
+	public void mouseExited(java.awt.event.MouseEvent arg0) 
+	{}
+	public void mousePressed(java.awt.event.MouseEvent arg0) 
+	{}
+	public void mouseReleased(java.awt.event.MouseEvent arg0)
+	{}	
 }

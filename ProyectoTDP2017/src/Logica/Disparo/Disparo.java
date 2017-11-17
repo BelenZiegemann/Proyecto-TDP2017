@@ -1,7 +1,11 @@
-package Logica;
+package Logica.Disparo;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
+
+import Logica.Celda;
+import Logica.Contenido;
+import Logica.Mapa;
 
 /**
 * Clase abstracta Disparo

@@ -1,4 +1,8 @@
-package Logica;
+package Logica.ObstaculosConVida;
+
+import Logica.Obstaculo;
+import Logica.VisitorPersonaje.Visitor;
+import Logica.VisitorPowerUp.VisitorPowerUp;
 
 /**
 * Clase abstracta ObstaculoConVida 
@@ -19,8 +23,13 @@ public abstract class ObstaculoConVida extends Obstaculo
 		return vida;
 	}
 	
-	public synchronized void seratacado(Visitor v) 
+	public void seratacado(Visitor v) 
 	{
 		v.atacar(this);
+	}
+	
+	public void serAfectado(VisitorPowerUp p)
+	{
+		p.afectar(this);
 	}
 }

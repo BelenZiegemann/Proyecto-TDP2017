@@ -1,5 +1,7 @@
 package Logica;
 
+import Logica.VisitorPersonaje.Visitor;
+import Logica.VisitorPowerUp.VisitorPowerUp;
 
 /**
  * Clase abstracta Jugador 
@@ -10,19 +12,19 @@ public abstract class Jugador extends Personaje
 {
 	protected int precio = 125;
 	
-	public synchronized void seratacado(Visitor p)
+	public void seratacado(Visitor p)
 	{
 		p.atacar(this);
+	}
+	
+	public void serAfectado(VisitorPowerUp p)
+	{
+		p.afectar(this);
 	}
 	
 	public int getPrecio()
 	{
 		return precio;
-	}
-	
-	public void setProyectil(VisitorJugador proyJug)
-	{
-		proyectil = proyJug;
 	}
 	
 	public void mover() 

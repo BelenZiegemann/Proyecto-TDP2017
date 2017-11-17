@@ -1,7 +1,14 @@
-package Logica;
+package Logica.ObstaculosPorTiempo;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.Timer;
+
+import Logica.Celda;
+import Logica.Mapa;
 
 /**
 * Clase Fuego
@@ -10,14 +17,17 @@ import javax.swing.JLabel;
 */
 public class Fuego extends ObstaculoPorTiempo
 {
-	protected int desplX;
-	protected int desplY;
-	
 	public Fuego(Celda c, Mapa m) 
 	{
 		estaVivo = false; //se pone en true cuando comienza el timer
-		
 		tiempo = 8; //tiempo en segundos
+		DuracionObstaculo=new Timer(tiempo * 1000 ,  new ActionListener () 
+		{ 
+		    public void actionPerformed(ActionEvent e) 
+		    {   
+		    	estaVivo = true;
+		    } 
+		}); 
 		DuracionObstaculo.setRepeats(false);
 		miCelda = c;
 		mapa = m;
@@ -27,6 +37,7 @@ public class Fuego extends ObstaculoPorTiempo
 		desplX = (mapa.obtenerAnchoReal() / mapa.obtenerAncho()) * miCelda.getPosCelda().getEjeX();
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();						
 		mGrafico.setBounds(desplX, desplY ,imagen.getIconWidth(),imagen.getIconHeight());
+		
 	}
 
 }

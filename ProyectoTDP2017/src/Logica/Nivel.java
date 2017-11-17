@@ -7,6 +7,10 @@ import java.util.Random;
 
 import Grafica.gMapa;
 import Logica.CreadorEnemigo.CreadorEnemigo;
+import Logica.ObstaculosConVida.Arbol;
+import Logica.ObstaculosConVida.ObstaculoConVida;
+import Logica.ObstaculosConVida.Piedra;
+import Logica.ObstaculosConVida.Torre;
 
 /**
  * Clase Nivel

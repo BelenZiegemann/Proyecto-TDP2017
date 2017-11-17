@@ -1,4 +1,12 @@
-package Logica;
+package Logica.VisitorPersonaje;
+
+import Logica.Celda;
+import Logica.Enemigo;
+import Logica.Jugador;
+import Logica.Posicion;
+import Logica.Disparo.DisparoEnemigo;
+import Logica.ObstaculosConVida.ObstaculoConVida;
+import Logica.ObstaculosPorTiempo.ObstaculoPorTiempo;
 
 /**
  * Clase VisitorEnemigo
@@ -21,9 +29,9 @@ public class VisitorEnemigo extends Visitor
 		int miX = posEnem.getEjeX();
 		int miY = posEnem.getEjeY();
 		Posicion posInicialDisparo = new Posicion(miX+1, miY);
-		Celda celdaDisparo = e.mapa.obtenerCelda(posInicialDisparo);
-		DisparoEnemigo disparoEnem = new DisparoEnemigo(celdaDisparo, e.mapa, j);
-		e.mapa.agregarDisparo(disparoEnem);
+		Celda celdaDisparo = e.getMapa().obtenerCelda(posInicialDisparo);
+		DisparoEnemigo disparoEnem = new DisparoEnemigo(celdaDisparo, e.getMapa(), j);
+		e.getMapa().agregarDisparo(disparoEnem);
 		
 		//realizo el ataque
 		j.setVida(j.getVida() - e.getFuerzaImpacto());
@@ -49,9 +57,9 @@ public class VisitorEnemigo extends Visitor
 		int miX = posEnem.getEjeX();
 		int miY = posEnem.getEjeY();
 		Posicion posInicialDisparo = new Posicion(miX+1, miY);
-		Celda celdaDisparo = e.mapa.obtenerCelda(posInicialDisparo);
-		DisparoEnemigo disparoEnem = new DisparoEnemigo(celdaDisparo, e.mapa, o);
-		e.mapa.agregarDisparo(disparoEnem);
+		Celda celdaDisparo = e.getMapa().obtenerCelda(posInicialDisparo);
+		DisparoEnemigo disparoEnem = new DisparoEnemigo(celdaDisparo, e.getMapa(), o);
+		e.getMapa().agregarDisparo(disparoEnem);
 		
 		//realizo el ataque
 		o.setVida(o.getVida() - e.getFuerzaImpacto());
@@ -67,10 +75,9 @@ public class VisitorEnemigo extends Visitor
 	public void atacar(ObstaculoPorTiempo o)
 	{
 		if(o.estaVivo() && !o.getTimerDuracionObstaculo().isRunning())
-		{
+		{	
 			this.e.setMovimiento(true);
 			this.e.setImagenEnMovimiento();
-		}
-		
+		}	
 	}
 }

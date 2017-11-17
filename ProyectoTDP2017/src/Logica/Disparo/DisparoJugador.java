@@ -1,7 +1,12 @@
-package Logica;
+package Logica.Disparo;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import Logica.Celda;
+import Logica.Contenido;
+import Logica.Mapa;
+import Logica.Posicion;
 
 /**
 * Clase DisparoJugador

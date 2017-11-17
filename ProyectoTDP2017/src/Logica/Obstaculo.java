@@ -1,5 +1,8 @@
 package Logica;
 
+import Logica.VisitorPersonaje.Visitor;
+import Logica.VisitorPowerUp.VisitorPowerUp;
+
 /**
 * Clase abstracta Obstaculo
 * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
@@ -18,5 +21,8 @@ public abstract class Obstaculo extends Contenido
 	{
 		estaVivo = b;
 	}
-
+	
+	public abstract void seratacado(Visitor p);
+	public abstract void serAfectado(VisitorPowerUp p);
+	
 }

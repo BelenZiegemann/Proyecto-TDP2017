@@ -1,5 +1,13 @@
 package Logica;
 
+import java.util.HashMap;
+import java.util.Random;
+
+import Logica.MagiaTemporal.DuplicarFuerza;
+import Logica.MagiaTemporal.DuplicarVida;
+import Logica.ObjetoPrecioso.Bomba;
+import Logica.VisitorPersonaje.Visitor;
+import Logica.VisitorPowerUp.VisitorPowerUp;
 
 /**
  * Clase abstracta Enemigo
@@ -11,12 +19,11 @@ public abstract class Enemigo extends Personaje
 	protected int velocidad = 2;
 	protected int puntaje = 50;
 	protected int rangoMonedas = 150;
-	protected Premio miPremio;
 	protected int cantDesplazada;
 	protected int anchoRealCelda;
 	protected boolean estaEnMovimiento = true;
 	protected boolean deboPerder = false;
-	
+
 	protected int alcance = 2;
 	
 	//Se debe invocar cuando se muere.
@@ -26,9 +33,29 @@ public abstract class Enemigo extends Personaje
 		mapa.obtenerPantalla().setPresupuesto(rangoMonedas);
 	}
 	
-	public void setProyectil(VisitorEnemigo proyEnem)
+	public boolean deboPerderJuego()
 	{
-		proyectil = proyEnem;
+		return deboPerder;
+	}
+
+	public void setMovimiento(boolean m) 
+	{
+		estaEnMovimiento = m;
+	}
+	
+	public void seratacado(Visitor p)
+	{
+		p.atacar(this);
+	}
+	
+	public void serAfectado(VisitorPowerUp p)
+	{
+		p.afectar(this);
+	}
+	
+	public void setVelocidad(int v)
+	{
+		velocidad = v;
 	}
 	
 	/**
@@ -98,23 +125,23 @@ public abstract class Enemigo extends Personaje
 			}		
 	}
 	
-	public boolean deboPerderJuego()
-	{
-		return deboPerder;
-	}
-
-	public void setMovimiento(boolean m) 
-	{
-		estaEnMovimiento = m;
-	}
 	
-	public  synchronized void seratacado(Visitor p)
+	public PowerUp generarPowerUp()
 	{
-		p.atacar(this);
-	}
-	
-	public void setVelocidad(int v) {
-		velocidad = v;
+		PowerUp puObtenido = null;
+		double x = Math.random();
+		if (x<=0.60)
+		{
+			HashMap<Integer,PowerUp> mapeoPowerUp = new HashMap<Integer,PowerUp>();
+			mapeoPowerUp.put(0, new DuplicarFuerza());	
+			mapeoPowerUp.put(1, new DuplicarVida());
+			mapeoPowerUp.put(2, new Bomba(miCelda,mapa));
+			Random generador = new Random(System.currentTimeMillis());
+			puObtenido = mapeoPowerUp.get(generador.nextInt(mapeoPowerUp.size()));
+			generador.setSeed(generador.nextLong());//refresco datos aleatorios
+			puObtenido = puObtenido.clone();
+		}
+		return puObtenido; 
 	}
 	
 	public abstract void setImagenEnMovimiento();

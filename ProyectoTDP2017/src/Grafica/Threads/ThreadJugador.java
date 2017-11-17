@@ -1,7 +1,8 @@
-package Grafica;
+package Grafica.Threads;
 
 import java.util.LinkedList;
 
+import Grafica.gMapa;
 import Logica.Jugador;
 
 /**
