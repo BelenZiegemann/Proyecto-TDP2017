@@ -2,7 +2,7 @@ package Grafica.Threads;
 
 import java.util.LinkedList;
 
-import Grafica.gMapa;
+import Grafica.GUI.gMapa;
 import Logica.Enemigo;
 
 /**
@@ -54,8 +54,6 @@ public class ThreadEnemigo extends Thread
 							if(e.deboPerderJuego())
 							{
 								gmapa.Perder();
-								gmapa.obtenerMapaLogico().getListaEnemigos().clear();
-								detener();
 							}
 						}
 						else

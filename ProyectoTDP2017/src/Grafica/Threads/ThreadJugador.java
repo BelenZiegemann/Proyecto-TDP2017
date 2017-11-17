@@ -2,7 +2,7 @@ package Grafica.Threads;
 
 import java.util.LinkedList;
 
-import Grafica.gMapa;
+import Grafica.GUI.gMapa;
 import Logica.Jugador;
 
 /**

@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-import Grafica.gMapa;
+import Grafica.GUI.gMapa;
 import Logica.PowerUp;
 
 /**
@@ -42,14 +42,7 @@ public class ThreadPowerUp extends Thread
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				for(JLabel lblElim : explosionParaEliminar)
-				{
-					gmapa.obtenerPisoMapa().remove(lblElim);
-					gmapa.obtenerPisoMapa().repaint();
-					gmapa.obtenerMapaLogico().getListaExplosion().remove(lblElim);
-				}
-				explosionParaEliminar.clear();
-				
+				eliminarExplosion();
 			}
 		});
 		timerExplosion.setRepeats(false);
@@ -63,7 +56,7 @@ public class ThreadPowerUp extends Thread
 		{
 			try 
 			{
-				Thread.sleep(200);
+				Thread.sleep(800);
 			}
 			catch (InterruptedException e)
 			{}
@@ -76,8 +69,8 @@ public class ThreadPowerUp extends Thread
 				{
 					gmapa.obtenerPisoMapa().add(pu.getGrafico());
 					gmapa.obtenerPisoMapa().repaint();
-					pu.getGrafico().addMouseListener(gmapa.getGUI()); // agrego el oyente al jlabel del powerup
-					gmapa.getGUI().agregarBomba(pu);
+					pu.getGrafico().addMouseListener(gmapa.getGUI()); // agrego el oyente al jlabel del powerup (de tipo objeto precioso)
+					gmapa.getGUI().agregarObjetoPrecioso(pu);
 					powerupsParaEliminar.addLast(pu);
 				}
 				else
@@ -100,8 +93,25 @@ public class ThreadPowerUp extends Thread
 				gmapa.obtenerPisoMapa().repaint();
 				explosionParaEliminar.addLast(lbl);
 			}	
+		//	explosionAuxiliar.clear();
 			timerExplosion.start();
 		}
+	}
+	
+	public void stopTimer()
+	{
+		timerExplosion.stop();
+	}
+	
+	public void eliminarExplosion()
+	{
+		for(JLabel lblElim : explosionParaEliminar)
+		{
+			gmapa.obtenerPisoMapa().remove(lblElim);
+			gmapa.obtenerPisoMapa().repaint();
+			gmapa.obtenerMapaLogico().getListaExplosion().remove(lblElim);
+		}
+		explosionParaEliminar.clear();
 	}
 	
 	public void detener() 

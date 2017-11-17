@@ -1,4 +1,4 @@
-package Grafica;
+package Grafica.GUI;
 import Logica.CreadorJugador.*;
 import Logica.ObstaculosConVida.ObstaculoConVida;
 import Logica.ObstaculosPorTiempo.ObstaculoPorTiempo;
@@ -9,6 +9,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import Grafica.Threads.Nivel;
 import Grafica.Threads.ThreadDisparo;
 import Grafica.Threads.ThreadEnemigo;
 import Grafica.Threads.ThreadJugador;
@@ -36,6 +37,7 @@ public class gMapa implements MouseListener
 	protected boolean deboAgregar;
 	protected boolean deboPonerBomba;
 	protected boolean deboVenderJugador;
+	protected boolean finJuego;
 	protected CreadorJugador jugadorParaAgregar;
 	protected Jugador jugadorParaVender;
 	protected final int anchoMapa = 10;
@@ -50,6 +52,7 @@ public class gMapa implements MouseListener
 		jugadorParaAgregar = null;
 		deboVenderJugador = false;
 		deboPonerBomba = false;
+		finJuego= false;
 		jugadorParaVender = null;
 		
 		//Para agregar el piso al mapa
@@ -126,25 +129,83 @@ public class gMapa implements MouseListener
 		}
 	}
 	
-	public void Perder()
+	public void detener()
 	{
+		finJuego = true;
+		jugadorParaVender = null;
+		deboVenderJugador = false;
+		gui.mostrarMensajePU("");
 		level.detener();
 		jugadores.detener();
+		enemigos.detener();
 		disparos.detener();
 		obstaculos.detener();
 		powerups.detener();
-		gui.mostrarMensajePerder();	
+		
+		m.getListaEnemigos().clear();
+		m.getListaJugadores().clear();
+		m.getListaDisparos().clear();
+		m.getListaObstaculosConVida().clear();
+		m.getListaObstaculosPorTiempo().clear();
+		m.getListaPowerUp().clear();
+		m.getListaExplosion().clear();
+		
+		grafPiso.removeAll();
+		grafPiso.repaint();
+	}
+	
+	public void Perder()
+	{	
+		setImagenPerderJuego();
+		detener();
 	}
 
 	public void Ganar()
 	{
-		gui.mostrarMensajeGanar();
+		if(getNivel().getNumNivel() == 2) //acá ya gané el juego
+		{
+			setImagenGanarJuego();	
+			detener();
+		}
+		else //sino muestro el mensaje para pasar de nivel
+			gui.mostrarSiguienteNivel();
+	}
+	
+	public void setFinJuego(boolean fin)
+	{
+		finJuego = fin;
+	}
+	
+	public void setImagenGanarJuego()
+	{
+		grafPiso.setVisible(false);
+		grafPiso.setEnabled(false);
+		Icon imagenGanar = new ImageIcon(this.getClass().getResource("/Imagenes/ganar.png"));
+		JLabel lblGanar = new JLabel(imagenGanar);
+		lblGanar.setSize(gui.getPanelMapa().getWidth(), gui.getPanelMapa().getHeight());
+		gui.getPanelMapa().add(lblGanar);
+		gui.getPanelMapa().repaint();
+	}
+	 
+	public void setImagenPerderJuego()
+	{
+		grafPiso.setVisible(false);
+		grafPiso.setEnabled(false);
+		Icon imagenPerder = new ImageIcon(this.getClass().getResource("/Imagenes/perder.jpg"));
+		JLabel lblPerder = new JLabel(imagenPerder);
+		lblPerder.setSize(gui.getPanelMapa().getWidth(), gui.getPanelMapa().getHeight());
+		gui.getPanelMapa().add(lblPerder);
+		gui.getPanelMapa().repaint();		
 	}
 	
 	public void siguienteNivel()
 	{
+		jugadorParaVender = null;
+		deboVenderJugador = false;
+		gui.mostrarMensajePU("");
+		powerups.stopTimer();
+		powerups.eliminarExplosion();
 		level = new Nivel(level.getNumNivel() + 1,"src\\Logica\\Niveles\\Nivel2.txt",this);
-		
 		Thread tl = new Thread(level);
 		tl.start();
 		level.start();
@@ -202,51 +263,57 @@ public class gMapa implements MouseListener
 
 	public void mouseClicked(java.awt.event.MouseEvent arg0)
 	{
-	
-		int PosX = (grafPiso.getMousePosition().x) / (gui.getPanelMapa().getWidth() / anchoMapa);
-		int PosY = (grafPiso.getMousePosition().y) / (gui.getPanelMapa().getHeight() / altoMapa);
-		if(PosX == anchoMapa)
+		if(!finJuego)
 		{
-			PosX--;
-		}
-		if(PosX == altoMapa)
-		{
-			PosY--;
-		}
-		Posicion posClickeada = new Posicion(PosX,PosY);
-		Celda miCelda = m.obtenerCelda(posClickeada);
-		if(deboAgregar)
-		{	
-			Jugador j = jugadorParaAgregar.crearJugador(miCelda, m);
-			agregarJugador(j);  //posición en la cual se agregará al jugador
-		}
-		deboAgregar = false;
-		if(deboPonerBomba)
-		{
-			PowerUp bomba = gui.eliminarBomba();
-			bomba.setCelda(miCelda);
-			bomba.actualizarPosGrafico();
-			grafPiso.add(bomba.getGrafico());
-			grafPiso.repaint();
-			//inicio retardo de timepo antes de la explosión
-			bomba.iniTimer();	
-		}
-		deboPonerBomba = false;
-		 ///////////////////////////////////////////////////////////////////
-		// Recorro la lista de Jugadores del mapa para ver si la posición clickeada corresponde a la posición
-		// de un Jugador en el mapa. Entonces ese Jugador podrá ser vendido.
-		Iterator<Jugador> itJugador = m.getListaJugadores().iterator();
-		boolean encontre = false;
-		while(itJugador.hasNext() && !encontre)
-		{
-			Jugador jug = itJugador.next();
-			Posicion pJug = jug.getCelda().getPosCelda();
-			if(posClickeada.equals(pJug))
+			int PosX = (grafPiso.getMousePosition().x) / (gui.getPanelMapa().getWidth() / anchoMapa);
+			int PosY = (grafPiso.getMousePosition().y) / (gui.getPanelMapa().getHeight() / altoMapa);
+			if(PosX == anchoMapa)
 			{
-				jugadorParaVender = jug;
-				deboVenderJugador = true;
-				encontre = true;
+				PosX--;
 			}	
+			if(PosX == altoMapa)
+			{
+				PosY--;
+			}
+			if(PosX < 0)
+				PosX = 0;
+			if(PosY < 0)
+				PosY = 0;
+			Posicion posClickeada = new Posicion(PosX,PosY);
+			Celda miCelda = m.obtenerCelda(posClickeada);
+			if(deboAgregar)
+			{	
+				Jugador j = jugadorParaAgregar.crearJugador(miCelda, m);
+				agregarJugador(j);  //posición en la cual se agregará al jugador
+			}
+			deboAgregar = false;
+			if(deboPonerBomba)
+			{
+				PowerUp bomba = gui.eliminarBomba();
+				bomba.setCelda(miCelda);
+				bomba.actualizarPosGrafico();
+				grafPiso.add(bomba.getGrafico());
+				grafPiso.repaint();
+				//inicio retardo de timepo antes de la explosión
+				bomba.iniTimer();	
+			}
+			deboPonerBomba = false;
+			///////////////////////////////////////////////////////////////////
+			// Recorro la lista de Jugadores del mapa para ver si la posición clickeada corresponde a la posición
+			// de un Jugador en el mapa. Entonces ese Jugador podrá ser vendido.
+			Iterator<Jugador> itJugador = m.getListaJugadores().iterator();
+			boolean encontre = false;
+			while(itJugador.hasNext() && !encontre)
+			{
+				Jugador jug = itJugador.next();
+				Posicion pJug = jug.getCelda().getPosCelda();
+				if(posClickeada.equals(pJug))
+				{
+					jugadorParaVender = jug;
+					deboVenderJugador = true;
+					encontre = true;
+				}	
+			}
 		}		
 	}
 		

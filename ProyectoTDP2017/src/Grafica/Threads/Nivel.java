@@ -1,11 +1,14 @@
-package Logica;
+package Grafica.Threads;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
-import Grafica.gMapa;
+import Grafica.GUI.gMapa;
+import Logica.Celda;
+import Logica.Enemigo;
+import Logica.Posicion;
 import Logica.CreadorEnemigo.CreadorEnemigo;
 import Logica.ObstaculosConVida.Arbol;
 import Logica.ObstaculosConVida.ObstaculoConVida;
@@ -90,9 +93,7 @@ public class Nivel extends Thread
 		cerrarArchivo();	
 		} 
 		catch (IOException e)
-		{
-			System.out.println("Ocurrió error de lectura");
-		} 
+		{} 
 		catch (ClassNotFoundException e)
 		{}
 		catch (SecurityException e) 

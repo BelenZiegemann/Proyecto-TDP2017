@@ -1,4 +1,4 @@
-package Grafica;
+package Grafica.GUI;
  
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import Grafica.GUI.gMapa;
 import Logica.Contenido;
 import Logica.Enemigo;
 import Logica.Jugador;
@@ -31,8 +32,6 @@ import Logica.CreadorJugador.CreadorGuardianNocturno;
 import Logica.CreadorJugador.CreadorInmaculado;
 import Logica.CreadorJugador.CreadorJonSnow;
 import Logica.CreadorJugador.CreadorJugador;
-import Logica.ObjetoPrecioso.Bomba;
-
 import java.awt.Font;
 
 
@@ -47,7 +46,7 @@ public class GUI extends JFrame implements MouseListener
 	private JPanel contentPane;	
 	private gMapa mapa;	
 	private JLabel lblMensajePU = new JLabel(" ");
-	private LinkedList<PowerUp> bombas = new LinkedList<PowerUp>();
+	private LinkedList<PowerUp> objetosPreciosos = new LinkedList<PowerUp>();
 	private	JLabel lblbomba= new JLabel("Bombas");
 	private JButton btnbomba= new JButton();
 	private	JLabel lblcantbombas = new JLabel("Cantidad");
@@ -465,17 +464,14 @@ public class GUI extends JFrame implements MouseListener
 		return contentPane;
 	}
 	
-	public void mostrarMensajePerder()
-	{
-		JOptionPane.showMessageDialog(contentPane, "PERDISTE: HAN LLEGADO AL MURO", "GAME OF THRONES", JOptionPane.INFORMATION_MESSAGE);
-	}
-	
-	public void mostrarMensajeGanar()
+	public void mostrarSiguienteNivel()
 	{
 		int resp = JOptionPane.showConfirmDialog(contentPane, "GANASTE EL NIVEL: ¿SIGUIENTE NIVEL?", "GAME OF THRONES", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		if(resp != 1) // si la respuesta es SI
-		{
 			mapa.siguienteNivel();
+		else
+		{	
+			mapa.detener();
 		}
 	}
 	
@@ -484,15 +480,15 @@ public class GUI extends JFrame implements MouseListener
 		lblMensajePU.setText(mensaje); 
 	}
 	
-	public void agregarBomba(PowerUp bomba)
+	public void agregarObjetoPrecioso(PowerUp op)
 	{
-		bombas.addLast(bomba);
+		objetosPreciosos.addLast(op);
 	}
 	
 	public PowerUp eliminarBomba()
 	{
 		PowerUp eliminado = null;
-		int cantBomb = bombas.size();
+		int cantBomb = objetosPreciosos.size();
 		if(cantBomb >= 1)
 		{
 			if(cantBomb == 1)	
@@ -504,24 +500,41 @@ public class GUI extends JFrame implements MouseListener
 			}
 			else
 			{
-				lblmostrarcantbombas.setText("" + (bombas.size()-1));
+				lblmostrarcantbombas.setText("" + (objetosPreciosos.size()-1));
 			}
-			eliminado = bombas.removeLast();
+			eliminado = objetosPreciosos.removeLast();
 		}
 		return eliminado; 	
 	}
 	
 	public void mouseClicked(java.awt.event.MouseEvent arg0)
 	{ 	
-		if(bombas.size() > 0)
+		if(objetosPreciosos.size() > 0)
 		{
-			lblbomba.setVisible(true);
-			btnbomba.setVisible(true);
-			lblcantbombas.setVisible(true);
-			lblmostrarcantbombas.setVisible(true);
-			lblmostrarcantbombas.setText("" + bombas.size());
-			mapa.obtenerPisoMapa().remove(bombas.getLast().getGrafico());
-			mapa.obtenerPisoMapa().repaint();
+			PowerUp opUltimo = objetosPreciosos.getLast();
+			if(opUltimo.getVisitor() == null)
+			{
+				//si es un huevo de Dragón
+				//agrego 2000 monedas al presupuesto 
+				mapa.obtenerMapaLogico().obtenerPantalla().setPresupuesto(2000);
+				//elimino del piso del mapa
+				mapa.obtenerPisoMapa().remove(opUltimo.getGrafico());
+				mapa.obtenerPisoMapa().repaint();
+				//elimino de la lista de objetos preciosos
+				objetosPreciosos.removeLast();
+			}
+			else
+			{
+				//si es una bomba
+				lblbomba.setVisible(true);
+				btnbomba.setVisible(true);
+				lblcantbombas.setVisible(true);
+				lblmostrarcantbombas.setVisible(true);
+				lblmostrarcantbombas.setText("" + objetosPreciosos.size());
+				//elimino del piso del mapa
+				mapa.obtenerPisoMapa().remove(opUltimo.getGrafico());
+				mapa.obtenerPisoMapa().repaint();
+			}
 		}
 	}
 	public void mouseEntered(java.awt.event.MouseEvent arg0)

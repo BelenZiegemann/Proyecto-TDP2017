@@ -3,7 +3,7 @@ package Grafica.Threads;
 import java.util.LinkedList;
 import java.util.Random;
 
-import Grafica.gMapa;
+import Grafica.GUI.gMapa;
 import Logica.Celda;
 import Logica.Posicion;
 import Logica.ObstaculosConVida.ObstaculoConVida;

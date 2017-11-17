@@ -80,6 +80,11 @@ public abstract class PowerUp
 		return miCelda;
 	}
 	
+	public Mapa getMapa()
+	{
+		return mapa;
+	}
+	
 	public void setCelda(Celda c)
 	{
 		miCelda = c;
