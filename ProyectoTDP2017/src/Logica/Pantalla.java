@@ -26,7 +26,7 @@ public class Pantalla
 	 */
 	public Pantalla(Mapa m)
 	{
-		monedas = 1000;
+		monedas = 10000;
 		puntos = 0;
 		mapa = m;
 		listaPremiosObtenidos = new LinkedList<Premio>();
