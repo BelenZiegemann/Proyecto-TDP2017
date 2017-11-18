@@ -35,11 +35,10 @@ public class VisitorJugador extends Visitor
 		Celda celdaDisparo = j.getMapa().obtenerCelda(new Posicion(miX-1, miY));
 		DisparoJugador disparoJug = new DisparoJugador(celdaDisparo, j.getMapa(),e);
 		j.getMapa().agregarDisparo(disparoJug);	
-		
 		//realizo el ataque
-		e.setVida(e.getVida() - j.getFuerzaImpacto());
-		if (e.getVida() <= 0) 
+		if(j.tieneCampoProteccion()) //si es true entonces debe matar al enemigo
 		{
+			e.setVida(0);
 			PowerUp PU = e.generarPowerUp();
 			if(PU != null) 
 			{
@@ -49,9 +48,29 @@ public class VisitorJugador extends Visitor
 				}
 				j.getMapa().agregarPowerUp(PU);
 			}
-			e.setEstaVivo(false);
 			e.setPuntajeMonedas();
-			e.getCelda().setContenido(null);	
+			e.getCelda().setContenido(null);
+			e.setEstaVivo(false);
+		}
+		else
+		{
+			e.setVida(e.getVida() - j.getFuerzaImpacto());
+			if (e.getVida() <= 0) 
+			{	
+				PowerUp PU = e.generarPowerUp();
+				if(PU != null) 
+				{
+					if(PU.getGrafico() == null)
+					{	//entonces ataco diractamente porque es de magia temporal
+						j.serAfectado(PU.getVisitor());
+					}
+					j.getMapa().agregarPowerUp(PU);
+				}
+				
+				e.setPuntajeMonedas();
+				e.getCelda().setContenido(null);
+				e.setEstaVivo(false);	
+			}	
 		}
 	}
 	

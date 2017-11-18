@@ -34,13 +34,16 @@ public class VisitorEnemigo extends Visitor
 		e.getMapa().agregarDisparo(disparoEnem);
 		
 		//realizo el ataque
-		j.setVida(j.getVida() - e.getFuerzaImpacto());
-		if (j.getVida() <= 0) 
+		if(!j.tieneCampoProteccion())
 		{
-			j.setEstaVivo(false);
-			j.getCelda().setContenido(null);
-			e.setMovimiento(true);	
-			e.setImagenEnMovimiento();
+			j.setVida(j.getVida() - e.getFuerzaImpacto());
+			if (j.getVida() <= 0) 
+			{
+				j.setEstaVivo(false);
+				j.getCelda().setContenido(null);
+				e.setMovimiento(true);	
+				e.setImagenEnMovimiento();
+			}
 		}
 	}
 	
