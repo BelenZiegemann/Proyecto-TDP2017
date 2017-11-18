@@ -511,6 +511,7 @@ public class GUI extends JFrame implements MouseListener
 	{ 	
 		if(objetosPreciosos.size() > 0)
 		{
+			
 			PowerUp opUltimo = objetosPreciosos.getLast();
 			if(opUltimo.getVisitor() == null)
 			{
@@ -535,6 +536,7 @@ public class GUI extends JFrame implements MouseListener
 				mapa.obtenerPisoMapa().remove(opUltimo.getGrafico());
 				mapa.obtenerPisoMapa().repaint();
 			}
+			opUltimo.getGrafico().removeMouseListener(this);
 		}
 	}
 	public void mouseEntered(java.awt.event.MouseEvent arg0)
