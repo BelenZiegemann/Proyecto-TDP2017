@@ -10,9 +10,9 @@ CreadorCaminanteBlanco-3
 CreadorCaminanteBlanco-4
 CreadorCaminanteBlanco-5
 
-CreadorCaminanteBlanco-0
+CreadorDragonDeHielo-0
 CreadorCaminanteBlanco-1
 CreadorCaminanteBlanco-2
 CreadorCaminanteBlanco-3
-CreadorCaminanteBlanco-4
+CreadorDragonDeHielo-4
 CreadorCaminanteBlanco-5

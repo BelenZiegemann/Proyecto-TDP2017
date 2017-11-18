@@ -93,7 +93,7 @@ public class ThreadPowerUp extends Thread
 				gmapa.obtenerPisoMapa().repaint();
 				explosionParaEliminar.addLast(lbl);
 			}	
-		//	explosionAuxiliar.clear();
+
 			timerExplosion.start();
 		}
 	}
