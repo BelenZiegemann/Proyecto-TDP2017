@@ -17,7 +17,7 @@ public class CampoDeProteccion extends MagiaTemporal
 		tiempo = 8;
 		timer.setInitialDelay(tiempo * 1000);
 	}
-	
+	 
 	public void accionFinTimer() 
 	{
 		jugadorConMagia.setCampoProteccion(false);
