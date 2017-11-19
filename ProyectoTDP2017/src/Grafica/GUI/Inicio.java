@@ -38,7 +38,6 @@ public class Inicio extends JFrame
 				{
 					frame = new Inicio();
 					frame.setVisible(true);
-					
 				} catch (Exception e) 
 				{
 					e.printStackTrace();
@@ -86,6 +85,7 @@ public class Inicio extends JFrame
 						{
 							GUI frame = new GUI();
 							frame.setVisible(true);	
+							dispose();
 						} 
 						catch (Exception e)
 						{

@@ -1,8 +1,6 @@
 package Grafica.GUI;
  
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -34,13 +32,12 @@ import Logica.CreadorJugador.CreadorJonSnow;
 import Logica.CreadorJugador.CreadorJugador;
 import java.awt.Font;
 
-
-@SuppressWarnings("serial")
 /**
  * Clase GUI
  * @author Bernabé Di Marco - Gabriel Ignacio Paez - Belén Ziegemann
  *
  */
+@SuppressWarnings("serial")
 public class GUI extends JFrame implements MouseListener
 {
 	private JPanel contentPane;	
@@ -51,22 +48,6 @@ public class GUI extends JFrame implements MouseListener
 	private JButton btnbomba= new JButton();
 	private	JLabel lblcantbombas = new JLabel("Cantidad");
 	private JLabel lblmostrarcantbombas = new JLabel("0");
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI frame = new GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -88,7 +69,7 @@ public class GUI extends JFrame implements MouseListener
 		getContentPane().add(contentPane);
 		
 		//creo el mapa gráfico
-		mapa = new gMapa(this);
+		mapa = new gMapa(this); 
 		
 		//Label para powerup (magia temporal)
 		JLabel lblMagiaTemp = new JLabel("Estado de Magia");
@@ -154,6 +135,23 @@ public class GUI extends JFrame implements MouseListener
 		lblmostrarcantbombas.setVisible(false);;
 		getContentPane().add(lblmostrarcantbombas);
 		
+		//botón reiniciar partida
+		Icon imagenNuevaPartida = new ImageIcon(this.getClass().getResource("/Imagenes/reiniciarPartida.jpg"));
+		JButton btnNuevaPartida = new JButton();
+		btnNuevaPartida.setIcon(imagenNuevaPartida);
+		btnNuevaPartida.setBounds(762, 532 ,imagenNuevaPartida.getIconWidth(), imagenNuevaPartida.getIconHeight());
+		btnNuevaPartida.setFocusPainted(false);
+		getContentPane().add(btnNuevaPartida);
+		btnNuevaPartida.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{	
+				GUI frame = new GUI();
+				frame.setVisible(true);	
+				dispose();
+			}
+		});
+
 		//Label Puntaje
 		JLabel lblPuntaje = new JLabel("Puntaje");
 		lblPuntaje.setFont(new Font("Tahoma", Font.BOLD, 11));
