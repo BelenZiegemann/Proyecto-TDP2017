@@ -268,17 +268,9 @@ public class gMapa implements MouseListener
 			int PosX = (grafPiso.getMousePosition().x) / (gui.getPanelMapa().getWidth() / anchoMapa);
 			int PosY = (grafPiso.getMousePosition().y) / (gui.getPanelMapa().getHeight() / altoMapa);
 			if(PosX == anchoMapa)
-			{
 				PosX--;
-			}	
-			if(PosX == altoMapa)
-			{
+			if(PosY == altoMapa)
 				PosY--;
-			}
-			if(PosX < 0)
-				PosX = 0;
-			if(PosY < 0)
-				PosY = 0;
 			Posicion posClickeada = new Posicion(PosX,PosY);
 			Celda miCelda = m.obtenerCelda(posClickeada);
 			if(deboAgregar)
