@@ -65,7 +65,7 @@ public class gMapa implements MouseListener
 		m = new Mapa(altoMapa, anchoMapa, gui.getPanelMapa().getHeight(), gui.getPanelMapa().getWidth());
 		
 		//Creo un Thread para el Nivel
-		level = new Nivel(1,"src\\Logica\\Niveles\\Nivel1.txt",this);
+		level = new Nivel(1,"Logica/Niveles/Nivel1.txt",this);
 		level.start();
 		
 		//Creo un ThreadJugador
@@ -205,7 +205,7 @@ public class gMapa implements MouseListener
 		gui.mostrarMensajePU("");
 		powerups.stopTimer();
 		powerups.eliminarExplosion();
-		level = new Nivel(level.getNumNivel() + 1,"src\\Logica\\Niveles\\Nivel2.txt",this);
+		level = new Nivel(level.getNumNivel() + 1,"Logica/Niveles/Nivel2.txt",this);
 		Thread tl = new Thread(level);
 		tl.start();
 		level.start();

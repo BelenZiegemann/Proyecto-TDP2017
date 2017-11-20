@@ -25,7 +25,7 @@ public class Nivel extends Thread
 	
 	private int numeroNivel;
 	private int retardoOleada; // en milisegundos
-	private FileReader fichero;
+	private InputStream fichero;
 	private BufferedReader br;
 	private String ruta;
 	protected volatile boolean Detener;
@@ -126,17 +126,9 @@ public class Nivel extends Thread
 	
 	private void abrirArchivo()
 	{
-		try
-		{   
-			fichero = new FileReader (new File(ruta));
-			br = new BufferedReader(fichero);
-		}
-		catch (IOException e) 
-		{
-			System.out.println("Error al abrir el archivo");
-	    	//si se produjo un error intento cerrar el archivo
-			cerrarArchivo();
-		}
+			ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			fichero = loader.getResourceAsStream(ruta);
+			br = new BufferedReader(new InputStreamReader(fichero));
 	}
 
 	private void cerrarArchivo()
@@ -147,8 +139,7 @@ public class Nivel extends Thread
             {
             	fichero.close();
             	detener();
-            }
-            
+            }  
     	}
         catch (Exception e) 
         {
