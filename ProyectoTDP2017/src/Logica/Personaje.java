@@ -15,6 +15,7 @@ public abstract class Personaje extends Contenido
 	protected int puntosVida = 100;
 	protected int fuerzaImpacto = 10;
 	protected int alcance = 1;
+	protected boolean campoProteccion = false;
 	protected Visitor proyectil;
 	protected LinkedList<Celda> misCeldas;
 	
@@ -46,6 +47,11 @@ public abstract class Personaje extends Contenido
 		return fuerzaImpacto;
 	}
 	
+	public boolean tieneCampoProteccion()
+	{
+		return campoProteccion;
+	}
+	
 	public void setVida(int v)
 	{
 		puntosVida = v;
@@ -59,6 +65,11 @@ public abstract class Personaje extends Contenido
 	public void setAlcance(int a)
 	{
 		alcance = a;
+	}
+	
+	public void setCampoProteccion(boolean c)
+	{
+		campoProteccion = c; 
 	}
 	
 	public LinkedList<Celda> getMisCeldas()

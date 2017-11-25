@@ -1,6 +1,6 @@
 package Logica.MagiaTemporal;
 
-import Logica.Jugador;
+import Logica.Personaje;
 import Logica.PowerUp;
 
 /**
@@ -11,17 +11,17 @@ import Logica.PowerUp;
 public abstract class MagiaTemporal extends PowerUp 
 {
 		protected int tiempo;
-		protected Jugador jugadorConMagia;
+		protected Personaje personajeConMagia;
 		
 		protected MagiaTemporal()
 		{
 			super();
-			jugadorConMagia =  null;
+			personajeConMagia =  null;
 		}
 		
-		public void setJugadorMagia(Jugador j)
+		public void setPersonajeMagia(Personaje p)
 		{
-			jugadorConMagia = j;
+			personajeConMagia = p;
 		}
 		
 		public abstract void accionFinTimer();

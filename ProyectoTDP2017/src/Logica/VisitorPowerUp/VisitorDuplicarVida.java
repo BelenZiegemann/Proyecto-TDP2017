@@ -23,9 +23,9 @@ public class VisitorDuplicarVida extends VisitorPowerUp
 	public void afectar(Jugador j)
 	{
 		j.setVida(2 * j.getVida());
-		dv.setJugadorMagia(j);	
+		dv.setPersonajeMagia(j);	
 		dv.iniTimer();
-		dv.setMensajeEstadoPU("Vida Duplicada ACTIVADA");	
+		dv.setMensajeEstadoPU("<html><body>Vida Duplicada<br>De JUGADOR: ACTIVADA</body></html>");
 	}
 	public void afectar(Enemigo e)
 	{}

@@ -20,8 +20,8 @@ public class CampoDeProteccion extends MagiaTemporal
 	 
 	public void accionFinTimer() 
 	{
-		jugadorConMagia.setCampoProteccion(false);
-		mensajeEstadoPU = "C. de Protección DESACTIVADO";
+		personajeConMagia.setCampoProteccion(false);
+		mensajeEstadoPU = "<html><body>Campo de Protección: <br>DESACTIVADO</body></html>";
 	}
 
 	public PowerUp clone() 

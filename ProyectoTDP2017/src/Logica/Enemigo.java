@@ -154,6 +154,17 @@ public abstract class Enemigo extends Personaje
 		return puObtenido; 
 	}
 	
+	public void generarCampoDeProteccion()
+	{
+		double x = Math.random();
+		if(x <= 0.33)
+		{
+			CampoDeProteccion campoProteccion = new CampoDeProteccion();
+			this.serAfectado(campoProteccion.getVisitor());
+			this.getMapa().agregarPowerUp(campoProteccion);		
+		}
+	}
+	
 	public void controlarTamaño()
 	{
 		misCeldas.addLast(miCelda); //desde la posición de miCelda comenzaría el jlabel del enemigo (mGrafico)

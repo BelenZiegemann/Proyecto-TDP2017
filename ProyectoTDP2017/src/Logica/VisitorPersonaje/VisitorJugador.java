@@ -37,30 +37,10 @@ public class VisitorJugador extends Visitor
 		j.getMapa().agregarDisparo(disparoJug);	
 		//realizo el ataque
 		if(j.tieneCampoProteccion()) //si es true entonces debe matar al enemigo
-		{
-			e.setVida(0);
-			PowerUp PU = e.generarPowerUp();
-			if(PU != null) 
+		{							//mientras el enemigo no tenga campo de protección activado
+			if(!e.tieneCampoProteccion())
 			{
-				if(PU.getGrafico() == null)
-				{	//entonces ataco diractamente porque es de magia temporal
-					j.serAfectado(PU.getVisitor());
-				}
-				j.getMapa().agregarPowerUp(PU);
-			}
-			e.setPuntajeMonedas();
-			for(Celda cell : e.getMisCeldas())
-			{
-				j.getMapa().obtenerCelda(cell.getPosCelda()).setContenido(null);
-				cell.setContenido(null);
-			}
-			e.setEstaVivo(false);
-		}
-		else
-		{
-			e.setVida(e.getVida() - j.getFuerzaImpacto());
-			if (e.getVida() <= 0) 
-			{	
+				e.setVida(0);
 				PowerUp PU = e.generarPowerUp();
 				if(PU != null) 
 				{
@@ -76,8 +56,34 @@ public class VisitorJugador extends Visitor
 					j.getMapa().obtenerCelda(cell.getPosCelda()).setContenido(null);
 					cell.setContenido(null);
 				}
-				e.setEstaVivo(false);	
-			}	
+				e.setEstaVivo(false);
+			}
+		}
+		else
+		{
+			if(!e.tieneCampoProteccion())
+			{	
+				e.setVida(e.getVida() - j.getFuerzaImpacto());
+				if (e.getVida() <= 0) 
+				{	
+					PowerUp PU = e.generarPowerUp();
+					if(PU != null) 
+					{
+						if(PU.getGrafico() == null)
+						{	//entonces ataco diractamente porque es de magia temporal
+							j.serAfectado(PU.getVisitor());
+						}
+						j.getMapa().agregarPowerUp(PU);
+					}
+					e.setPuntajeMonedas();
+					for(Celda cell : e.getMisCeldas())
+					{
+						j.getMapa().obtenerCelda(cell.getPosCelda()).setContenido(null);
+						cell.setContenido(null);
+					}
+					e.setEstaVivo(false);	
+				}	
+			}		
 		}
 	}
 	

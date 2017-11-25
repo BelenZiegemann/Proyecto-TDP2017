@@ -20,8 +20,8 @@ public class DuplicarVida extends MagiaTemporal
 	
 	public void accionFinTimer()
 	{
-		jugadorConMagia.setVida(jugadorConMagia.getVida() / 2);
-		mensajeEstadoPU = "Vida Duplicada DESACTIVADA";
+		personajeConMagia.setVida(personajeConMagia.getVida() / 2);
+		mensajeEstadoPU = "<html><body>Vida Duplicada <br>De JUGADORr: DESACTIVADA</body></html>";	
 	}
 	
 	public PowerUp clone()

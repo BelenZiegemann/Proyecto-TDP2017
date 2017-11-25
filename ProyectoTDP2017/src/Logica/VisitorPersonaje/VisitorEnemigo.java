@@ -33,19 +33,37 @@ public class VisitorEnemigo extends Visitor
 		DisparoEnemigo disparoEnem = new DisparoEnemigo(celdaDisparo, e.getMapa(), j);
 		e.getMapa().agregarDisparo(disparoEnem);
 		//realizo el ataque
-		if(!j.tieneCampoProteccion())
-		{
-			j.setVida(j.getVida() - e.getFuerzaImpacto());
-			if (j.getVida() <= 0) 
+		if(e.tieneCampoProteccion()) //si es true entonces debe matar al jugador 
+		{							 //mientras el jugador no tenga campo de protección activado
+			if(!j.tieneCampoProteccion())
 			{
-				j.setEstaVivo(false);
+				j.setVida(0);
 				for(Celda cell : j.getMisCeldas())
 				{
 					e.getMapa().obtenerCelda(cell.getPosCelda()).setContenido(null);
 					cell.setContenido(null);
 				}
+				j.setEstaVivo(false);
 				e.setMovimiento(true);	
 				e.setImagenEnMovimiento();
+			}
+		}
+		else
+		{
+			if(!j.tieneCampoProteccion())
+			{
+				j.setVida(j.getVida() - e.getFuerzaImpacto());
+				if (j.getVida() <= 0) 
+				{
+					for(Celda cell : j.getMisCeldas())
+					{
+						e.getMapa().obtenerCelda(cell.getPosCelda()).setContenido(null);
+						cell.setContenido(null);
+					}
+					j.setEstaVivo(false);
+					e.setMovimiento(true);	
+					e.setImagenEnMovimiento();
+				}
 			}
 		}
 	}

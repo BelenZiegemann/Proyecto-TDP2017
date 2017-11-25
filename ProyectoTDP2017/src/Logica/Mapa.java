@@ -147,6 +147,7 @@ public class Mapa
 					Posicion pcell = cell.getPosCelda();
 					obtenerCelda(pcell).setContenido(enem);
 				}
+				enem.generarCampoDeProteccion();
 				misEnemigos.addLast(enem);
 				lblSalida =  enem.getGrafico();
 			}

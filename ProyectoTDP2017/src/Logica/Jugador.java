@@ -11,7 +11,6 @@ import Logica.VisitorPowerUp.VisitorPowerUp;
 public abstract class Jugador extends Personaje
 {
 	protected int precio = 125;
-	protected boolean campoProteccion = false;
 	
 	public void seratacado(Visitor p)
 	{
@@ -26,15 +25,6 @@ public abstract class Jugador extends Personaje
 	public int getPrecio()
 	{
 		return precio;
-	}
-	
-	public boolean tieneCampoProteccion()
-	{
-		return campoProteccion;
-	}
-	public void setCampoProteccion(boolean c)
-	{
-		campoProteccion = c; 
 	}
 	
 	public void mover() 

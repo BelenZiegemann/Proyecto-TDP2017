@@ -21,8 +21,8 @@ public class DuplicarFuerza extends MagiaTemporal
 	
 	public void accionFinTimer()
 	{
-		jugadorConMagia.setFuerzaImpacto(jugadorConMagia.getFuerzaImpacto() / 2);
-		mensajeEstadoPU = "Fuerza Duplicada DESACTIVADA";
+		personajeConMagia.setFuerzaImpacto(personajeConMagia.getFuerzaImpacto() / 2);
+		mensajeEstadoPU = "<html><body>Fuerza Duplicada <br>De JUGADOR: DESACTIVADA</body></html>";
 	}
 	
 	public PowerUp clone()

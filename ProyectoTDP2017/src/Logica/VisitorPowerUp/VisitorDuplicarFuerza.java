@@ -23,9 +23,9 @@ public class VisitorDuplicarFuerza extends VisitorPowerUp
 	public void afectar(Jugador j)
 	{
 		j.setFuerzaImpacto(2 * j.getFuerzaImpacto());
-		df.setJugadorMagia(j);
+		df.setPersonajeMagia(j);
 		df.iniTimer();
-		df.setMensajeEstadoPU("Fuerza Duplicada ACTIVADA");
+		df.setMensajeEstadoPU("<html><body>Fuerza Duplicada<br>De JUGADOR: ACTIVADA</body></html>");
 	}
 	public void afectar(Enemigo e)
 	{}

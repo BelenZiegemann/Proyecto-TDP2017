@@ -85,16 +85,16 @@ public class GUI extends JFrame implements MouseListener
 		//Label mensaje powerup
 		lblMensajePU.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblMensajePU.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensajePU.setBounds(762, 208 , 240, 30);
+		lblMensajePU.setBounds(762, 208 , 240, 60);
 		lblMensajePU.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
 		lblMensajePU.setBackground(Color.DARK_GRAY);
 		lblMensajePU.setForeground(Color.RED);
 		getContentPane().add(lblMensajePU);
-		
+
 		//Label bomba
 		lblbomba.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblbomba.setHorizontalAlignment(SwingConstants.CENTER);
-		lblbomba.setBounds(807, 248 , 150, 30);
+		lblbomba.setBounds(807, 278 , 150, 30);
 		lblbomba.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
 		lblbomba.setBackground(Color.ORANGE);
 		lblbomba.setForeground(Color.DARK_GRAY);
@@ -104,7 +104,7 @@ public class GUI extends JFrame implements MouseListener
 		//JButton bomba
 		Icon imagenbtnBomba = new ImageIcon(this.getClass().getResource("/Imagenes/botonBomba.png"));
 		btnbomba.setIcon(imagenbtnBomba);
-		btnbomba.setBounds(807, 278 , imagenbtnBomba.getIconWidth(), imagenbtnBomba.getIconHeight());
+		btnbomba.setBounds(807, 308 , imagenbtnBomba.getIconWidth(), imagenbtnBomba.getIconHeight());
 		btnbomba.setFocusPainted(false);
 		btnbomba.setVisible(false);
 		getContentPane().add(btnbomba);
@@ -119,7 +119,7 @@ public class GUI extends JFrame implements MouseListener
 		//Label cantidad de bombas
 		lblcantbombas.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblcantbombas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblcantbombas.setBounds(882, 278 , 75, 38);
+		lblcantbombas.setBounds(882, 308 , 75, 38);
 		lblcantbombas.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
 		lblcantbombas.setBackground(Color.DARK_GRAY);
 		lblcantbombas.setForeground(Color.ORANGE);
@@ -129,7 +129,7 @@ public class GUI extends JFrame implements MouseListener
 		//Label mostrar cantidad de bombas
 		lblmostrarcantbombas.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblmostrarcantbombas.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmostrarcantbombas.setBounds(882, 316 , 75, 38);
+		lblmostrarcantbombas.setBounds(882, 346 , 75, 38);
 		lblmostrarcantbombas.setOpaque(true);	//lo debo poner para que se muestre el color de fondo del JLabel
 		lblmostrarcantbombas.setBackground(Color.WHITE);
 		lblmostrarcantbombas.setForeground(Color.DARK_GRAY);
