@@ -1,5 +1,7 @@
 package Logica;
 
+import java.util.LinkedList;
+
 import Logica.VisitorPersonaje.Visitor;
 import Logica.VisitorPowerUp.VisitorPowerUp;
 
@@ -13,8 +15,8 @@ public abstract class Personaje extends Contenido
 	protected int puntosVida = 100;
 	protected int fuerzaImpacto = 10;
 	protected int alcance = 1;
-	protected boolean estaVivo = true;
 	protected Visitor proyectil;
+	protected LinkedList<Celda> misCeldas;
 	
 	public abstract void seratacado(Visitor p);
 	
@@ -22,14 +24,11 @@ public abstract class Personaje extends Contenido
 	
 	public abstract void mover();
 	
+	public abstract void controlarTamaño(); //asumo que el personaje solo podría ocupar mas de una celda en el eje X	
+	
 	public Visitor getProyectil()
 	{
 		return proyectil;
-	}
-	
-	public boolean estaVivo()
-	{
-		return estaVivo;
 	}
 	
 	public int getVida()
@@ -47,11 +46,6 @@ public abstract class Personaje extends Contenido
 		return fuerzaImpacto;
 	}
 	
-	public void setEstaVivo(boolean b) 
-	{	
-		estaVivo = b;
-	}
-	
 	public void setVida(int v)
 	{
 		puntosVida = v;
@@ -59,12 +53,16 @@ public abstract class Personaje extends Contenido
 	
 	public void setFuerzaImpacto(int fuerzaI)
 	{
-		fuerzaImpacto = fuerzaI;
-		
+		fuerzaImpacto = fuerzaI;	
 	}
 	
 	public void setAlcance(int a)
 	{
 		alcance = a;
+	}
+	
+	public LinkedList<Celda> getMisCeldas()
+	{
+		return misCeldas;
 	}
 }

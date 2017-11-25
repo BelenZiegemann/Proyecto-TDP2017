@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import Grafica.GUI.gMapa;
+import Logica.Celda;
 import Logica.Contenido;
 import Logica.Enemigo;
 import Logica.Jugador;
@@ -243,13 +244,17 @@ public class GUI extends JFrame implements MouseListener
 						//elimino al jugador que es vendido
 						jugParaVender.setEstaVivo(false); //para que se remueva de la lista de jugadores y del mapa.
 																	//Lo hace la clase ThreadJugador
-						jugParaVender.getCelda().setContenido(null);
+						for(Celda cell : jugParaVender.getMisCeldas())
+						{
+							mapa.obtenerMapaLogico().obtenerCelda(cell.getPosCelda()).setContenido(null);
+							cell.setContenido(null);
+						}
 						mapa.obtenerPisoMapa().remove(jugParaVender.getGrafico());
 						mapa.obtenerPisoMapa().repaint();
 						mapa.obtenerMapaLogico().getListaJugadores().remove(jugParaVender);
 					
 						// lo hago porque debo actualizar el movimiento de algún enemigo que lo estaba atacando
-						Posicion posJugVenta = jugParaVender.getCelda().getPosCelda();
+						Posicion posJugVenta = jugParaVender.getMisCeldas().getFirst().getPosCelda();
 						int posjugX = posJugVenta.getEjeX();
 						int posjugY = posJugVenta.getEjeY();
 						for(int i = 1; i<= jugParaVender.getAlcance();i++)
@@ -262,20 +267,25 @@ public class GUI extends JFrame implements MouseListener
 								{
 									Iterator<Enemigo> itEnem = mapa.obtenerMapaLogico().getListaEnemigos().iterator();
 									boolean encontre = false;
+									boolean encontrePosCelda = false;
 									while(itEnem.hasNext() && !encontre)
 									{
 										Enemigo enem = itEnem.next();
-										Posicion pEnem = enem.getCelda().getPosCelda();
-										if(pEnem.equals(pos))
+										Iterator<Celda> itCeldasEnem = enem.getMisCeldas().iterator();
+										while(itCeldasEnem.hasNext() && !encontrePosCelda)
 										{
-											enem.setImagenEnMovimiento();
-											enem.setMovimiento(true);
-											enem.mover();
-											encontre = true;
+											Celda cellEnem = itCeldasEnem.next();
+											Posicion pEnem = cellEnem.getPosCelda();
+											if(pEnem.equals(pos))
+											{
+												enem.setImagenEnMovimiento();
+												enem.setMovimiento(true);
+												enem.mover();
+												encontre = true;
+												encontrePosCelda = true;
+											}
 										}
-									
 									}
-								
 								}
 							}
 						}

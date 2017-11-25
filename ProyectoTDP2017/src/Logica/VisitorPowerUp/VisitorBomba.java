@@ -1,5 +1,6 @@
 package Logica.VisitorPowerUp;
 
+import Logica.Celda;
 import Logica.Enemigo;
 import Logica.Jugador;
 import Logica.ObjetoPrecioso.Bomba;
@@ -24,18 +25,27 @@ public class VisitorBomba extends VisitorPowerUp
 	{
 		j.setVida(0);
 		j.setEstaVivo(false);
-		j.getCelda().setContenido(null);
+		for(Celda cell : j.getMisCeldas())
+		{
+			bomb.getMapa().obtenerCelda(cell.getPosCelda()).setContenido(null);
+			cell.setContenido(null);
+		}
 	}
 	public void afectar(Enemigo e)
 	{
 		e.setVida(0);
 		e.setEstaVivo(false);
-		e.getCelda().setContenido(null);
+		for(Celda cell : e.getMisCeldas())
+		{
+			bomb.getMapa().obtenerCelda(cell.getPosCelda()).setContenido(null);
+			cell.setContenido(null);
+		}
 	}
 	public void afectar(ObstaculoConVida o)
 	{
 		o.setVida(0);
 		o.setEstaVivo(false);
+		bomb.getMapa().obtenerCelda(o.getCelda().getPosCelda()).setContenido(null);
 		o.getCelda().setContenido(null);
 	}
 	public void afectar(ObstaculoPorTiempo o)

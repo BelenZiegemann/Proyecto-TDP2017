@@ -32,7 +32,7 @@ public class VisitorJugador extends Visitor
 		Posicion posJug = j.getCelda().getPosCelda();
 		int miX = posJug.getEjeX();
 		int miY = posJug.getEjeY();
-		Celda celdaDisparo = j.getMapa().obtenerCelda(new Posicion(miX-1, miY));
+		Celda celdaDisparo = j.getMapa().obtenerCelda(new Posicion(miX - j.getMisCeldas().size(), miY));
 		DisparoJugador disparoJug = new DisparoJugador(celdaDisparo, j.getMapa(),e);
 		j.getMapa().agregarDisparo(disparoJug);	
 		//realizo el ataque
@@ -49,7 +49,11 @@ public class VisitorJugador extends Visitor
 				j.getMapa().agregarPowerUp(PU);
 			}
 			e.setPuntajeMonedas();
-			e.getCelda().setContenido(null);
+			for(Celda cell : e.getMisCeldas())
+			{
+				j.getMapa().obtenerCelda(cell.getPosCelda()).setContenido(null);
+				cell.setContenido(null);
+			}
 			e.setEstaVivo(false);
 		}
 		else
@@ -66,9 +70,12 @@ public class VisitorJugador extends Visitor
 					}
 					j.getMapa().agregarPowerUp(PU);
 				}
-				
 				e.setPuntajeMonedas();
-				e.getCelda().setContenido(null);
+				for(Celda cell : e.getMisCeldas())
+				{
+					j.getMapa().obtenerCelda(cell.getPosCelda()).setContenido(null);
+					cell.setContenido(null);
+				}
 				e.setEstaVivo(false);	
 			}	
 		}

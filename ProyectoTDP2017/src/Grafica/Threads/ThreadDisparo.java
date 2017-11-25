@@ -54,7 +54,6 @@ public class ThreadDisparo extends Thread
 					{
 						DisparosParaEliminar.addLast(d);
 					}
-				
 				}
 				
 				//RECORRO LA LISTA AUXILIAR Y VOY ELIMINANDO LOS DISPAROS

@@ -28,11 +28,10 @@ public class VisitorEnemigo extends Visitor
 		Posicion posEnem = e.getCelda().getPosCelda();
 		int miX = posEnem.getEjeX();
 		int miY = posEnem.getEjeY();
-		Posicion posInicialDisparo = new Posicion(miX+1, miY);
+		Posicion posInicialDisparo = new Posicion(miX + e.getMisCeldas().size(), miY);
 		Celda celdaDisparo = e.getMapa().obtenerCelda(posInicialDisparo);
 		DisparoEnemigo disparoEnem = new DisparoEnemigo(celdaDisparo, e.getMapa(), j);
 		e.getMapa().agregarDisparo(disparoEnem);
-		
 		//realizo el ataque
 		if(!j.tieneCampoProteccion())
 		{
@@ -40,7 +39,11 @@ public class VisitorEnemigo extends Visitor
 			if (j.getVida() <= 0) 
 			{
 				j.setEstaVivo(false);
-				j.getCelda().setContenido(null);
+				for(Celda cell : j.getMisCeldas())
+				{
+					e.getMapa().obtenerCelda(cell.getPosCelda()).setContenido(null);
+					cell.setContenido(null);
+				}
 				e.setMovimiento(true);	
 				e.setImagenEnMovimiento();
 			}
@@ -59,16 +62,16 @@ public class VisitorEnemigo extends Visitor
 		Posicion posEnem = e.getCelda().getPosCelda();
 		int miX = posEnem.getEjeX();
 		int miY = posEnem.getEjeY();
-		Posicion posInicialDisparo = new Posicion(miX+1, miY);
+		Posicion posInicialDisparo = new Posicion(miX + e.getMisCeldas().size(), miY);
 		Celda celdaDisparo = e.getMapa().obtenerCelda(posInicialDisparo);
 		DisparoEnemigo disparoEnem = new DisparoEnemigo(celdaDisparo, e.getMapa(), o);
 		e.getMapa().agregarDisparo(disparoEnem);
-		
 		//realizo el ataque
 		o.setVida(o.getVida() - e.getFuerzaImpacto());
 		if (o.getVida() <= 0)
 		{
 			o.setEstaVivo(false);
+			e.getMapa().obtenerCelda(o.getCelda().getPosCelda()).setContenido(null);
 			o.getCelda().setContenido(null);
 			this.e.setMovimiento(true);
 			this.e.setImagenEnMovimiento();

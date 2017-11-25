@@ -1,5 +1,7 @@
 package Logica.Enemigos;
 
+import java.util.LinkedList;
+
 import javax.swing.ImageIcon;
 import Logica.Celda;
 import javax.swing.JLabel;
@@ -38,6 +40,9 @@ public class ReyDeLaNoche extends Enemigo
 		desplX = 0;
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();
 		mGrafico.setBounds(desplX,desplY,imagen.getIconWidth(),imagen.getIconHeight());	
+		//veo si el Rey de la Noche ocupa mas de una celda
+		misCeldas = new LinkedList<Celda>();
+		controlarTamaño();
 		proyectil = new VisitorEnemigo(this);
 	}
 	

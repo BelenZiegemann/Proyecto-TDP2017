@@ -1,5 +1,7 @@
 package Logica.Enemigos;
 
+import java.util.LinkedList;
+
 import javax.swing.ImageIcon;
 import Logica.Celda;
 import javax.swing.JLabel;
@@ -27,7 +29,6 @@ public class CaminanteBlanco extends Enemigo
 		fuerzaImpacto = 2 * fuerzaImpacto;
 		puntaje = 400;
 		rangoMonedas = 400;
-		
 		cantDesplazada = 0;	// Se usará para controlar cuánto se mueve el JLabel dentro del ancho real de la celda
 		anchoRealCelda = mapa.obtenerAnchoReal() / mapa.obtenerAncho();	
 		//agrego la gráfica al caminante
@@ -36,6 +37,10 @@ public class CaminanteBlanco extends Enemigo
 		desplX = 0;
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();
 		mGrafico.setBounds(desplX,desplY,imagen.getIconWidth(),imagen.getIconHeight());	
+		//veo si el caminante ocupa mas de una celda
+		misCeldas = new LinkedList<Celda>();
+		controlarTamaño();
+		//agrego proyectil
 		proyectil = new VisitorEnemigo(this);
 	}
 	public void setImagenEnMovimiento()

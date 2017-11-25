@@ -1,11 +1,11 @@
 package Logica.Jugadores;
 
+import java.util.LinkedList;
+
 import javax.swing.ImageIcon;
 
 import javax.swing.JLabel;
 
-import Logica.Jugador;
-import Logica.Mapa;
 import Logica.VisitorPersonaje.VisitorJugador;
 import Logica.*;
 
@@ -27,14 +27,17 @@ public class Dothraki extends Jugador
 		puntosVida = 2 * puntosVida;
 		fuerzaImpacto = 2 * fuerzaImpacto;
 		precio = 350;
-		alcance = 2 * alcance;
-		
+		alcance = 2;
 		//agrego la gráfica a Dothraki
 		imagen = new ImageIcon(this.getClass().getResource("/Imagenes/Dothraki.png"));
 		mGrafico = new JLabel(imagen);			
 		desplX = (mapa.obtenerAnchoReal() / mapa.obtenerAncho()) * miCelda.getPosCelda().getEjeX();
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();						
 		mGrafico.setBounds(desplX, desplY ,imagen.getIconWidth(),imagen.getIconHeight());	
+		//veo si Dothraki ocupa mas de una celda
+		misCeldas = new LinkedList<Celda>();
+		controlarTamaño();
+		
 		proyectil = new VisitorJugador(this);
 	}
 	

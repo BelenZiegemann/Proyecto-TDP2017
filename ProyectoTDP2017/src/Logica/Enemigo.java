@@ -1,6 +1,7 @@
 package Logica;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Random;
 
 import Logica.MagiaTemporal.CampoDeProteccion;
@@ -25,7 +26,6 @@ public abstract class Enemigo extends Personaje
 	protected int anchoRealCelda;
 	protected boolean estaEnMovimiento = true;
 	protected boolean deboPerder = false;
-
 	protected int alcance = 2;
 	
 	//Se debe invocar cuando se muere.
@@ -68,7 +68,6 @@ public abstract class Enemigo extends Personaje
 		Posicion ubicacion = miCelda.getPosCelda();
 		int miX = ubicacion.getEjeX();
 		int miY = ubicacion.getEjeY();
-			
 		//Intento mover hacia la derecha
 		if(miX + 1 < mapa.obtenerAncho())
 		{
@@ -77,12 +76,12 @@ public abstract class Enemigo extends Personaje
 			//verifico si hay alguien a mi alcance para atacar  
 			while(i <= alcance && !encontre) 
 			{
-				if(miX+i < mapa.obtenerAncho()) 
+				if((miX + misCeldas.size() - 1 + i) < mapa.obtenerAncho()) 
 				{
-					Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX+i,miY));
+					Celda celdaSiguiente = mapa.obtenerCelda(new Posicion(miX + misCeldas.size() - 1 + i, miY));
 					Contenido contenidoSiguiente = celdaSiguiente.getContenido();
 					if(contenidoSiguiente != null) 
-					{
+					{	
 						estaEnMovimiento = false;
 						setImagenQuieto();
 						encontre = true;
@@ -98,10 +97,26 @@ public abstract class Enemigo extends Personaje
 				{		
 					cantDesplazada = 0;
 					//se actualiza la posición del enemigo en la matriz de celdas
-					Posicion p = new Posicion(ubicacion.getEjeX() + 1, ubicacion.getEjeY());
-					mapa.obtenerCelda(ubicacion).setContenido(null);
-					mapa.obtenerCelda(p).setContenido(this);
-					miCelda = mapa.obtenerCelda(p);
+					LinkedList<Celda> listaAux = new LinkedList<Celda>();
+					int despl = 1;
+					for(Celda c : misCeldas)
+					{
+						Posicion posc = c.getPosCelda();
+						if(posc.getEjeX() + 1 < mapa.obtenerAncho())
+						{
+							Posicion p = new Posicion(miX + despl, miY);
+							mapa.obtenerCelda(posc).setContenido(null);
+							mapa.obtenerCelda(p).setContenido(this);
+							listaAux.addLast(mapa.obtenerCelda(p));
+							despl++;
+						}
+					}
+					misCeldas.clear();
+					for(Celda cAux : listaAux)
+					{
+						misCeldas.addLast(cAux);
+					}
+					miCelda = misCeldas.getFirst();
 				}	
 				else
 					cantDesplazada = (int) (cantDesplazada + Math.pow(2, velocidad+1));
@@ -114,7 +129,7 @@ public abstract class Enemigo extends Personaje
 		else // significa que el enemigo ya atravesó el mapa (se debe perder el juego) 
 		{ 		
 			estaVivo = false; 
-			miCelda.setContenido(null);		
+			miCelda.setContenido(null);
 			deboPerder = true;		
 		}		
 	}
@@ -137,6 +152,21 @@ public abstract class Enemigo extends Personaje
 			puObtenido = puObtenido.clone();
 		}
 		return puObtenido; 
+	}
+	
+	public void controlarTamaño()
+	{
+		misCeldas.addLast(miCelda); //desde la posición de miCelda comenzaría el jlabel del enemigo (mGrafico)
+		int cantCeldasAOcupar = imagen.getIconWidth() / (mapa.obtenerAnchoReal() / mapa.obtenerAncho());
+		if(cantCeldasAOcupar > 1)
+		{
+			for(int i = 1; i <= cantCeldasAOcupar - 1; i++)
+			{
+				Posicion posNuevaCelda = new Posicion(miCelda.getPosCelda().getEjeX() + i, miCelda.getPosCelda().getEjeY());
+				Celda nuevaCelda = new Celda(posNuevaCelda);	
+				misCeldas.addLast(nuevaCelda);
+			}
+		}
 	}
 	
 	public abstract void setImagenEnMovimiento();

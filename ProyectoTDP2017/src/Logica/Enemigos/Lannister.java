@@ -1,5 +1,7 @@
 package Logica.Enemigos;
 
+import java.util.LinkedList;
+
 import javax.swing.ImageIcon;
 import Logica.Celda;
 import javax.swing.JLabel;
@@ -24,7 +26,6 @@ public class Lannister extends Enemigo
 		mapa = m;
 		miCelda = c;
 		fuerzaImpacto = 2 * fuerzaImpacto;
-		
 		cantDesplazada = 0;	// Se usará para controlar cuánto se mueve el JLabel dentro del ancho real de la celda
 		anchoRealCelda = mapa.obtenerAnchoReal() / mapa.obtenerAncho();	
 		//agrego la gráfica a Lannister
@@ -33,6 +34,9 @@ public class Lannister extends Enemigo
 		desplX = 0;
 		desplY = (mapa.obtenerAltoReal() / mapa.obtenerAlto()) * miCelda.getPosCelda().getEjeY();
 		mGrafico.setBounds(desplX,desplY,imagen.getIconWidth(),imagen.getIconHeight());	
+		//veo si Lannister ocupa mas de una celda
+		misCeldas = new LinkedList<Celda>();
+		controlarTamaño();
 		proyectil = new VisitorEnemigo(this);
 	}
 	

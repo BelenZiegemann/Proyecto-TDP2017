@@ -17,6 +17,7 @@ public abstract class Contenido
 	protected Mapa mapa;
 	protected Icon imagen;
 	protected JLabel mGrafico;
+	protected boolean estaVivo = true;
 	protected int desplX;
 	protected int desplY;
 	
@@ -33,11 +34,23 @@ public abstract class Contenido
 		return mGrafico;
 	}
 	
-	public Celda getCelda() {
+	public Celda getCelda()
+	{
 		return miCelda;
 	}
 	
-	public void setCelda(Celda c) {
+	public void setCelda(Celda c) 
+	{
 		miCelda = c;
+	}
+	
+	public boolean estaVivo() 
+	{
+		return estaVivo;
+	}
+	
+	public void setEstaVivo(boolean b)
+	{
+		estaVivo = b;
 	}
 }

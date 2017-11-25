@@ -293,17 +293,26 @@ public class gMapa implements MouseListener
 			///////////////////////////////////////////////////////////////////
 			// Recorro la lista de Jugadores del mapa para ver si la posición clickeada corresponde a la posición
 			// de un Jugador en el mapa. Entonces ese Jugador podrá ser vendido.
+			jugadorParaVender = null;
+			deboVenderJugador = false;
 			Iterator<Jugador> itJugador = m.getListaJugadores().iterator();
 			boolean encontre = false;
+			boolean encontrePosCelda = false;
 			while(itJugador.hasNext() && !encontre)
 			{
 				Jugador jug = itJugador.next();
-				Posicion pJug = jug.getCelda().getPosCelda();
-				if(posClickeada.equals(pJug))
+				Iterator<Celda> itCeldasJug = jug.getMisCeldas().iterator();
+				while(itCeldasJug.hasNext() && !encontrePosCelda)
 				{
-					jugadorParaVender = jug;
-					deboVenderJugador = true;
-					encontre = true;
+					Celda cellJug = itCeldasJug.next();
+					Posicion pJug = cellJug.getPosCelda();
+					if(posClickeada.equals(pJug))
+					{
+						jugadorParaVender = jug;
+						deboVenderJugador = true;
+						encontre = true;
+						encontrePosCelda = true;
+					}
 				}	
 			}
 		}		

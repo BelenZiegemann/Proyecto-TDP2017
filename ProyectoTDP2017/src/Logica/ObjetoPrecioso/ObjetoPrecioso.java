@@ -9,7 +9,6 @@ import Logica.PowerUp;
 */
 public abstract class ObjetoPrecioso extends PowerUp
 {
-
 	protected ObjetoPrecioso()
 	{
 		super();

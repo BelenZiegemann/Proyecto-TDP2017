@@ -1,5 +1,6 @@
 package Logica;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import javax.swing.JLabel;
 
@@ -124,31 +125,70 @@ public class Mapa
 	
 	public JLabel agregarEnemigo(Enemigo enem)
 	{
-		if(obtenerCelda(enem.getCelda().getPosCelda()).getContenido() == null)
-		{	
-			Celda miCelda = obtenerCelda(enem.getCelda().getPosCelda());
-			miCelda.setContenido(enem);
-			misEnemigos.addLast(enem);
-			return enem.getGrafico();
+		JLabel lblSalida = null;
+		boolean puedoAgregar = true;
+		Iterator<Celda> itCeldas = enem.getMisCeldas().iterator();
+		Iterator<Celda> itCeldas2 = enem.getMisCeldas().iterator();
+		int posMasTamañoEnemigo = enem.getCelda().getPosCelda().getEjeX() + enem.getMisCeldas().size() - 1;		
+		if(posMasTamañoEnemigo < ancho)	
+		{
+			while(itCeldas.hasNext() && puedoAgregar)
+			{
+				Celda cell = itCeldas.next();
+				Posicion pcell = cell.getPosCelda();
+				if(obtenerCelda(pcell).getContenido() != null)	
+					puedoAgregar = false;
+			}
+			if(puedoAgregar)
+			{
+				while(itCeldas2.hasNext())
+				{
+					Celda cell = itCeldas2.next();
+					Posicion pcell = cell.getPosCelda();
+					obtenerCelda(pcell).setContenido(enem);
+				}
+				misEnemigos.addLast(enem);
+				lblSalida =  enem.getGrafico();
+			}
 		}
-		else
-			return null;
+		return lblSalida;
 	}
 	
 	public JLabel agregarJugador(Jugador j)
 	{
 		//Debo verificar si dispongo de la cantidad de monedas suficientes para comprar al jugador.
-		//También debo verificar que la celda donde agregaré al jugador no esté ocupada
-		if((miPantalla.getPresupuesto() >= j.getPrecio()) && (obtenerCelda(j.getCelda().getPosCelda()).getContenido() == null))
+		//También debo verificar que las celdas donde agregaré al jugador no estén ocupadas
+		JLabel lblSalida = null;
+		boolean puedoAgregar = true;
+		Iterator<Celda> itCeldas = j.getMisCeldas().iterator();
+		Iterator<Celda> itCeldas2 = j.getMisCeldas().iterator();
+		int posMasTamañoJugador = j.getCelda().getPosCelda().getEjeX() - j.getMisCeldas().size() + 1;		
+		if(posMasTamañoJugador >= 0)	
 		{
-			
-			miPantalla.setPresupuesto(- j.getPrecio());
-			obtenerCelda(j.getCelda().getPosCelda()).setContenido(j);
-			misJugadores.addLast(j);
-			return j.getGrafico();
+			if(miPantalla.getPresupuesto() >= j.getPrecio())
+			{
+				while(itCeldas.hasNext() && puedoAgregar)
+				{
+					Celda cell = itCeldas.next();
+					Posicion pcell = cell.getPosCelda();
+					if(obtenerCelda(pcell).getContenido() != null)	
+						puedoAgregar = false;
+				}
+				if(puedoAgregar)
+				{
+					while(itCeldas2.hasNext())
+					{
+						Celda cell = itCeldas2.next();
+						Posicion pcell = cell.getPosCelda();
+						obtenerCelda(pcell).setContenido(j);
+					}
+					miPantalla.setPresupuesto(- j.getPrecio());
+					misJugadores.addLast(j);
+					lblSalida =  j.getGrafico();
+				}
+			}
 		}
-		else
-			return null;
+		return lblSalida;
 	}
 	
 	public JLabel agregarObstaculoConVida(ObstaculoConVida o) 
