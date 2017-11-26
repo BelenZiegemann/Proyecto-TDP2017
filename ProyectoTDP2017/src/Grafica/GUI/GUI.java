@@ -1,5 +1,6 @@
 package Grafica.GUI;
  
+import java.applet.AudioClip;
 import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -13,7 +14,6 @@ import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.awt.event.ActionEvent;
-
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -49,6 +49,7 @@ public class GUI extends JFrame implements MouseListener
 	private JButton btnbomba= new JButton();
 	private	JLabel lblcantbombas = new JLabel("Cantidad");
 	private JLabel lblmostrarcantbombas = new JLabel("0");
+	private AudioClip sonido;
 
 	/**
 	 * Create the frame.
@@ -62,6 +63,10 @@ public class GUI extends JFrame implements MouseListener
 		setBounds(0, 0, 1020, 614);
 		setLocationRelativeTo(null);	// para que la ventana se abra en el centro de la pantalla
 		getContentPane().setLayout(null);
+		
+		//sonido para el inicio
+		sonido = java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Game-of-Thrones-GUI.wav"));
+		sonido.play();
 		
 		//Panel para el mapa
 		contentPane = new JPanel();
@@ -147,6 +152,7 @@ public class GUI extends JFrame implements MouseListener
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{	
+				sonido.stop();
 				GUI frame = new GUI();
 				frame.setVisible(true);	
 				dispose();
@@ -465,6 +471,11 @@ public class GUI extends JFrame implements MouseListener
 		panelFondo.add(labelFondo);
 		getContentPane().add(panelFondo);
 		
+	}
+	
+	public AudioClip getSonido()
+	{
+		return sonido;
 	}
 	
 	public JPanel getPanelMapa()
