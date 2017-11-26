@@ -50,6 +50,7 @@ public class GUI extends JFrame implements MouseListener
 	private	JLabel lblcantbombas = new JLabel("Cantidad");
 	private JLabel lblmostrarcantbombas = new JLabel("0");
 	private AudioClip sonido;
+	private AudioClip sonidoFin;
 
 	/**
 	 * Create the frame.
@@ -67,6 +68,8 @@ public class GUI extends JFrame implements MouseListener
 		//sonido para el inicio
 		sonido = java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Game-of-Thrones-GUI.wav"));
 		sonido.play();
+		
+		sonidoFin = null;
 		
 		//Panel para el mapa
 		contentPane = new JPanel();
@@ -478,6 +481,12 @@ public class GUI extends JFrame implements MouseListener
 		return sonido;
 	}
 	
+	public void setSonidoFin(String rutaSonido)
+	{
+		sonidoFin = java.applet.Applet.newAudioClip(getClass().getResource(rutaSonido));
+		sonidoFin.play();
+	}
+	
 	public JPanel getPanelMapa()
 	{
 		return contentPane;
@@ -490,6 +499,7 @@ public class GUI extends JFrame implements MouseListener
 			mapa.siguienteNivel();
 		else
 		{	
+			sonido.stop();
 			mapa.detener();
 		}
 	}

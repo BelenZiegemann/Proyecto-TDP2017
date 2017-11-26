@@ -141,8 +141,6 @@ public class gMapa implements MouseListener
 		disparos.detener();
 		obstaculos.detener();
 		powerups.detener();
-		gui.getSonido().stop();
-		
 		m.getListaEnemigos().clear();
 		m.getListaJugadores().clear();
 		m.getListaDisparos().clear();
@@ -150,13 +148,15 @@ public class gMapa implements MouseListener
 		m.getListaObstaculosPorTiempo().clear();
 		m.getListaPowerUp().clear();
 		m.getListaExplosion().clear();
-		
 		grafPiso.removeAll();
 		grafPiso.repaint();
 	}
 	
 	public void Perder()
 	{	
+		gui.getSonido().stop();
+		//sonido game over
+		gui.setSonidoFin("/Sonidos/Game Over.wav");
 		setImagenPerderJuego();
 		detener();
 	}
@@ -165,6 +165,9 @@ public class gMapa implements MouseListener
 	{
 		if(getNivel().getNumNivel() == 2) //acá ya gané el juego
 		{
+			gui.getSonido().stop();
+			//sonido you win
+			gui.setSonidoFin("/Sonidos/You Win.wav");
 			setImagenGanarJuego();	
 			detener();
 		}
