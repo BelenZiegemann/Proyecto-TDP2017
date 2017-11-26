@@ -499,6 +499,7 @@ public class GUI extends JFrame implements MouseListener
 			mapa.siguienteNivel();
 		else
 		{	
+			setGuiBomba(false);
 			sonido.stop();
 			mapa.detener();
 		}
@@ -522,10 +523,7 @@ public class GUI extends JFrame implements MouseListener
 		{
 			if(cantBomb == 1)	
 			{
-				lblbomba.setVisible(false);
-				btnbomba.setVisible(false);
-				lblcantbombas.setVisible(false);
-				lblmostrarcantbombas.setVisible(false);
+				setGuiBomba(false);
 			}
 			else
 			{
@@ -534,6 +532,14 @@ public class GUI extends JFrame implements MouseListener
 			eliminado = objetosPreciosos.removeLast();
 		}
 		return eliminado; 	
+	}
+	
+	public void setGuiBomba(boolean b)
+	{
+		lblbomba.setVisible(b);
+		btnbomba.setVisible(b);
+		lblcantbombas.setVisible(b);
+		lblmostrarcantbombas.setVisible(b);	
 	}
 	
 	public void mouseClicked(java.awt.event.MouseEvent arg0)
@@ -556,10 +562,7 @@ public class GUI extends JFrame implements MouseListener
 			else
 			{
 				//si es una bomba
-				lblbomba.setVisible(true);
-				btnbomba.setVisible(true);
-				lblcantbombas.setVisible(true);
-				lblmostrarcantbombas.setVisible(true);
+				setGuiBomba(true);
 				lblmostrarcantbombas.setText("" + objetosPreciosos.size());
 				//elimino del piso del mapa
 				mapa.obtenerPisoMapa().remove(opUltimo.getGrafico());
