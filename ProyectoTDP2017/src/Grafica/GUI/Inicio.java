@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+import java.applet.AudioClip;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -24,6 +24,7 @@ public class Inicio extends JFrame
 	private static Inicio frame;
 	private JLabel Image = new JLabel("");
 	private JButton btnJugar = new JButton("");
+	private AudioClip sonido;
 
 	/**
 	 * Launch the application.
@@ -50,7 +51,7 @@ public class Inicio extends JFrame
 	 * Create the frame.
 	 */
 	public Inicio() 
-	{
+	{	
 		//ventana
 		setResizable(false);
 		setTitle("GAME OF THRONES");
@@ -59,6 +60,10 @@ public class Inicio extends JFrame
 		setBounds(0,0, 500,410); // (x,y,ancho,alto) 
 		setLocationRelativeTo(null); // para que la ventana se abra en el centro de la pantalla
 		getContentPane().setLayout(null);
+		
+		//sonido para el inicio
+		sonido = java.applet.Applet.newAudioClip(getClass().getResource("/Sonidos/Game-of-Thrones-Inicio.wav"));
+		sonido.play();
 		
 		//imágen de fondo
 		Image.setIcon(new ImageIcon(Inicio.class.getResource("/Imagenes/Fondo.gif")));
@@ -75,6 +80,7 @@ public class Inicio extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				sonido.stop();
 				frame.setVisible(false);
 				
 				EventQueue.invokeLater(new Runnable() 

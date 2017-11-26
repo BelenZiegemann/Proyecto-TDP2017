@@ -141,6 +141,7 @@ public class gMapa implements MouseListener
 		disparos.detener();
 		obstaculos.detener();
 		powerups.detener();
+		gui.getSonido().stop();
 		
 		m.getListaEnemigos().clear();
 		m.getListaJugadores().clear();
